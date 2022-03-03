@@ -10,5 +10,5 @@ const usersController = require("../controllers/users_controller");
 //Access the Users Controller's Profile() Function by '/users/profile' route.
 router.get("/profile", usersController.profile);
 
-//Export the Router.
+//Export the Router
 module.exports = router;
