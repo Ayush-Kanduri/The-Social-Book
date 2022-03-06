@@ -13,6 +13,8 @@ const path = require("path");
 const route = require("./routes/index");
 //Requires express-ej-layouts Module
 const expressLayouts = require("express-ejs-layouts");
+//Requires MongoDB
+const db = require("./config/mongoose");
 
 //Middleware - Express App uses Static Files in the Assets Folder
 app.use(express.static("./assets"));
