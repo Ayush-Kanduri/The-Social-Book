@@ -11,13 +11,25 @@ const port = 8000;
 const path = require("path");
 //Requires the index.js - Route File, from the Routes Folder.
 const route = require("./routes/index");
+//Requires express-ej-layouts Module
+const expressLayouts = require("express-ejs-layouts");
+
+//Middleware - Express App uses Static Files in the Assets Folder
+app.use(express.static("./assets"));
+//Middleware - Express App uses expressLayouts to tell that the views which are going to be rendered belongs to some layout.
+app.use(expressLayouts);
+
+//Set Up - Extract Styles and Scripts from Sub Pages into the Layout.
+app.set("layout extractStyles", true);
+//Set Up - Extract Styles and Scripts from Sub Pages into the Layout.
+app.set("layout extractScripts", true);
 
 //Middleware - App calls index.js - Route File, whenever '/' route is called in the request.
 app.use("/", route);
 
-//Set Up Template Engine as EJS
+//Set Up - Template Engine as EJS
 app.set("view engine", "ejs");
-//Set Up Template Engine Views Folder Path (..../views)
+//Set Up - Template Engine Views Folder Path (..../views)
 app.set("views", path.join(__dirname, "views"));
 
 //Run the ExpressJS Server
