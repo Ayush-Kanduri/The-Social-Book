@@ -4,6 +4,6 @@
 module.exports.home = (request, response) => {
 	// return response.end("<h1>Home Page</h1>");
 	return response.render("home", {
-		title: "Social Book",
+		title: "Home Page",
 	});
 };
