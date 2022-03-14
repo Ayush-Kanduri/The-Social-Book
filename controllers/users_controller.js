@@ -50,4 +50,27 @@ module.exports.createUser = (req, res) => {
 };
 
 //Export the Users Controller's createSession() Function
-module.exports.createSession = (req, res) => {};
+module.exports.createSession = (req, res) => {
+	// STEPS TO AUTHENTICATE A USER //
+	// 1. Find the User by Email in the Database
+	User.findOne({ email: req.body.email }, (err, user) => {
+		if (err) {
+			console.log("Error in finding user in signing in");
+			return;
+		}
+		// 2. If User exists, then compare the password
+		if (user) {
+			// 3. If the password didn't match, then redirect back to login page
+			if (user.password !== req.body.password) {
+				return res.redirect("back");
+			}
+			// 4. If password matches, then create a session for the user and redirect to the profile page
+			res.cookie("user_id", user.id);
+			return res.redirect("/users/profile");
+		}
+		// 5. If User doesn't exist or Credentials didn't match, then redirect to login page
+		else {
+			return res.redirect("back");
+		}
+	});
+};

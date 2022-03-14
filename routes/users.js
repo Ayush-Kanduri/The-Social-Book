@@ -15,6 +15,8 @@ router.get("/signup", usersController.signUp);
 router.get("/login", usersController.signIn);
 //Access the Users Controller's createUser() Function by '/users/create-user' route.
 router.post("/create-user", usersController.createUser);
+//Access the Users Controller's createSession() Function by '/users/create-session' route.
+router.post("/create-session", usersController.createSession);
 
 //Export the Router
 module.exports = router;
