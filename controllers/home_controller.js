@@ -7,8 +7,3 @@ module.exports.home = (request, response) => {
 		title: "Social Book",
 	});
 };
-
-//Export the Home Controller's Welcome() Function to the "/" Route.
-module.exports.welcome = () => {
-	console.log("Welcome to the Home Page");
-};
