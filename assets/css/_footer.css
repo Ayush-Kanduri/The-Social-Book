@@ -1,0 +1,25 @@
+footer {
+	background-color: #9af7ff;
+	padding: 0.5% 0%;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	border-radius: 50% 50% 51% 49% / 100% 100% 0% 0%;
+}
+footer {
+	bottom: 0%;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+footer p {
+	font-size: 0.7rem;
+}
+footer a {
+	color: darkred;
+	text-decoration: none;
+}
+footer strong {
+	color: red;
+}
+footer b {
+	color: darkred;
+}

@@ -1,0 +1,16 @@
+header h1 {
+	font-size: 2.5rem;
+	font-family: "Sansita Swashed", cursive;
+	text-transform: capitalize;
+	word-spacing: 0.2rem;
+	color: #00547a;
+}
+header {
+	background-color: #9af7ff;
+	padding: 0.5%;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	top: 0%;
+	border-radius: 48% 52% 51% 49% / 0% 0% 100% 100%;
+}
