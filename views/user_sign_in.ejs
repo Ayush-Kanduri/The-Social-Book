@@ -1,2 +1,13 @@
 <link rel="stylesheet" href="/css/user_sign_in.css" />
 <h3>Login</h3>
+
+<form action="/users/create-session" method="post">
+	<input type="email" name="email" placeholder="Enter Email" required />
+	<input
+		type="password"
+		name="password"
+		placeholder="Enter Password"
+		required
+	/>
+	<input type="submit" value="Login" />
+</form>
