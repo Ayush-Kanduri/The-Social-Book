@@ -13,6 +13,8 @@ router.get("/profile", usersController.profile);
 router.get("/signup", usersController.signUp);
 //Access the Users Controller's signIn() Function by '/users/login' route.
 router.get("/login", usersController.signIn);
+//Access the Users Controller's createUser() Function by '/users/create-user' route.
+router.post("/create-user", usersController.createUser);
 
 //Export the Router
 module.exports = router;
