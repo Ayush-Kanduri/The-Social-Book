@@ -4,22 +4,48 @@ const User = require("../models/user");
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
 	// return response.end("<h1>Users Profile</h1>");
-	return response.render("user_profile", {
-		title: "User Profile",
-	});
+	// USER SHOULD BE ABLE TO ACCESS PROFILE PAGE ONLY WHEN LOGIN IS DONE CORRECTLY AS USER IS AUTHENTICATED, ELSE PROFILE PAGE IS NOT ACCESSIBLE TO ANYONE ELSE //
+
+	// If key: user_id exists in the cookies
+	if (request.cookies.user_id) {
+		// Find the User by user_id in the Database & if found, then only render the profile page
+		User.findById(request.cookies.user_id, (err, user) => {
+			// If error in finding user
+			if (err) {
+				console.log("Error in finding user in profile");
+				return;
+			}
+			// If user is found
+			if (user) {
+				return response.render("user_profile", {
+					title: "User Profile",
+					user: user,
+				});
+			}
+			// If user is not found
+			else {
+				return response.redirect("/users/login");
+			}
+		});
+	}
+	// If key: user_id doesn't exist in the cookies
+	else {
+		return response.redirect("/users/login");
+	}
 };
 
 //Export the Users Controller's signUp() Function
 module.exports.signUp = (req, res) => {
 	return res.render("user_sign_up", {
-		title: "Social Book | Sign Up",
+		title: "Sign Up",
 	});
 };
 
 //Export the Users Controller's signIn() Function
 module.exports.signIn = (req, res) => {
+	res.clearCookie("user_id");
 	return res.render("user_sign_in", {
-		title: "Social Book | Login",
+		title: "Login",
 	});
 };
 

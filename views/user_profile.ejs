@@ -1,3 +1,11 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
 <script defer src="/js/user_profile.js"></script>
 <h3><%= title%></h3>
+
+<div id="details">
+	<p>Name: <%= user.name%></p>
+	<p>Email: <%= user.email%></p>
+	<button class="btn-grad" onclick="window.location='/users/login';">
+		Log Out
+	</button>
+</div>
