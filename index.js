@@ -15,6 +15,13 @@ const route = require("./routes/index");
 const expressLayouts = require("express-ejs-layouts");
 //Requires MongoDB
 const db = require("./config/mongoose");
+//Requires the cookie-parser Module
+const cookieParser = require("cookie-parser");
+
+//Middleware - URL Encoder
+app.use(express.urlencoded({ extended: true }));
+//Middleware - Cookie Parser for accessing the cookies
+app.use(cookieParser());
 
 //Middleware - Express App uses Static Files in the Assets Folder
 app.use(express.static("./assets"));
