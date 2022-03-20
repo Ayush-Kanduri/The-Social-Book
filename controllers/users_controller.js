@@ -50,4 +50,7 @@ module.exports.createUser = (req, res) => {
 };
 
 //Export the Users Controller's createSession() Function
-module.exports.createSession = (req, res) => {};
+module.exports.createSession = (req, res) => {
+	//User is Signed In & we need to redirect to the Home Page
+	return res.redirect("/");
+};
