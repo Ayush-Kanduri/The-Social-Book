@@ -1,0 +1,25 @@
+//Export the Users Controller's createUser() Function
+module.exports.createUser = (req, res) => {
+	if (req.body.password !== req.body.confirm_password) {
+		return res.redirect("back");
+	}
+
+	User.findOne({ email: req.body.email }, (err, user) => {
+		if (err) {
+			console.log("Error in finding user in signing up");
+			return;
+		}
+
+		if (!user) {
+			User.create(req.body, (err, user) => {
+				if (err) {
+					console.log("Error in creating user while signing up");
+					return;
+				}
+				return res.redirect("/users/login");
+			});
+		} else {
+			return res.redirect("back");
+		}
+	});
+};

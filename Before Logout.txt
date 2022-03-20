@@ -1,0 +1,8 @@
+//Export the Users Controller's signIn() Function
+module.exports.signIn = (req, res) => {
+    //Logs out the user by removing the cookies from the browser, then displays the login screen
+	res.clearCookie("user_id");
+	return res.render("user_sign_in", {
+		title: "Login",
+	});
+};
