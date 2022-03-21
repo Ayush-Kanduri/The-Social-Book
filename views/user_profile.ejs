@@ -2,5 +2,13 @@
 <script defer src="/js/user_profile.js"></script>
 <h3><%= title%></h3>
 
-<p id="userName">Name: <%= user.name%></p>
-<p id="userEmail">Email: <%= user.email%></p>
+<div id="details">
+	<p><span>Name</span>: <%= user.name%></p>
+	<p><span>Email</span>: <%= user.email%></p>
+	<!-- <button class="btn-grad" onclick="window.location='/users/login';">
+		Log Out
+	</button> -->
+    <button class="btn-grad"">
+		Log Out
+	</button>
+</div>

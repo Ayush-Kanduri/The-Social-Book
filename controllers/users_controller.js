@@ -11,6 +11,9 @@ module.exports.profile = (request, response) => {
 
 //Export the Users Controller's signUp() Function
 module.exports.signUp = (req, res) => {
+	if (req.isAuthenticated()) {
+		return res.redirect("/users/profile");
+	}
 	return res.render("user_sign_up", {
 		title: "Social Book | Sign Up",
 	});
@@ -18,6 +21,9 @@ module.exports.signUp = (req, res) => {
 
 //Export the Users Controller's signIn() Function
 module.exports.signIn = (req, res) => {
+	if (req.isAuthenticated()) {
+		return res.redirect("/users/profile");
+	}
 	return res.render("user_sign_in", {
 		title: "Social Book | Login",
 	});
