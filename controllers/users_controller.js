@@ -47,6 +47,7 @@ module.exports.createUser = (req, res) => {
 					console.log("Error in creating user while signing up");
 					return;
 				}
+				console.log("User created");
 				return res.redirect("/users/login");
 			});
 		} else {
@@ -57,6 +58,16 @@ module.exports.createUser = (req, res) => {
 
 //Export the Users Controller's createSession() Function
 module.exports.createSession = (req, res) => {
+	console.log("User Logged In & Authenticated");
 	//User is Signed In & we need to redirect to the Home Page
+	return res.redirect("/");
+};
+
+//Export the Users Controller's destroySession() Function
+module.exports.destroySession = (req, res) => {
+	//PassportJS provides logout() Function to the Request Object
+	req.logout();
+	console.log("User Logged Out & De-Authenticated");
+	//User is Signed Out & redirected to the Home Page
 	return res.redirect("/");
 };

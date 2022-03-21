@@ -85,6 +85,9 @@ passport.deserializeUser((id, done) => {
 passport.checkAuthentication = function (req, res, next) {
 	//If the user is signed in then pass on the request to the next function(controller's action) & let them have the profile page
 	if (req.isAuthenticated()) {
+		console.log(
+			"[User is Logged In & Authenticated] ---> Access Granted to Profile"
+		);
 		return next();
 	}
 	//If the user is not signed in, then redirect them back to the Login page
@@ -98,6 +101,7 @@ passport.setAuthenticatedUser = function (req, res, next) {
 	if (req.isAuthenticated()) {
 		//req.user contains the current signed in user from the session cookie and we are just sending this to the locals for the views
 		res.locals.user = req.user;
+		console.log("[Authenticated User is Set in the Response Object] ");
 	}
 	next();
 };

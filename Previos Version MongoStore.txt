@@ -1,0 +1,36 @@
+//Requires the MongoStore, with Session as argument
+const MongoStore = require("connect-mongo")(session);
+
+
+//MongoStore is used to store the Session Cookies in the MongoDB
+//Middleware - Takes the Session Cookie and Encrypts it with a Key
+app.use(
+	session({
+		//Cookie Name
+		name: "socialBook",
+		//Secret Key for encrypting the session cookie
+		//** TODO - Change the Secret Key before Deployment in Production Mode **//
+		secret: "social_book",
+		saveUninitialized: false,
+		resave: false,
+		//Cookie Options
+		cookie: {
+			//Cookie Expiry Time - 100 Minutes
+			maxAge: 1000 * 60 * 100,
+		},
+		store: new MongoStore(
+			{
+				//Interacts with the mongoose to connect to the MongoDB
+				mongooseConnection: db,
+				//To auto remove the store
+				autoRemove: "disabled",
+			},
+			(err) => {
+				//If there is an error
+				if (err) {
+					console.log(err || "connect-mongodb setup ok");
+				}
+			}
+		),
+	})
+);

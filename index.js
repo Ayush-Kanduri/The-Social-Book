@@ -23,6 +23,8 @@ const session = require("express-session");
 const passport = require("passport");
 //Requires the Passport Local Strategy used for the Authentication
 const passportLocal = require("./config/passport-local-strategy");
+//Requires the MongoStore
+const MongoStore = require("connect-mongo");
 
 //Middleware - URL Encoder
 app.use(express.urlencoded({ extended: true }));
@@ -50,13 +52,32 @@ app.use(
 		//Secret Key for encrypting the session cookie
 		//** TODO - Change the Secret Key before Deployment in Production Mode **//
 		secret: "social_book",
+		//Don't save the uninitialized session
 		saveUninitialized: false,
+		//Dont re-save the session if it is not modified
 		resave: false,
 		//Cookie Options
 		cookie: {
 			//Cookie Expiry Time - 100 Minutes
 			maxAge: 1000 * 60 * 100,
 		},
+		//MongoStore is used to store the Session Cookies in the MongoDB
+		store: MongoStore.create(
+			{
+				//DB Connection URL
+				mongoUrl: "mongodb://localhost/social_book_development",
+				//Interacts with the mongoose to connect to the MongoDB
+				mongooseConnection: db,
+				//To auto remove the store
+				autoRemove: "disabled",
+			},
+			(err) => {
+				//If there is an error
+				if (err) {
+					console.log(err || "connect-mongodb setup ok");
+				}
+			}
+		),
 	})
 );
 //Middleware - App should use PassportJS for the Authentication

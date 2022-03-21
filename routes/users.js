@@ -17,6 +17,8 @@ router.get("/signup", usersController.signUp);
 router.get("/login", usersController.signIn);
 //Access the Users Controller's createUser() Function by '/users/create-user' route.
 router.post("/create-user", usersController.createUser);
+//Access the Users Controller's logout() Function by '/users/logout' route.
+router.get("/logout", usersController.destroySession);
 
 //SYNTAX: router.METHOD("Users: Sub-Router", MIDDLEWARE, usersController.FUNCTION_NAME);
 //Passport as route level middleware to authenticate the user.

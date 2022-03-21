@@ -1,5 +1,25 @@
 <link rel="stylesheet" href="/css/_header.css" />
 
 <header>
-	<h1>The Social Book &nbsp; <i class="fa-solid fa-message"></i></h1>
+	<div class="container">
+		<% if(locals.user){%>
+		<button class="btn-grad left" onclick="window.location='/users/profile';">
+			<%= user.name%>'s Profile
+		</button>
+		<% }else{%>
+		<button class="btn-grad left" onclick="window.location='/users/signup';">
+			Sign Up
+		</button>
+		<% }%>
+		<h1>The Social Book &nbsp; <i class="fa-solid fa-message"></i></h1>
+		<% if(locals.user){%>
+		<button class="btn-grad right" onclick="window.location='/users/logout';">
+			Log Out
+		</button>
+		<% }else{%>
+		<button class="btn-grad right" onclick="window.location='/users/login';">
+			Log In
+		</button>
+		<% }%>
+	</div>
 </header>

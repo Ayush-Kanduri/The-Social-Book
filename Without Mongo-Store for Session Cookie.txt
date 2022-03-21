@@ -1,0 +1,17 @@
+//Middleware - Takes the Session Cookie and Encrypts it with a Key
+app.use(
+	session({
+		//Cookie Name
+		name: "socialBook",
+		//Secret Key for encrypting the session cookie
+		//** TODO - Change the Secret Key before Deployment in Production Mode **//
+		secret: "social_book",
+		saveUninitialized: false,
+		resave: false,
+		//Cookie Options
+		cookie: {
+			//Cookie Expiry Time - 100 Minutes
+			maxAge: 1000 * 60 * 100,
+		},
+	})
+);
