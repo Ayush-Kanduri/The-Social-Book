@@ -4,13 +4,13 @@ const express = require("express");
 const router = express.Router();
 //Require the Passport Module
 const passport = require("passport");
+//Requires the Passport Local Strategy Module
+const passportLocal = require("../config/passport-local-strategy");
 
 //Require Users Controller
 const usersController = require("../controllers/users_controller");
 
 //SYNTAX: router.METHOD("Users: Sub-Router", usersController.FUNCTION_NAME);
-//Access the Users Controller's Profile() Function by '/users/profile' route.
-router.get("/profile", usersController.profile);
 //Access the Users Controller's signUp() Function by '/users/signup' route.
 router.get("/signup", usersController.signUp);
 //Access the Users Controller's signIn() Function by '/users/login' route.
@@ -32,6 +32,10 @@ router.post(
 	),
 	usersController.createSession
 );
+
+//SYNTAX: router.METHOD("Users: Sub-Router", MIDDLEWARE, usersController.FUNCTION_NAME);
+//Access the Users Controller's Profile() Function by '/users/profile' route.
+router.get("/profile", passport.checkAuthentication, usersController.profile);
 
 //Export the Router
 module.exports = router;

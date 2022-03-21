@@ -80,6 +80,28 @@ passport.deserializeUser((id, done) => {
 	});
 });
 //-------------------------------------------------------------------------------------//
+// ** Check if the user is Authenticated ** //
+//Creating a middleware in passport.js
+passport.checkAuthentication = function (req, res, next) {
+	//If the user is signed in then pass on the request to the next function(controller's action) & let them have the profile page
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	//If the user is not signed in, then redirect them back to the Login page
+	return res.redirect("/users/login");
+};
+
+// ** Set the Authenticated User ** //
+//Creating a middleware in passport.js
+passport.setAuthenticatedUser = function (req, res, next) {
+	//Whenever a user is signed in, that user's info is available in req.user because of the passport & User Model
+	if (req.isAuthenticated()) {
+		//req.user contains the current signed in user from the session cookie and we are just sending this to the locals for the views
+		res.locals.user = req.user;
+		console.log(req.user);
+	}
+	next();
+};
 
 //Export the Passport Module
 module.exports = passport;

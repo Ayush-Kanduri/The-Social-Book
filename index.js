@@ -63,6 +63,8 @@ app.use(
 app.use(passport.initialize());
 //Middleware - PassportJS creates & maintains the Session
 app.use(passport.session());
+//Middleware - Sets the Authenticated User in the Response
+app.use(passport.setAuthenticatedUser);
 //Middleware - App calls index.js - Route File, whenever '/' route is called in the request.
 app.use("/", route);
 
