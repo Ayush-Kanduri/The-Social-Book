@@ -25,7 +25,25 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 //Requires the MongoStore
 const MongoStore = require("connect-mongo");
+//Requires the Node SASS Middleware Module
+const sassMiddleware = require("node-sass-middleware");
 
+//We have to put SASS just before the server is starting, because the files should be pre-compiled before the server starts. Whenever templates/browser ask for it, these pre-compiled files will be served.
+//Middleware - SASS Middleware
+app.use(
+	sassMiddleware({
+		//Where to look for the SASS files
+		src: "./assets/scss",
+		//Where to put the compiled CSS files
+		dest: "./assets/css",
+		//Reports error. If in production mode, set as false.
+		debug: true,
+		//The code should be in a single line - "compressed" or multiple lines - "expanded"
+		outputStyle: "extended",
+		//Prefix for the CSS files - where to look out for the css files in the assets folder
+		prefix: "/css",
+	})
+);
 //Middleware - URL Encoder
 app.use(express.urlencoded({ extended: true }));
 //Middleware - Cookie Parser for accessing the cookies
