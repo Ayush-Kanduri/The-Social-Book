@@ -1,20 +1,55 @@
-<link rel="stylesheet" href="/css/user_sign_up.css" />
-<h3>Sign Up</h3>
 
-<form action="/users/create-user" method="post">
-	<input type="text" name="name" placeholder="Enter Name" required />
-	<input type="email" name="email" placeholder="Enter Email" required />
-	<input
-		type="password"
-		name="password"
-		placeholder="Enter Password"
-		required
-	/>
-	<input
-		type="password"
-		name="confirm_password"
-		placeholder="Confirm Password"
-		required
-	/>
-	<input type="submit" value="Sign Up" />
-</form>
+<div class="form-container">
+	<h3 class="form-heading">Sign Up</h3>
+	<form id="signup" action="/users/create-user" method="post">
+		<div class="input-box">
+			<input
+				type="text"
+				name="name"
+				placeholder=" "
+				autocomplete="off"
+				class="input"
+				required
+			/>
+			<label for="" class="label">
+				<span> Enter Name </span>
+			</label>
+		</div>
+		<div class="input-box">
+			<input
+				type="email"
+				name="email"
+				autocomplete="off"
+				placeholder=" "
+				required
+				class="input"
+			/>
+			<label for="" class="label"><span> Enter Email </span></label>
+		</div>
+		<div class="input-box">
+			<input
+				type="password"
+				name="password"
+				autocomplete="off"
+				placeholder=" "
+				class="input"
+				required
+			/>
+			<label for="" class="label"><span> Enter Password </span></label>
+		</div>
+		<div class="input-box">
+			<input
+				type="password"
+				name="confirm_password"
+				autocomplete="off"
+				placeholder=" "
+				class="input"
+				required
+			/>
+			<label for="" class="label"><span> Confirm Password </span></label>
+		</div>
+		<div class="input-box btn">
+			<button class="btn-grad" type="submit">Submit</button>
+		</div>
+	</form>
+</div>

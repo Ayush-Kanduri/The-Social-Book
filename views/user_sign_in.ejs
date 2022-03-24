@@ -1,13 +1,31 @@
-<link rel="stylesheet" href="/css/user_sign_in.css" />
-<h3>Login</h3>
 
-<form action="/users/create-session" method="post">
-	<input type="email" name="email" placeholder="Enter Email" required />
-	<input
-		type="password"
-		name="password"
-		placeholder="Enter Password"
-		required
-	/>
-	<input type="submit" value="Login" />
-</form>
+<div class="form-container">
+	<h3 class="form-heading">Login</h3>
+	<form id="login" action="/users/create-session" method="post">
+		<div class="input-box">
+			<input
+				type="email"
+				name="email"
+				placeholder=" "
+				autocomplete="off"
+				class="input"
+				required
+			/>
+			<label for="" class="label"><span> Enter Email </span></label>
+		</div>
+		<div class="input-box">
+			<input
+				type="password"
+				name="password"
+				placeholder=" "
+				autocomplete="off"
+				class="input"
+				required
+			/>
+			<label for="" class="label"><span> Enter Password </span></label>
+		</div>
+		<div class="input-box btn">
+			<button class="btn-grad" type="submit">Login</button>
+		</div>
+	</form>
+</div>

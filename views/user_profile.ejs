@@ -3,10 +3,25 @@
 <h3><%= title%></h3>
 
 <div id="details">
-	<p><span>Name</span>: <%= user.name%></p>
-	<p><span>Email</span>: <%= user.email%></p>
-	<button class="btn-grad" onclick="window.location='/users/logout';">
-		Log Out
-	</button>
-	<button class="btn-grad" onclick="window.location='/';">Home Page</button>
+	<table>
+		<tr>
+			<th>
+				<span>Name:</span>
+			</th>
+			<td><span>&nbsp;<%= user.name%></span></td>
+		</tr>
+		<tr>
+			<th>
+				<span>Email:</span>
+			</th>
+			<td><span>&nbsp;<%= user.email%></span></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<button class="btn-grad" onclick="window.location='/';">
+					Home Page
+				</button>
+			</td>
+		</tr>
+	</table>
 </div>

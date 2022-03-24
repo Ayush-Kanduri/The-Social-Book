@@ -1,14 +1,12 @@
 footer {
-	background-color: #9af7ff;
-	padding: 0.5% 0%;
+	background-color: var(--header-color);
+	padding: 2% 0%;
 	text-align: center;
-	position: fixed;
 	width: 100%;
-	/* border-radius: 50% 50% 51% 49% / 100% 100% 0% 0%; */
-	bottom: 0%;
-	font-family: Georgia, "Times New Roman", Times, serif;
+	margin-top: auto;
+	font-weight: 500;
 	p {
-		font-size: 0.7rem;
+		font-size: 0.8rem;
 		a {
 			color: darkred;
 			text-decoration: none;
@@ -18,6 +16,17 @@ footer {
 		}
 		b {
 			color: darkred;
+		}
+	}
+	.links {
+		margin-top: 1rem;
+		a {
+			padding-top: 2rem;
+			text-decoration: none;
+			color: var(--logo-color);
+			&:hover {
+				color: darkred;
+			}
 		}
 	}
 }

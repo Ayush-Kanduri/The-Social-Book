@@ -1,15 +1,167 @@
 @import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Red+Hat+Display:wght@300;400;500&display=swap");
 * {
-	user-select: none;
 	-webkit-user-select: none;
 	-webkit-user-drag: none;
 	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	user-select: none;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+	font-family: "Red Hat Display", sans-serif;
+}
+:root {
+	--header-color: #9af7ff;
+	--background-color: #b8fff9;
+	--logo-color: #00547a;
+	--logo-font-family: "Sansita Swashed", cursive;
+	--sub-heading-font-family: "Poppins", sans-serif;
+	--text-font-family: "Red Hat Display", sans-serif;
+	--button-background-color: linear-gradient(
+		to right,
+		#1fa2ff 0%,
+		#12d8fa 51%,
+		#1fa2ff 100%
+	);
 }
 body {
-	margin: 0%;
-	padding: 0%;
-	box-sizing: border-box;
-	text-align: center;
 	position: relative;
-	background-color: #b8fff9;
+	background-color: var(--background-color);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+body::-webkit-scrollbar {
+	display: none;
+	overflow: hidden;
+}
+h2,
+h3,
+h4 {
+	font-family: var(--sub-heading-font-family);
+}
+main {
+	padding: 5%;
+	width: 100%;
+}
+h3 {
+	font-size: 1rem;
+	letter-spacing: 0.06rem;
+	word-spacing: 0.2rem;
+	line-height: 1.6;
+	text-align: center;
+	margin: 50px auto;
+	padding-top: 20px;
+}
+.btn-grad {
+	background-image: var(--button-background-color);
+	font-weight: 700;
+	padding: 5px 20px;
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.12rem;
+	word-spacing: 0.1rem;
+	line-height: 1.6;
+	transition: 0.5s;
+	background-size: 200% auto;
+	color: #fff;
+	border-radius: 5px;
+	display: block;
+	border: none;
+	font-size: 0.8rem;
+	cursor: pointer;
+	&:hover {
+		background-position: right center; /* change the direction of the change here */
+		color: #fff;
+	}
+}
+
+.form-container {
+	width: 40%;
+	margin: 3.7rem auto;
+	padding: 4% 4% 1% 4%;
+	border-radius: 1rem;
+	box-shadow: 0px 10px 25px rgba(92, 99, 105, 0.2);
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	.form-heading {
+		color: var(--logo-color);
+		font-size: 1.5em;
+		font-weight: 600;
+		text-transform: uppercase;
+		margin: 0 0 1.5rem 0;
+		padding: 0;
+		border-bottom: 4px solid var(--logo-color);
+		letter-spacing: 1px;
+		width: 40%;
+	}
+	form {
+		width: 100%;
+		padding: 1rem 2rem;
+		.input-box {
+			position: relative;
+			height: 48px;
+			width: 100%;
+			margin-bottom: 1.5rem;
+			.input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				font-size: 1rem;
+				border: 1px solid black;
+				border-radius: 0.5rem;
+				outline: none;
+				padding: 1rem;
+				background: none;
+				z-index: 1;
+			}
+			.label {
+				position: absolute;
+				left: 1rem;
+				top: 1rem;
+				padding: 0 0.25rem;
+				background-color: #fff;
+				color: black;
+				font-size: 1rem;
+				transition: 0.3s;
+			}
+			.input:focus + label {
+				top: -0.5rem;
+				left: 0.8rem;
+				color: #1a73e8;
+				font-size: 0.75rem;
+				font-weight: 500;
+				z-index: 10;
+			}
+			.input:not(:placeholder-shown).input:not(:focus) + .label {
+				top: -0.5rem;
+				left: 0.8rem;
+				color: #1a73e8;
+				font-size: 0.75rem;
+				font-weight: 500;
+				z-index: 10;
+			}
+			.input:focus {
+				border: 1.5px solid #1a73e8;
+			}
+			.btn-grad {
+				margin: auto;
+			}
+		}
+		.btn {
+			margin-top: 3rem;
+			margin-bottom: 0rem;
+		}
+	}
 }
