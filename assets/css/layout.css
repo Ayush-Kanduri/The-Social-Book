@@ -44,7 +44,8 @@ body::-webkit-scrollbar {
 h2,
 h3,
 h4 {
-  font-family: var(--sub-heading-font-family); }
+  font-family: var(--sub-heading-font-family);
+  color: var(--logo-color); }
 
 main {
   padding: 5%;
@@ -57,8 +58,7 @@ h3 {
   line-height: 1.6;
   text-align: center;
   margin: 50px auto;
-  padding-top: 20px;
-  color: var(--logo-color); }
+  padding-top: 20px; }
 
 .btn-grad {
   background-image: var(--button-background-color);
