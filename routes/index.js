@@ -12,6 +12,8 @@ const homeRouterFile = require("./home");
 const usersRouterFile = require("./users");
 //Require Contacts Router File
 const contactRouterFile = require("./contact");
+//Require Posts Router File
+const postsRouterFile = require("./posts");
 
 //SYNTAX: router.METHOD("/Route_Name", Router_File_Name);
 //Access the Home Router File on '/' route.
@@ -20,6 +22,8 @@ router.use("/", homeRouterFile);
 router.use("/users", usersRouterFile);
 //Access the Contacts Router File on '/contact' route.
 router.use("/contact", contactRouterFile);
+//Access the Contacts Router File on '/posts' route.
+router.use("/posts", postsRouterFile);
 
 //Router Loaded Successfully.
 console.log("Router Loaded Successfully");

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //Create the DB Schema
 const postSchema = new mongoose.Schema(
 	{
-		post: {
+		content: {
 			type: String,
 			required: true,
 		},
