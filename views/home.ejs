@@ -1,6 +1,7 @@
 <script defer src="/js/home.js"></script>
 <h3><%= title%></h3>
 
+<% if(locals.user){ %>
 <section class="feed-posts">
 	<h4>Posts</h4>
 	<form action="/posts/create" id="new-post-form" method="post">
@@ -27,3 +28,4 @@
 		</ul>
 	</div>
 </section>
+<% } %>
