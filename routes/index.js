@@ -14,6 +14,8 @@ const usersRouterFile = require("./users");
 const contactRouterFile = require("./contact");
 //Require Posts Router File
 const postsRouterFile = require("./posts");
+//Require Comments Router File
+const commentsRouterFile = require("./comments");
 
 //SYNTAX: router.METHOD("/Route_Name", Router_File_Name);
 //Access the Home Router File on '/' route.
@@ -22,8 +24,10 @@ router.use("/", homeRouterFile);
 router.use("/users", usersRouterFile);
 //Access the Contacts Router File on '/contact' route.
 router.use("/contact", contactRouterFile);
-//Access the Contacts Router File on '/posts' route.
+//Access the Posts Router File on '/posts' route.
 router.use("/posts", postsRouterFile);
+//Access the Comments Router File on '/comments' route.
+router.use("/comments", commentsRouterFile);
 
 //Router Loaded Successfully.
 console.log("Router Loaded Successfully");
