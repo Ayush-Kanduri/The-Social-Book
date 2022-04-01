@@ -15,7 +15,7 @@ module.exports.signUp = (req, res) => {
 		return res.redirect("/users/profile");
 	}
 	return res.render("user_sign_up", {
-		title: "Social Book | Sign Up",
+		title: "Sign Up",
 	});
 };
 
@@ -25,7 +25,7 @@ module.exports.signIn = (req, res) => {
 		return res.redirect("/users/profile");
 	}
 	return res.render("user_sign_in", {
-		title: "Social Book | Login",
+		title: "Login",
 	});
 };
 
