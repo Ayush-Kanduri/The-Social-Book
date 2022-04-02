@@ -12,6 +12,12 @@ const commentsController = require("../controllers/comments_controller");
 
 //Access the Posts Controller's create() Function
 router.post("/create", passport.checkAuthentication, commentsController.create);
+//Access the Posts Controller's destroy() Function
+router.post(
+	"/delete/:id",
+	passport.checkAuthentication,
+	commentsController.destroy
+);
 
 //Export the Router
 module.exports = router;
