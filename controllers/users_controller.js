@@ -4,8 +4,15 @@ const User = require("../models/user");
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
 	// return response.end("<h1>Users Profile</h1>");
-	return response.render("user_profile", {
-		title: "User Profile",
+	User.findById(request.params.id, (err, user) => {
+		if (err) {
+			console.log("Error in finding user in profile");
+			return;
+		}
+		return response.render("user_profile", {
+			title: "User Profile",
+			profile_user: user,
+		});
 	});
 };
 

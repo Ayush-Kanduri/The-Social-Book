@@ -2,7 +2,7 @@
 <h3><%= title%></h3>
 
 <section id="feed-posts">
-	<h3>Posts</h3>
+	<h4>Posts</h4>
 	<% if(locals.user){ %>
 	<form action="/posts/create" id="new-post-form" method="post">
 		<textarea
@@ -23,10 +23,10 @@
 </section>
 
 <section id="user-friends">
-	<h3>Friends List</h3>
-	<% for(user of all_users){ %>
+	<h4>Friends List</h4>
+	<% for(person of all_users){ %>
 	<p>
-		<a href="/users/profile/<%= user.id %>"></a>
+		<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
 	</p>
 	<% } %>
 </section>

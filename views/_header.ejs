@@ -8,7 +8,7 @@
 				<% if(locals.user){%>
 				<button
 					class="btn-grad"
-					onclick="window.location='/users/profile';"
+					onclick="window.location='/users/profile/<%= locals.user.id %>';"
 				>
 					<%= user.name%>'s Profile
 				</button>

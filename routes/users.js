@@ -37,7 +37,11 @@ router.post(
 
 //SYNTAX: router.METHOD("Users: Sub-Router", MIDDLEWARE, usersController.FUNCTION_NAME);
 //Access the Users Controller's Profile() Function by '/users/profile' route.
-router.get("/profile", passport.checkAuthentication, usersController.profile);
+router.get(
+	"/profile/:id",
+	passport.checkAuthentication,
+	usersController.profile
+);
 
 //Export the Router
 module.exports = router;
