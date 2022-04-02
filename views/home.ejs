@@ -52,7 +52,14 @@
 							<% for(comment of post.comments){ %>
 							<li>
 								<p>
-									<%= comment.content %>
+									<% if((locals.user) && (locals.user.id ==
+									comment.user.id)){ %>
+									<small>
+										<a href="/comments/delete/<%= comment.id %>"
+											>DELETE</a
+										>
+									</small>
+									<% } %> <%= comment.content %>
 									<br />
 									<%= comment.user.name %>
 								</p>

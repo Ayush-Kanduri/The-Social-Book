@@ -65,6 +65,7 @@ module.exports.destroy = (req, res) => {
 					return res.redirect("back");
 				}
 			);
+			console.log("Comment Deleted");
 		} else {
 			return res.redirect("back");
 		}

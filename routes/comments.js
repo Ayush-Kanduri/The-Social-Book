@@ -13,7 +13,7 @@ const commentsController = require("../controllers/comments_controller");
 //Access the Posts Controller's create() Function
 router.post("/create", passport.checkAuthentication, commentsController.create);
 //Access the Posts Controller's destroy() Function
-router.post(
+router.get(
 	"/delete/:id",
 	passport.checkAuthentication,
 	commentsController.destroy
