@@ -16,6 +16,18 @@ module.exports.profile = (request, response) => {
 	});
 };
 
+//Export the Users Controller's update() Function
+module.exports.update = (req, res) => {
+	if (req.params.id == req.user.id) {
+		// User.findByIdAndUpdate(req.params.id, {name:req.body.name, email:req.body.email})
+		User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+			return res.redirect("back");
+		});
+	} else {
+		return res.status(401).send("Unauthorized");
+	}
+};
+
 //Export the Users Controller's signUp() Function
 module.exports.signUp = (req, res) => {
 	if (req.isAuthenticated()) {

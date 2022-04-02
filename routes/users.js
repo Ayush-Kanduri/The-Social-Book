@@ -43,5 +43,12 @@ router.get(
 	usersController.profile
 );
 
+//Access the Users Controller's update() Function
+router.post(
+	"/update/:id",
+	passport.checkAuthentication,
+	usersController.update
+);
+
 //Export the Router
 module.exports = router;

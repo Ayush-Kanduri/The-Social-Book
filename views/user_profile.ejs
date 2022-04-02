@@ -4,6 +4,45 @@
 
 <div id="details">
 	<table>
+		<% if(locals.user.id == profile_user.id){ %>
+		<form action="/users/update/<%= profile_user.id %>" method="POST">
+			<tr>
+				<th>
+					<span>Name:</span>
+				</th>
+				<td>
+					<span
+						>&nbsp;<input
+							type="text"
+							name="name"
+							placeholder="Your Name"
+							value="<%= profile_user.name %>"
+							required
+					/></span>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<span>Email:</span>
+				</th>
+				<td>
+					<span
+						>&nbsp;<input
+							type="email"
+							name="email"
+							placeholder="Your Email"
+							value="<%= profile_user.email %>"
+							required
+					/></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="submit" value="Update" />
+				</td>
+			</tr>
+		</form>
+		<% }else{ %>
 		<tr>
 			<th>
 				<span>Name:</span>
@@ -23,5 +62,6 @@
 				</button>
 			</td>
 		</tr>
+		<% } %>
 	</table>
 </div>
