@@ -1,32 +1,35 @@
+<link rel="stylesheet" href="/css/home.css" />
 <script defer src="/js/home.js"></script>
 <h3><%= title%></h3>
 
-<section id="feed-posts">
-	<h4>Posts</h4>
-	<% if(locals.user){ %>
-	<form action="/posts/create" id="new-post-form" method="post">
-		<textarea
-			name="content"
-			cols="30"
-			rows="3"
-			placeholder="Type Here..."
-		></textarea>
-		<input type="submit" value="Post" />
-	</form>
-	<% } %>
+<div id="home-container">
+	<section id="feed-posts">
+		<h4>Posts</h4>
+		<% if(locals.user){ %>
+		<form action="/posts/create" id="new-post-form" method="post">
+			<textarea
+				name="content"
+				cols="30"
+				rows="3"
+				placeholder="Type Here..."
+			></textarea>
+			<input type="submit" value="Post" />
+		</form>
+		<% } %>
 
-	<div id="posts-list-container">
-		<ul>
-			<% for(post of posts){ %> <%- include('_post.ejs'); -%> <% } %>
-		</ul>
-	</div>
-</section>
+		<div id="posts-list-container">
+			<ul>
+				<% for(post of posts){ %> <%- include('_post.ejs'); -%> <% } %>
+			</ul>
+		</div>
+	</section>
 
-<section id="user-friends">
-	<h4>Friends List</h4>
-	<% for(person of all_users){ %>
-	<p>
-		<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
-	</p>
-	<% } %>
-</section>
+	<section id="user-friends">
+		<h4>Friends List</h4>
+		<% for(person of all_users){ %>
+		<p>
+			<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
+		</p>
+		<% } %>
+	</section>
+</div>
