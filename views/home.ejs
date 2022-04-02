@@ -17,59 +17,7 @@
 
 	<div class="posts-list-container">
 		<ul>
-			<% for(post of posts){ %>
-			<li>
-				<p>
-					<!-- If (User is signed in) -->
-					<!-- If (User who is signed in == User who created the post) -->
-					<!-- locals.user.id is String -->
-					<!-- post.user.id is String, post.user._id is Number -->
-					<% if((locals.user) && (locals.user.id == post.user.id)){ %>
-					<small>
-						<!-- post.id is String by MongoDB, post._id is Number -->
-						<a href="/posts/delete/<%= post.id %>">X</a>
-					</small>
-					<% } %> <%= post.content %>
-					<br />
-					<small><%= post.user.name %></small>
-				</p>
-				<div class="post-comments">
-					<% if(locals.user){ %>
-					<form action="/comments/create" method="post">
-						<textarea
-							name="content"
-							cols="20"
-							rows="3"
-							placeholder="Type Here To Add Comment ..."
-						></textarea>
-						<!-- Send ID of this specific Post where the Comment would be added  -->
-						<input type="hidden" name="post" value="<%= post._id %>" />
-						<input type="submit" value="Add Comment" />
-					</form>
-					<% } %>
-					<div class="post-comments-list">
-						<ul id="post-comments-<%= post._id %>">
-							<% for(comment of post.comments){ %>
-							<li>
-								<p>
-									<% if((locals.user) && (locals.user.id ==
-									comment.user.id)){ %>
-									<small>
-										<a href="/comments/delete/<%= comment.id %>"
-											>DELETE</a
-										>
-									</small>
-									<% } %> <%= comment.content %>
-									<br />
-									<%= comment.user.name %>
-								</p>
-							</li>
-							<% } %>
-						</ul>
-					</div>
-				</div>
-			</li>
-			<% } %>
+			<% for(post of posts){ %> <%- include('_post.ejs'); -%> <% } %>
 		</ul>
 	</div>
 </section>
