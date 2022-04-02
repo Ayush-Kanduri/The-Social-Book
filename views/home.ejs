@@ -1,8 +1,8 @@
 <script defer src="/js/home.js"></script>
 <h3><%= title%></h3>
 
-<section class="feed-posts">
-	<h4>Posts</h4>
+<section id="feed-posts">
+	<h3>Posts</h3>
 	<% if(locals.user){ %>
 	<form action="/posts/create" id="new-post-form" method="post">
 		<textarea
@@ -15,9 +15,18 @@
 	</form>
 	<% } %>
 
-	<div class="posts-list-container">
+	<div id="posts-list-container">
 		<ul>
 			<% for(post of posts){ %> <%- include('_post.ejs'); -%> <% } %>
 		</ul>
 	</div>
+</section>
+
+<section id="user-friends">
+	<h3>Friends List</h3>
+	<% for(user of all_users){ %>
+	<p>
+		<a href="/users/profile/<%= user.id %>"></a>
+	</p>
+	<% } %>
 </section>
