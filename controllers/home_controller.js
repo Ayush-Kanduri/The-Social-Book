@@ -1,5 +1,7 @@
 //Require the Post Model Data Structure
 const Post = require("../models/post");
+//Require the User Model Data Structure
+const User = require("../models/user");
 
 //We need to give this function a name, since it is an object.
 //Export the Home Controller's Home() Function to the "/" Route.
@@ -18,9 +20,16 @@ module.exports.home = (request, response) => {
 				console.log("Error in Fetching Posts & User");
 				return;
 			}
-			return response.render("home", {
-				title: "Home Page",
-				posts: posts,
+			User.find({}, (err, users) => {
+				if (err) {
+					console.log("Error in Fetching Users");
+					return;
+				}
+				return response.render("home", {
+					title: "Home Page",
+					posts: posts,
+					all_users: users,
+				});
 			});
 		});
 };
