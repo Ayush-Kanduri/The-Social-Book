@@ -30,10 +30,13 @@ module.exports.destroy = (req, res) => {
 			return;
 		}
 		//.id means converting the object id into string
-		//If the User who posted the post === the User logged in
-		if (post.user === req.user.id) {
+		//If the User who posted the post == the User logged in
+		//Object value == String value TRUE, Object value === String value FALSE
+		//post.user is an Object with the User's Object ID as a String
+		if (post.user == req.user.id) {
 			//Delete the Post
 			post.remove();
+			console.log("Post Deleted");
 			Comment.deleteMany({ post: req.params.id }, (err) => {
 				return res.redirect("back");
 			});

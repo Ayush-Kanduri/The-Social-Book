@@ -20,7 +20,16 @@
 			<% for(post of posts){ %>
 			<li>
 				<p>
-					<%= post.content %>
+					<!-- If (User is signed in) -->
+					<!-- If (User who is signed in == User who created the post) -->
+					<!-- locals.user.id is String -->
+					<!-- post.user.id is String, post.user._id is Number -->
+					<% if((locals.user) && (locals.user.id == post.user.id)){ %>
+					<small>
+						<!-- post.id is String by MongoDB, post._id is Number -->
+						<a href="/posts/delete/<%= post.id %>">X</a>
+					</small>
+					<% } %> <%= post.content %>
 					<br />
 					<small><%= post.user.name %></small>
 				</p>
