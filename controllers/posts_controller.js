@@ -33,6 +33,7 @@ module.exports.destroy = (req, res) => {
 		//If the User who posted the post == the User logged in
 		//Object value == String value TRUE, Object value === String value FALSE
 		//post.user is an Object with the User's Object ID as a String
+		//req.params.id is String, req.user.id is String, req.user._id is Number
 		if (post.user == req.user.id) {
 			//Delete the Post
 			post.remove();

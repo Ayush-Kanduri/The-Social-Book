@@ -44,3 +44,29 @@ module.exports.create = (req, res) => {
 		}
 	});
 };
+
+//Export the Comments Controller's destroy() Function
+module.exports.destroy = (req, res) => {
+	//Find the Comment
+	Comment.findById(req.params.id, (err, comment) => {
+		if (err) {
+			console.log("Error in finding the comment");
+			return;
+		}
+		if (comment.user == req.user.id) {
+			let postID = comment.post;
+			//Delete the Comment
+			comment.remove();
+			//Find the Post & Remove the Comment-id from the comments array
+			Post.findByIdAndUpdate(
+				postID,
+				{ $pull: { comments: req.params.id } },
+				(err, post) => {
+					return res.redirect("back");
+				}
+			);
+		} else {
+			return res.redirect("back");
+		}
+	});
+};
