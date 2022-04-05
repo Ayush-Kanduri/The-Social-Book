@@ -6,6 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>The Social Book | <%= title%></title>
 		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+		/>
+		<link
 			rel="shortcut icon"
 			href="/images/favicon.png"
 			type="image/x-icon"
@@ -14,9 +18,9 @@
 		<link rel="stylesheet" href="/css/_header.css" />
 		<link rel="stylesheet" href="/css/_footer.css" />
 		<%- style%>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 		<script
 			src="https://kit.fontawesome.com/34162fcf4d.js"
-			defer
 			crossorigin="anonymous"
 		></script>
 		<script defer src="/js/layout.js"></script>
@@ -24,12 +28,34 @@
 	</head>
 	<body>
 		<%- include('_header');%>
-		<!-- Flash Message -->
-		<% if(flash.success && flash.success.length > 0){ %>
-		<h5><%= flash.success %></h5>
-		<% } %>
-		<!-- Flash Message -->
 		<main><%- body%></main>
 		<%- include('_footer');%>
+
+		<!-- Script -->
+		<script defer>
+			<% if(flash.success && flash.success.length > 0){ %>
+				new Noty({
+					theme: 'relax',
+					text: '<%= flash.success %>',
+					type:'success',
+					layout:'topRight',
+					timeout:1500
+				}).show();
+			<% } %>
+			<% if(flash.error && flash.error.length > 0){ %>
+				new Noty({
+					theme: 'relax',
+					text: '<%= flash.error %>',
+					type:'error',
+					layout:'topRight',
+					timeout:1500
+				}).show();
+			<% } %>
+		</script>
+		<!-- Script -->
+
+		<!-- <% if(flash.success && flash.success.length > 0){ %>
+		<h5><%= flash.success %></h5>
+		<% } %> -->
 	</body>
 </html>

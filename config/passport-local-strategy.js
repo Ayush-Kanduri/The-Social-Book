@@ -23,8 +23,9 @@ passport.use(
 		{
 			//email [DB]
 			usernameField: "email",
+			passReqToCallback: true,
 		},
-		(email, password, done) => {
+		(req, email, password, done) => {
 			//done is a callback function. It is called when the user is authenticated or not authenticated
 
 			//Find the user & establish the identity
@@ -32,12 +33,14 @@ passport.use(
 			User.findOne({ email: email }, (err, user) => {
 				if (err) {
 					console.log("Error in finding the user --> Passport");
+					req.flash("error", err);
 					//Reports error to the PassportJS
 					return done(err);
 				}
 
 				if (!user || user.password !== password) {
 					console.log("Invalid Credentials");
+					req.flash("error", "Invalid Credentials");
 					//There's no error but the user is not found or the password is incorrect, i.e, Authentication Failed.
 					//It takes 2 arguments: 1st: Error, 2nd: Authentication Status
 					return done(null, false);

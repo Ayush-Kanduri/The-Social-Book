@@ -21,6 +21,7 @@ module.exports.update = (req, res) => {
 	if (req.params.id == req.user.id) {
 		// User.findByIdAndUpdate(req.params.id, {name:req.body.name, email:req.body.email})
 		User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+			req.flash("success", "Profile updated !!!");
 			return res.redirect("back");
 		});
 	} else {
@@ -51,12 +52,13 @@ module.exports.signIn = (req, res) => {
 //Export the Users Controller's createUser() Function
 module.exports.createUser = (req, res) => {
 	if (req.body.password !== req.body.confirm_password) {
+		req.flash("error", "Password didn't match !!!");
 		return res.redirect("back");
 	}
 
 	User.findOne({ email: req.body.email }, (err, user) => {
 		if (err) {
-			console.log("Error in finding user in signing up");
+			req.flash("error", err);
 			return;
 		}
 
@@ -66,10 +68,11 @@ module.exports.createUser = (req, res) => {
 					console.log("Error in creating user while signing up");
 					return;
 				}
-				console.log("User created");
+				req.flash("success", "User created !!!");
 				return res.redirect("/users/login");
 			});
 		} else {
+			req.flash("error", "User exists !!!");
 			return res.redirect("back");
 		}
 	});

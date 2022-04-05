@@ -29,30 +29,36 @@ module.exports.create = async (req, res) => {
 			post.comments.push(comment);
 			//Whenever we update something, we call save() method to update the database.
 			post.save();
-
+			req.flash("success", "Comment added !!!");
 			return res.redirect("/");
 		}
 	} catch (err) {
-		console.log("Error: ", err);
+		req.flash("error", err);
 		return;
 	}
 };
 
 //Export the Comments Controller's destroy() Function
 module.exports.destroy = async (req, res) => {
-	//Find the Comment
-	let comment = await Comment.findById(req.params.id);
-	if (comment.user == req.user.id) {
-		let postID = comment.post;
-		//Delete the Comment
-		comment.remove();
-		//Find the Post & Remove the Comment-id from the comments array
-		await Post.findByIdAndUpdate(postID, {
-			$pull: { comments: req.params.id },
-		});
-		console.log("Comment Deleted");
-		return res.redirect("back");
-	} else {
-		return res.redirect("back");
+	try {
+		//Find the Comment
+		let comment = await Comment.findById(req.params.id);
+		if (comment.user == req.user.id) {
+			let postID = comment.post;
+			//Delete the Comment
+			comment.remove();
+			//Find the Post & Remove the Comment-id from the comments array
+			await Post.findByIdAndUpdate(postID, {
+				$pull: { comments: req.params.id },
+			});
+			req.flash("success", "Comment deleted !!!");
+			return res.redirect("back");
+		} else {
+			req.flash("error", "Comment cannot be deleted !!!");
+			return res.redirect("back");
+		}
+	} catch (err) {
+		req.flash("error", err);
+		return;
 	}
 };
