@@ -77,16 +77,16 @@ module.exports.createUser = (req, res) => {
 
 //Export the Users Controller's createSession() Function
 module.exports.createSession = (req, res) => {
-	console.log("User Logged In & Authenticated");
 	//User is Signed In & we need to redirect to the Home Page
+	req.flash("success", "Logged In Successfully !!!");
 	return res.redirect("/");
 };
 
 //Export the Users Controller's destroySession() Function
 module.exports.destroySession = (req, res) => {
 	//PassportJS provides logout() Function to the Request Object
-	req.logout();
-	console.log("User Logged Out & De-Authenticated");
 	//User is Signed Out & redirected to the Home Page
+	req.logout();
+	req.flash("success", "Logged Out Successfully !!!");
 	return res.redirect("/");
 };

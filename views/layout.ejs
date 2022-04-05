@@ -24,6 +24,11 @@
 	</head>
 	<body>
 		<%- include('_header');%>
+		<!-- Flash Message -->
+		<% if(flash.success && flash.success.length > 0){ %>
+		<h5><%= flash.success %></h5>
+		<% } %>
+		<!-- Flash Message -->
 		<main><%- body%></main>
 		<%- include('_footer');%>
 	</body>

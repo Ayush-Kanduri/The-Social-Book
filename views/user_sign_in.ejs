@@ -2,11 +2,11 @@
 	<h3 class="form-heading"><%= title %></h3>
 	<form id="login" action="/users/create-session" method="post">
 		<div class="input-box">
+			<!-- autocomplete="off" Removed from the input -->
 			<input
 				type="email"
 				name="email"
 				placeholder=" "
-				autocomplete="off"
 				class="input"
 				required
 			/>
@@ -17,7 +17,6 @@
 				type="password"
 				name="password"
 				placeholder=" "
-				autocomplete="off"
 				class="input"
 				required
 			/>

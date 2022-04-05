@@ -29,6 +29,8 @@ const MongoStore = require("connect-mongo");
 const sassMiddleware = require("node-sass-middleware");
 //Requires the Connect Flash Module
 const flash = require("connect-flash");
+//Requires the Custom Middleware
+const customMiddleware = require("./config/middleware");
 
 //We have to put SASS just before the server is starting, because the files should be pre-compiled before the server starts. Whenever templates/browser ask for it, these pre-compiled files will be served.
 //Middleware - SASS Middleware
@@ -108,6 +110,8 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 //Middleware - Uses the Flash Message just after the Session Cookie is set
 app.use(flash());
+//Middleware - Uses the Custom Middleware
+app.use(customMiddleware.setFlash);
 //Middleware - App calls index.js - Route File, whenever '/' route is called in the request.
 app.use("/", route);
 
