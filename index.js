@@ -27,6 +27,8 @@ const passportLocal = require("./config/passport-local-strategy");
 const MongoStore = require("connect-mongo");
 //Requires the Node SASS Middleware Module
 const sassMiddleware = require("node-sass-middleware");
+//Requires the Connect Flash Module
+const flash = require("connect-flash");
 
 //We have to put SASS just before the server is starting, because the files should be pre-compiled before the server starts. Whenever templates/browser ask for it, these pre-compiled files will be served.
 //Middleware - SASS Middleware
@@ -104,6 +106,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 //Middleware - Sets the Authenticated User in the Response
 app.use(passport.setAuthenticatedUser);
+//Middleware - Uses the Flash Message just after the Session Cookie is set
+app.use(flash());
 //Middleware - App calls index.js - Route File, whenever '/' route is called in the request.
 app.use("/", route);
 
