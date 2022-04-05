@@ -4,31 +4,26 @@ const Post = require("../models/post");
 const Comment = require("../models/comment");
 
 //Export the Posts Controller's create() Function
-module.exports.create = (req, res) => {
-	Post.create(
-		{
+module.exports.create = async (req, res) => {
+	try {
+		await Post.create({
 			content: req.body.content,
 			//We have Already Set the Authenticated User in the Request Object
 			user: req.user._id,
-		},
-		(err, post) => {
-			if (err) {
-				console.log("Error in creating post");
-				return;
-			}
-			console.log("Post Created");
-			return res.redirect("back");
-		}
-	);
+		});
+
+		return res.redirect("back");
+	} catch (err) {
+		console.log("Error: ", err);
+		return;
+	}
 };
 
 //Export the Posts Controller's destroy() Function
-module.exports.destroy = (req, res) => {
-	Post.findById(req.params.id, (err, post) => {
-		if (err) {
-			console.log("Error in finding the post");
-			return;
-		}
+module.exports.destroy = async (req, res) => {
+	try {
+		let post = await Post.findById(req.params.id);
+
 		//.id means converting the object id into string
 		//If the User who posted the post == the User logged in
 		//Object value == String value TRUE, Object value === String value FALSE
@@ -38,11 +33,13 @@ module.exports.destroy = (req, res) => {
 			//Delete the Post
 			post.remove();
 			console.log("Post Deleted");
-			Comment.deleteMany({ post: req.params.id }, (err) => {
-				return res.redirect("back");
-			});
+			await Comment.deleteMany({ post: req.params.id });
+			return res.redirect("back");
 		} else {
 			return res.redirect("back");
 		}
-	});
+	} catch (err) {
+		console.log("Error: ", err);
+		return;
+	}
 };

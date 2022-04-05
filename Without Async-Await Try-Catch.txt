@@ -1,0 +1,140 @@
+//Home Controller
+module.exports.home = (request, response) => {
+	//Populate the User (from user field) of each Post, Comments from comments array and the User making the comment from the Comment Schema.
+	Post.find({})
+		.populate("user")
+		.populate({
+			path: "comments",
+			populate: {
+				path: "user",
+			},
+		})
+		.exec((err, posts) => {
+			if (err) {
+				console.log("Error in Fetching Posts & User");
+				return;
+			}
+			User.find({}, (err, users) => {
+				if (err) {
+					console.log("Error in Fetching Users");
+					return;
+				}
+				return response.render("home", {
+					title: "Home Page",
+					posts: posts,
+					all_users: users,
+				});
+			});
+		});
+};
+---------------------------------------------------
+//Post Controller
+module.exports.create = (req, res) => {
+	Post.create(
+		{
+			content: req.body.content,
+			//We have Already Set the Authenticated User in the Request Object
+			user: req.user._id,
+		},
+		(err, post) => {
+			if (err) {
+				console.log("Error in creating post");
+				return;
+			}
+			console.log("Post Created");
+			return res.redirect("back");
+		}
+	);
+};
+
+module.exports.destroy = (req, res) => {
+	Post.findById(req.params.id, (err, post) => {
+		if (err) {
+			console.log("Error in finding the post");
+			return;
+		}
+		//.id means converting the object id into string
+		//If the User who posted the post == the User logged in
+		//Object value == String value TRUE, Object value === String value FALSE
+		//post.user is an Object with the User's Object ID
+		//req.params.id is String, req.user.id is String, req.user._id is Object-Id
+		if (post.user == req.user.id) {
+			//Delete the Post
+			post.remove();
+			console.log("Post Deleted");
+			Comment.deleteMany({ post: req.params.id }, (err) => {
+				return res.redirect("back");
+			});
+		} else {
+			return res.redirect("back");
+		}
+	});
+};
+---------------------------------------------------
+//Comment Controller
+module.exports.create = (req, res) => {
+	//req.body.post is the post-id of the post we want to comment on. This will fetch the value (post-id) of the input field with the name of post.
+
+	//We need to create a new comment over a post, so first we need to find the post with that post-id if it exists or not, as someone may fiddle with inspect element in the browser.
+	//Then create the comment, add post-id to the Comment Schema, assign the comment to that post, and add that comment-id to the comments array inside the Post Schema.
+
+	//Find Post
+	Post.findById(req.body.post, (err, post) => {
+		if (err || !post) {
+			console.log("Error in finding the post", err);
+			return res.redirect("back");
+		}
+		if (post) {
+			//Create Comment
+			Comment.create(
+				{
+					//Form content
+					content: req.body.content,
+					//Add post-id to the Comment Schema & assign the it to that post
+					post: req.body.post,
+					//Passport previously added the current user to the request object.
+					user: req.user._id,
+				},
+				(err, comment) => {
+					if (err) {
+						console.log("Error in creating the comment", err);
+						return res.redirect("back");
+					}
+
+					//This comment is pushed to the comments array of the Post Schema which will automatically fetch the comment-id from it.
+					post.comments.push(comment);
+					//Whenever we update something, we call save() method to update the database.
+					post.save();
+
+					return res.redirect("/");
+				}
+			);
+		}
+	});
+};
+
+module.exports.destroy = (req, res) => {
+	//Find the Comment
+	Comment.findById(req.params.id, (err, comment) => {
+		if (err) {
+			console.log("Error in finding the comment");
+			return;
+		}
+		if (comment.user == req.user.id) {
+			let postID = comment.post;
+			//Delete the Comment
+			comment.remove();
+			//Find the Post & Remove the Comment-id from the comments array
+			Post.findByIdAndUpdate(
+				postID,
+				{ $pull: { comments: req.params.id } },
+				(err, post) => {
+					return res.redirect("back");
+				}
+			);
+			console.log("Comment Deleted");
+		} else {
+			return res.redirect("back");
+		}
+	});
+};

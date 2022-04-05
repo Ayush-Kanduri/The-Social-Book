@@ -4,6 +4,7 @@
 
 <div id="details">
 	<table>
+		<!-- If user matches then show the update form -->
 		<% if(locals.user.id == profile_user.id){ %>
 		<form action="/users/update/<%= profile_user.id %>" method="POST">
 			<tr>
@@ -43,6 +44,7 @@
 			</tr>
 		</form>
 		<% }else{ %>
+		<!-- Else show only the profile information -->
 		<tr>
 			<th>
 				<span>Name:</span>
