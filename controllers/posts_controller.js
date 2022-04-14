@@ -14,6 +14,7 @@ module.exports.create = async (req, res) => {
 
 		//We need to check if the request is AJAX or not.
 		//The type of AJAX Request is XMLHttpRequest (XHR)
+		//It returns the Data in JSON format as a Response to the AJAX Call which made the Request.
 		if (req.xhr) {
 			//Return JSON with a status of 200(Success) because the post is created.
 			return res.status(200).json({
@@ -24,7 +25,7 @@ module.exports.create = async (req, res) => {
 			});
 		}
 
-		req.flash("success", "Post published !!!");
+		req.flash("success", "Post Published !!!");
 		return res.redirect("back");
 	} catch (err) {
 		req.flash("error", err);
@@ -47,6 +48,20 @@ module.exports.destroy = async (req, res) => {
 			post.remove();
 			console.log("Post Deleted");
 			await Comment.deleteMany({ post: req.params.id });
+
+			//We need to check if the request is AJAX or not.
+			//The type of AJAX Request is XMLHttpRequest (XHR)
+			//It returns the Data in JSON format as a Response to the AJAX Call which made the Request.
+			if (req.xhr) {
+				//Return JSON with a status of 200(Success).
+				return res.status(200).json({
+					data: {
+						post_id: req.params.id,
+					},
+					message: "Post Deleted !!!",
+				});
+			}
+
 			req.flash("success", "Post deleted !!!");
 			return res.redirect("back");
 		} else {

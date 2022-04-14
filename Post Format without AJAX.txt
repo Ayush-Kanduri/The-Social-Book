@@ -54,3 +54,62 @@ module.exports.create = async (req, res) => {
 		return res.redirect("back");
 	}
 };
+
+
+
+
+//Export the Home Controller's Home() Function to the "/" Route.
+module.exports.home = async (request, response) => {
+	//Populate the User (from user field) of each Post, Comments from comments array and the User making the comment from the Comment Schema.
+	try {
+		let posts = await Post.find({})
+			.populate("user")
+			.populate({
+				path: "comments",
+				populate: {
+					path: "user",
+				},
+			});
+
+		let users = await User.find({});
+
+		return response.render("home", {
+			title: "Home Page",
+			posts: posts,
+			all_users: users,
+		});
+	} catch (err) {
+		console.log("Error: ", err);
+		return;
+	}
+};
+
+
+
+
+//Export the Posts Controller's destroy() Function
+module.exports.destroy = async (req, res) => {
+	try {
+		let post = await Post.findById(req.params.id);
+
+		//.id means converting the object id into string
+		//If the User who posted the post == the User logged in
+		//Object value == String value TRUE, Object value === String value FALSE
+		//post.user is an Object with the User's Object ID
+		//req.params.id is String, req.user.id is String, req.user._id is Object-Id
+		if (post.user == req.user.id) {
+			//Delete the Post
+			post.remove();
+			console.log("Post Deleted");
+			await Comment.deleteMany({ post: req.params.id });
+			req.flash("success", "Post deleted !!!");
+			return res.redirect("back");
+		} else {
+			req.flash("err", "Post cannot be deleted !!!");
+			return res.redirect("back");
+		}
+	} catch (err) {
+		req.flash("error", err);
+		return;
+	}
+};

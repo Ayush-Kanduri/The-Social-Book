@@ -6,6 +6,8 @@
 		let newPostForm = $("#new-post-form");
 		newPostForm.submit((event) => {
 			event.preventDefault();
+
+			//Sends the request to the server (/posts/create) to create the post via jQuery AJAX.
 			$.ajax({
 				type: "POST",
 				url: "/posts/create",
@@ -16,6 +18,10 @@
 					let newPost = createPostInDOM(data.data.post);
 					//Prepend appends the post to the top of the list, at first position.
 					$("#posts-list-container>ul").prepend(newPost);
+					//Clear the form after submission.
+					newPostForm.trigger("reset");
+					//Extracts delete button from the post & calls the deletePost() method with it.
+					deletePostFromDOM($(" .delete-post-button", newPost));
 				},
 				error: (error) => {
 					console.log(error.responseText);
@@ -31,7 +37,7 @@
 					<!-- We are the one creating the post, so we don't need if else for the user -->
 					<small>
 						<!-- post.id is String by MongoDB, post._id is Number -->
-						<a class="delete-post-button" href="/posts/delete/${post.id}">X</a>
+						<a class="delete-post-button" href="/posts/delete/${post._id}">X</a>
 					</small>
 					${post.content}
 					<br />
@@ -59,6 +65,26 @@
 					</div>
 				</div>
 </li>`);
+	};
+
+	//Method to delete the post from DOM - This function attaches Click Event Listener to the Delete Post Button & sends the AJAX request to the server.
+	let deletePostFromDOM = (deleteLink) => {
+		$(deleteLink).click((event) => {
+			event.preventDefault();
+
+			//Sends the request to the server (/posts/delete/post.id) to delete the post via jQuery AJAX parallelly.
+			//When it sends, it receives a data object with the post id from the posts controller destroy().
+			$.ajax({
+				type: "GET",
+				url: $(deleteLink).prop("href"),
+				success: (data) => {
+					$(`#post-${data.data.post_id}`).remove();
+				},
+				error: (error) => {
+					console.log("Error: ", error.responseText);
+				},
+			});
+		});
 	};
 
 	createPost();
