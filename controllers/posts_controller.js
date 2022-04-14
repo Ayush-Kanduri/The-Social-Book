@@ -25,6 +25,7 @@ module.exports.create = async (req, res) => {
 			});
 		}
 
+		//If the request is made through normal Request (Not AJAX)
 		req.flash("success", "Post Published !!!");
 		return res.redirect("back");
 	} catch (err) {
@@ -62,6 +63,7 @@ module.exports.destroy = async (req, res) => {
 				});
 			}
 
+			//If the request is made through normal Request (Not AJAX)
 			req.flash("success", "Post deleted !!!");
 			return res.redirect("back");
 		} else {
