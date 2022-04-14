@@ -35,3 +35,22 @@
 		</div>
 	</div>
 </li>
+
+
+
+//Export the Posts Controller's create() Function
+module.exports.create = async (req, res) => {
+	try {
+		await Post.create({
+			content: req.body.content,
+			//We have Already Set the Authenticated User in the Request Object
+			user: req.user._id,
+		});
+		
+		req.flash("success", "Post published !!!");
+		return res.redirect("back");
+	} catch (err) {
+		req.flash("error", err);
+		return res.redirect("back");
+	}
+};
