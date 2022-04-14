@@ -6,11 +6,23 @@ const Comment = require("../models/comment");
 //Export the Posts Controller's create() Function
 module.exports.create = async (req, res) => {
 	try {
-		await Post.create({
+		let post = await Post.create({
 			content: req.body.content,
 			//We have Already Set the Authenticated User in the Request Object
 			user: req.user._id,
 		});
+
+		//We need to check if the request is AJAX or not.
+		//The type of AJAX Request is XMLHttpRequest (XHR)
+		if (req.xhr) {
+			//Return JSON with a status of 200(Success) because the post is created.
+			return res.status(200).json({
+				data: {
+					post: post,
+				},
+				message: "Post Created !!!",
+			});
+		}
 
 		req.flash("success", "Post published !!!");
 		return res.redirect("back");
