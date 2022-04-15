@@ -22,6 +22,14 @@
 					newPostForm.trigger("reset");
 					//Extracts delete button from the post & calls the deletePost() method with it.
 					deletePostFromDOM($(" .delete-post-button", newPost));
+					//Calls Noty() to display the success message.
+					new Noty({
+						theme: "relax",
+						text: "Post Published !!!",
+						type: "success",
+						layout: "topRight",
+						timeout: 1500,
+					}).show();
 				},
 				error: (error) => {
 					console.log(error.responseText);
@@ -78,7 +86,16 @@
 				type: "GET",
 				url: $(deleteLink).prop("href"),
 				success: (data) => {
+					//Removes the post from the DOM.
 					$(`#post-${data.data.post_id}`).remove();
+					//Calls Noty() to display the success message.
+					new Noty({
+						theme: "relax",
+						text: "Post Deleted !!!",
+						type: "success",
+						layout: "topRight",
+						timeout: 1500,
+					}).show();
 				},
 				error: (error) => {
 					console.log("Error: ", error.responseText);
