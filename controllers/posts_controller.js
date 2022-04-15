@@ -16,16 +16,21 @@ module.exports.create = async (req, res) => {
 		//The type of AJAX Request is XMLHttpRequest (XHR)
 		//It returns the Data in JSON format as a Response to the AJAX Call which made the Request.
 		if (req.xhr) {
-			//If we want to populate just the name of the user (we don't not want to send the password in the API), this is how we do it!
-			post = await post.populate("user", "name").execPopulate();
+			try {
+				//If we want to populate just the name of the user (we don't not want to send the password in the API), this is how we do it!
+				post = await post.populate("user", "name");
 
-			//Return JSON with a status of 200(Success) because the post is created.
-			return res.status(200).json({
-				data: {
-					post: post,
-				},
-				message: "Post Created !!!",
-			});
+				//Return JSON with a status of 200(Success) because the post is created.
+				return res.status(200).json({
+					data: {
+						post: post,
+					},
+					message: "Post Created !!!",
+				});
+			} catch (err) {
+				console.log("Error: ", err);
+				return;
+			}
 		}
 
 		//If the request is made through normal Request (Not AJAX)
