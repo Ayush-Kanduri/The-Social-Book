@@ -15,7 +15,11 @@
 	</p>
 	<div class="post-comments">
 		<% if(locals.user){ %>
-		<form action="/comments/create" method="post">
+		<form
+			action="/comments/create"
+			id="post-<%= post._id %>-comments-form"
+			method="post"
+		>
 			<textarea
 				name="content"
 				cols="20"

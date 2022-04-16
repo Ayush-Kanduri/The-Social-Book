@@ -1,4 +1,3 @@
-import PostComments from "./home_post_comments";
 //For Block Scope
 //jQuery AJAX//
 {
@@ -23,6 +22,8 @@ import PostComments from "./home_post_comments";
 					newPostForm.trigger("reset");
 					//Extracts delete button from the post & calls the deletePost() method with it.
 					deletePostFromDOM($(" .delete-post-button", newPost));
+					// call the create comment class
+					new PostComments(data.data.post._id);
 					//Calls Noty() to display the success message.
 					new Noty({
 						theme: "relax",
@@ -55,7 +56,7 @@ import PostComments from "./home_post_comments";
 
 				<div class="post-comments">
 					<!-- We are already signed in, so we are only creating the post -->
-					<form action="/comments/create" method="post">
+					<form action="/comments/create" method="post" id="post-${post._id}-comments-form">
 						<textarea
 							name="content"
 							cols="20"

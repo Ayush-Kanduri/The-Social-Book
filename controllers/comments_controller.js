@@ -29,6 +29,19 @@ module.exports.create = async (req, res) => {
 			post.comments.push(comment);
 			//Whenever we update something, we call save() method to update the database.
 			post.save();
+
+			if (req.xhr) {
+				// Similar for comments to fetch the user's id!
+				comment = await comment.populate("user", "name");
+
+				return res.status(200).json({
+					data: {
+						comment: comment,
+					},
+					message: "Post created!",
+				});
+			}
+
 			req.flash("success", "Comment added !!!");
 			return res.redirect("/");
 		}
@@ -51,6 +64,17 @@ module.exports.destroy = async (req, res) => {
 			await Post.findByIdAndUpdate(postID, {
 				$pull: { comments: req.params.id },
 			});
+
+			// send the comment id which was deleted back to the views
+			if (req.xhr) {
+				return res.status(200).json({
+					data: {
+						comment_id: req.params.id,
+					},
+					message: "Post deleted",
+				});
+			}
+
 			req.flash("success", "Comment deleted !!!");
 			return res.redirect("back");
 		} else {

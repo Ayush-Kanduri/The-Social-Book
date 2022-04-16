@@ -4,7 +4,7 @@
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
 
-export default class PostComments {
+class PostComments {
 	// constructor is used to initialize the instance of the class whenever a new instance is created
 	constructor(postId) {
 		this.postId = postId;
@@ -24,17 +24,19 @@ export default class PostComments {
 		let pSelf = this;
 		this.newCommentForm.submit(function (e) {
 			e.preventDefault();
+
 			let self = this;
 
 			$.ajax({
-				type: "post",
+				type: "POST",
 				url: "/comments/create",
 				data: $(self).serialize(),
 				success: function (data) {
 					let newComment = pSelf.newCommentDom(data.data.comment);
 					$(`#post-comments-${postId}`).prepend(newComment);
+					//Clear the form after submission.
+					$(self).trigger("reset");
 					pSelf.deleteComment($(" .delete-comment-button", newComment));
-
 					new Noty({
 						theme: "relax",
 						text: "Comment published!",
@@ -56,7 +58,7 @@ export default class PostComments {
                         <p>
                             
                             <small>
-                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
+                                <a class="delete-comment-button" href="/comments/delete/${comment._id}">DELETE</a>
                             </small>
                             
                             ${comment.content}
