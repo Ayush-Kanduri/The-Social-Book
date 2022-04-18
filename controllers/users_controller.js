@@ -17,14 +17,36 @@ module.exports.profile = (request, response) => {
 };
 
 //Export the Users Controller's update() Function
-module.exports.update = (req, res) => {
+module.exports.update = async (req, res) => {
 	if (req.params.id == req.user.id) {
-		// User.findByIdAndUpdate(req.params.id, {name:req.body.name, email:req.body.email})
-		User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
-			req.flash("success", "Profile updated !!!");
+		try {
+			let user = await User.findById(req.params.id);
+			//Now we can't access the body params in the form directly from req.params because it is a Multipart Form & body parser cannot parse it.
+			User.uploadedAvatar(req, res, (err) => {
+				if (err) {
+					console.log("Error in MULTER: ", err);
+					return;
+				}
+
+				user.name = req.body.name;
+				user.email = req.body.email;
+
+				//If File Exists
+				if (req.file) {
+					//Saving the path of the uploaded file into the avatar field of the user
+					user.avatar = User.avatarPath + "/" + req.file.filename;
+				}
+
+				user.save();
+				req.flash("success", "Profile Updated !!!");
+				return res.redirect("back");
+			});
+		} catch (err) {
+			req.flash("error", err);
 			return res.redirect("back");
-		});
+		}
 	} else {
+		req.flash("error", "Unauthorized !!!");
 		return res.status(401).send("Unauthorized");
 	}
 };
