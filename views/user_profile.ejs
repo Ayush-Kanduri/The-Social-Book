@@ -5,7 +5,11 @@
 	<table>
 		<!-- If user matches then show the update form -->
 		<% if(locals.user.id == profile_user.id){ %>
-		<form action="/users/update/<%= profile_user.id %>" method="POST">
+		<form
+			action="/users/update/<%= profile_user.id %>"
+			enctype="multipart/form-data"
+			method="POST"
+		>
 			<tr>
 				<th>
 					<span>Name:</span>
@@ -33,6 +37,19 @@
 							placeholder="Your Email"
 							value="<%= profile_user.email %>"
 							required
+					/></span>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<span>Profile Picture:</span>
+				</th>
+				<td>
+					<span
+						>&nbsp;<input
+							type="file"
+							name="avatar"
+							placeholder="Profile Picture"
 					/></span>
 				</td>
 			</tr>
