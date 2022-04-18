@@ -1,5 +1,9 @@
 //Require the User Model Data Structure
 const User = require("../models/user");
+//Require File System Module for the Directory
+const fs = require("fs");
+//Require Path Module for the Directory
+const path = require("path");
 
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
@@ -18,26 +22,42 @@ module.exports.profile = (request, response) => {
 
 //Export the Users Controller's update() Function
 module.exports.update = async (req, res) => {
+	//If user is the same as the user who is logged in
 	if (req.params.id == req.user.id) {
 		try {
+			//Find the User by the ID
 			let user = await User.findById(req.params.id);
 			//Now we can't access the body params in the form directly from req.params because it is a Multipart Form & body parser cannot parse it.
+
+			//Call User static method to upload the Profile Picture
 			User.uploadedAvatar(req, res, (err) => {
 				if (err) {
 					console.log("Error in MULTER: ", err);
 					return;
 				}
 
+				//Set Name & Email
 				user.name = req.body.name;
 				user.email = req.body.email;
 
-				//If File Exists
+				//If Incoming File Exists
 				if (req.file) {
+					//If User Avatar already exists in the Database
+					if (user.avatar) {
+						//If User Avatar already exists in the "/uploads/users/avatars" Directory
+						if (fs.existsSync(path.join(__dirname, "..", user.avatar))) {
+							//Delete that Old Avatar
+							fs.unlinkSync(path.join(__dirname, "..", user.avatar));
+						}
+					}
+
+					//Save the New Avatar
 					//Saving the path of the uploaded file into the avatar field of the user
 					user.avatar = User.avatarPath + "/" + req.file.filename;
 				}
-
+				//Save the User
 				user.save();
+
 				req.flash("success", "Profile Updated !!!");
 				return res.redirect("back");
 			});

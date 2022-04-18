@@ -11,6 +11,8 @@ const port = 8000;
 const path = require("path");
 //Requires the index.js - Route File, from the Routes Folder.
 const route = require("./routes/index");
+//Require File System Module for the Directory
+const fs = require("fs");
 //Requires Express-EJS-Layouts Module
 const expressLayouts = require("express-ejs-layouts");
 //Requires MongoDB
