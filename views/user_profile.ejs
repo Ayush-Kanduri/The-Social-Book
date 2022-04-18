@@ -3,6 +3,16 @@
 
 <div id="details">
 	<table>
+		<tr>
+			<td colspan="5" style="text-align: center; padding-bottom: 1rem">
+				<img
+					src="<%= user.avatar%>"
+					alt="<%= user.name %>"
+					width="100"
+					style="margin: auto"
+				/>
+			</td>
+		</tr>
 		<!-- If user matches then show the update form -->
 		<% if(locals.user.id == profile_user.id){ %>
 		<form
