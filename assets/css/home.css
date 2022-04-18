@@ -29,7 +29,7 @@
     -o-object-position: center;
     object-position: center;
     aspect-ratio: 1/1;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: all 0.5s linear;
     margin: auto; }
   #welcome-container .wrapper {
@@ -75,13 +75,8 @@
       word-break: break-all;
       word-wrap: break-word;
       overflow-wrap: break-word;
-      animation: typing 3.5s steps(30, end), blink 0.5s step-end infinite; }
-
-@keyframes typing {
-  from {
-    width: 0; }
-  to {
-    width: 40%; } }
+      font-family: "Source Code Pro", monospace;
+      animation: blink 0.5s step-end infinite; }
 
 @keyframes blink {
   from,
