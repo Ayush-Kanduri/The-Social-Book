@@ -80,6 +80,8 @@
 			word-wrap: break-word;
 			overflow-wrap: break-word;
 			font-family: "Source Code Pro", monospace;
+		}
+		.blink {
 			animation: blink 0.5s step-end infinite;
 		}
 		@keyframes blink {
@@ -89,6 +91,17 @@
 			}
 			50% {
 				border-color: var(--logo-color);
+			}
+		}
+		.fade {
+			animation: fadeIn 1s ease-in;
+		}
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
 			}
 		}
 	}

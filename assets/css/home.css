@@ -75,7 +75,8 @@
       word-break: break-all;
       word-wrap: break-word;
       overflow-wrap: break-word;
-      font-family: "Source Code Pro", monospace;
+      font-family: "Source Code Pro", monospace; }
+    #welcome-container .wrapper .blink {
       animation: blink 0.5s step-end infinite; }
 
 @keyframes blink {
@@ -84,6 +85,14 @@
     border-color: transparent; }
   50% {
     border-color: var(--logo-color); } }
+    #welcome-container .wrapper .fade {
+      animation: fadeIn 1s ease-in; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
 @media screen and (max-width: 914px) {
   #welcome-container {

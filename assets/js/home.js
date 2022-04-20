@@ -2,10 +2,14 @@
 	function textAnimation() {
 		let i = 0;
 		const wordElement = document.querySelector("#text-animation-header");
-		const words = ["Be Creative.", "Be Unique.", "Be Social.", "Be You."];
+		const words = ["Create.", "Share.", "Connect.", "THE SOCIAL BOOK"];
 		const speed = 300;
 
 		wordElement.textContent = "";
+
+		function sleep(ms) {
+			return new Promise((resolve) => setTimeout(resolve, ms));
+		}
 
 		const animate = (index) => {
 			const word = words[index];
@@ -20,16 +24,37 @@
 			} else {
 				const lastWord = words[words.length - 1];
 				if (word !== lastWord) {
-					setTimeout(() => {
-						i = 0;
+					if (word !== words[words.length - 2]) {
+						setTimeout(() => {
+							i = 0;
+							wordElement.textContent = "";
+							animate(words.indexOf(word) + 1);
+						}, speed);
+					} else {
 						wordElement.textContent = "";
-						animate(words.indexOf(word) + 1);
-					}, speed);
+						wordElement.classList.remove("blink");
+						wordElement.style.border = "none";
+						wordElement.textContent = lastWord;
+						wordElement.style.transform = "scale(1.5)";
+						wordElement.classList.add("fade");
+						sleep(2000).then(() => {
+							setTimeout(() => {
+								i = 0;
+								wordElement.textContent = "";
+								wordElement.classList.remove("fade");
+								wordElement.classList.add("blink");
+								wordElement.style.borderRight =
+									"0.15em solid var(--logo-color)";
+								wordElement.style.transform = "scale(1)";
+								animate(i);
+							}, speed);
+						});
+					}
 				} else {
 					setTimeout(() => {
-						i = 0;
+						i = 1;
 						wordElement.textContent = "";
-						animate(0);
+						animate(i);
 					}, speed);
 				}
 			}
