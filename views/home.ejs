@@ -4,22 +4,41 @@
 <script defer src="/js/home.js"></script>
 
 <% if(locals.user){ %>
-<h3><%= title%></h3>
 <div id="home-container">
 	<section id="feed-posts">
-		<h4>Posts</h4>
+		<h2>Posts</h2>
 		<% if(locals.user){ %>
-		<form action="/posts/create" id="new-post-form" method="post">
+		<form
+			action="/posts/create"
+			id="new-post-form"
+			method="post"
+			class="card"
+		>
+			<img
+				class="user-avatar create-post-avatar"
+				src="<%= user.avatar%>"
+				alt="<%= user.name %>"
+				style="margin: auto"
+				onclick="window.location.href='/users/profile/<%= user.id %>'"
+				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+			/>
 			<textarea
 				name="content"
 				cols="30"
 				rows="3"
 				placeholder="Type Here..."
 			></textarea>
-			<input type="submit" value="Post" />
+			<div class="upload-wrapper">
+				<button class="btn btn-grad">Add Image</button>
+				<input type="file" name="image" class="image" />
+			</div>
+			<div class="upload-wrapper">
+				<button class="btn-grad">Add Video</button>
+				<input type="file" name="video" class="video" />
+			</div>
+			<input type="submit" value="Post" class="btn-grad" />
 		</form>
 		<% } %>
-
 		<div id="posts-list-container">
 			<ul>
 				<% for(post of posts){ %> <%- include('_post.ejs'); -%> <% } %>
@@ -28,9 +47,28 @@
 	</section>
 
 	<section id="user-friends">
-		<h4>Friends List</h4>
+		<h2>Friends List</h2>
 		<% for(person of all_users){ %>
-		<p>
+		<p
+			class="friend card"
+			onclick="window.location.href='/users/profile/<%= person.id %>'"
+		>
+			<% if(person.avatar){ %>
+			<img
+				class="user-avatar friend-avatar"
+				src="<%= person.avatar%>"
+				alt="<%= person.name %>"
+				onclick="window.location.href='/users/profile/<%= person.id %>'"
+			/>
+			<% } else { %>
+			<img
+				class="user-avatar"
+				src="/images/empty-avatar.png"
+				alt="<%= person.name %>"
+				onclick="window.location.href='/users/profile/<%= person.id %>'"
+			/>
+			<% } %>
+
 			<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
 		</p>
 		<% } %>

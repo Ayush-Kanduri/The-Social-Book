@@ -6,22 +6,15 @@ footer {
 	margin-top: auto;
 	font-weight: 500;
 	p {
-		font-size: 0.8rem;
-		a {
-			color: darkred;
-			text-decoration: none;
-		}
-		strong {
-			color: red;
-		}
+		font-size: 0.9rem;
+		strong,
 		b {
 			color: darkred;
 		}
 	}
 	.links {
-		margin-top: 1rem;
+		margin-top: 0.5rem;
 		a {
-			padding-top: 2rem;
 			text-decoration: none;
 			color: var(--logo-color);
 			&:hover {

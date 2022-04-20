@@ -69,6 +69,12 @@ main {
   padding: 5%;
   width: 100%; }
 
+.show {
+  display: initial; }
+
+.hide {
+  display: none; }
+
 h3 {
   font-size: 1rem;
   letter-spacing: 0.06rem;

@@ -5,12 +5,21 @@
 	<table>
 		<tr>
 			<td colspan="5" style="text-align: center; padding-bottom: 1rem">
+				<% if(profile_user.avatar){ %>
 				<img
-					src="<%= user.avatar%>"
-					alt="<%= user.name %>"
+					src="<%= profile_user.avatar %>"
+					alt="<%= profile_user.name %>"
 					width="100"
 					style="margin: auto"
 				/>
+				<% }else{ %>
+				<img
+					src="/images/empty-avatar.png"
+					alt="<%= profile_user.name %>"
+					width="100"
+					style="margin: auto"
+				/>
+				<% } %>
 			</td>
 		</tr>
 		<!-- If user matches then show the update form -->

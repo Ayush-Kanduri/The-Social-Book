@@ -2,7 +2,11 @@
 	<h1 id="logo" onclick="window.location='/';">
 		The Social Book &nbsp; <i class="fa-solid fa-message"></i>
 	</h1>
-	<nav class="big-navbar-links">
+	<% if(locals.user){%>
+		<nav class="big-navbar-links" id="home-nav">
+	<% }else{ %>
+		<nav class="big-navbar-links" id="welcome-nav">
+	<% } %>
 		<ul>
 			<li>
 				<% if(locals.user){%>
@@ -10,10 +14,13 @@
 					class="btn-grad"
 					onclick="window.location='/users/profile/<%= locals.user.id %>';"
 				>
-					<%= user.name%>'s Profile
+					My Profile
 				</button>
 				<% }else{%>
-				<button class="btn-grad" onclick="window.location='/users/signup';">
+				<button
+					class="btn-grad signup"
+					onclick="window.location='/users/signup';"
+				>
 					Sign Up
 				</button>
 				<% }%>
@@ -24,11 +31,56 @@
 					Log Out
 				</button>
 				<% }else{%>
-				<button class="btn-grad" onclick="window.location='/users/login';">
+				<button
+					class="btn-grad login"
+					onclick="window.location='/users/login';"
+				>
 					Log In
 				</button>
 				<% }%>
 			</li>
 		</ul>
 	</nav>
+	<% if(locals.user){%>
+	<i class="fa-solid fa-bars" id="open"></i>
+	<div class="sidebar">
+		<section class="logo">
+			<i class="fa-solid fa-xmark" id="close"></i>
+			<h1>The Social Book</h1>
+			<hr />
+		</section>
+		<ul class="sidebar-links">
+			<li id="li-info">
+				<a href="#/" id="info">
+					<% if(locals.user.avatar){ %>
+					<img
+						class="user-avatar friend-avatar"
+						src="<%= locals.user.avatar %>"
+						alt="<%= locals.user.name %>"
+						onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+					/>
+					<% } else { %>
+					<img
+						class="user-avatar friend-avatar"
+						src="/images/empty-avatar.png"
+						alt="<%= locals.user.name %>"
+						onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+					/>
+					<% } %>&ensp;<%= locals.user.name %></a
+				>
+			</li>
+			<li>
+				<a href="#/"><i class="fa-solid fa-id-card"></i>&ensp;Profile</a>
+			</li>
+			<li>
+				<a href="#/"><i class="fa-solid fa-user-group"></i>&ensp;Friends</a>
+			</li>
+			<li>
+				<a href="#/"
+					><i class="fa-solid fa-right-from-bracket"></i>&ensp;Logout</a
+				>
+			</li>
+		</ul>
+	</div>
+	<% } %>
 </header>
