@@ -18,8 +18,13 @@
 				}, 1000);
 			});
 		}
+		sidebar();
+	} catch (e) {
+		// console.log(e);
+	}
+
+	try {
 		function textAnimation() {
-			sidebar();
 			let i = 0;
 			const wordElement = document.querySelector("#text-animation-header");
 			const words = ["Create.", "Share.", "Connect.", "THE SOCIAL BOOK"];
@@ -82,5 +87,7 @@
 			animate(0);
 		}
 		textAnimation();
-	} catch (e) {}
+	} catch (e) {
+		// console.log(e);
+	}
 }
