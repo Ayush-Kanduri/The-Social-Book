@@ -90,4 +90,31 @@
 	} catch (e) {
 		// console.log(e);
 	}
+
+	try {
+		function printPostDate() {
+			const dateEle = document.querySelectorAll(".post-info");
+
+			dateEle.forEach((item) => {
+				let date = JSON.stringify(item.children[1].textContent);
+				date = new Date(date);
+				const day = date.getDate();
+				const month = date.getMonth();
+				const year = date.getFullYear();
+				const monthWord = date.toLocaleString("default", {
+					month: "short",
+				});
+				const time = date.toLocaleTimeString("default", {
+					hour: "2-digit",
+					minute: "2-digit",
+				});
+				const today = day + " " + monthWord + ", " + year;
+				const format = today + " | " + time;
+				item.children[1].textContent = format;
+			});
+		}
+		printPostDate();
+	} catch (e) {
+		// console.log(e);
+	}
 }

@@ -1,28 +1,88 @@
-<li id="post-<%= post._id %>">
-	<p>
-		<!-- If (User is signed in) -->
-		<!-- If (User who is signed in == User who created the post) -->
-		<!-- locals.user.id is String -->
-		<!-- post.user.id is String, post.user._id is Object-Id -->
-		<% if((locals.user) && (locals.user.id == post.user.id)){ %>
-		<small>
-			<!-- post.id is String by MongoDB, post._id is Number -->
-			<a class="delete-post-button" href="/posts/delete/<%= post.id %>">X</a>
-		</small>
-		<% } %> <%= post.content %>
-		<br />
-		<small><%= post.user.name %></small>
-	</p>
+<li id="post-<%= post._id %>" class="card post-li">
+	<div class="post">
+		<div class="post-heading">
+			<% if(post.user.avatar){ %>
+			<img
+				class="user-avatar"
+				src="<%= post.user.avatar %>"
+				alt="<%= post.user.name %>"
+				onclick="window.location.href='/users/profile/<%= post.user.id %>'"
+			/>
+			<% }else{ %>
+			<img
+				class="user-avatar"
+				src="/images/empty-avatar.png"
+				alt="<%= post.user.name %>"
+				onclick="window.location.href='/users/profile/<%= post.user.id %>'"
+			/>
+			<% } %>
+			<p class="post-info">
+				<small
+					onclick="window.location.href='/users/profile/<%= post.user.id %>'"
+					><%= post.user.name %></small
+				>
+				<small><%= post.updatedAt %></small>
+			</p>
+
+			<!-- If (User is signed in) -->
+			<!-- If (User who is signed in == User who created the post) -->
+			<!-- locals.user.id is String -->
+			<!-- post.user.id is String, post.user._id is Object-Id -->
+			<% if((locals.user) && (locals.user.id == post.user.id)){ %>
+			<small>
+				<!-- post.id is String by MongoDB, post._id is Number -->
+				<a class="delete-post-button" href="/posts/delete/<%= post.id %>"
+					><i class="fa-solid fa-trash"></i
+				></a>
+			</small>
+			<% } %>
+		</div>
+		<div class="post-content">
+			<p><%= post.content %></p>
+			<!-- <img src="/images/intro-1.jpg" alt="alt-post-image" /> -->
+		</div>
+		<div class="post-react">
+			<a href="#/" class="like"
+				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
+			>
+			<a href="#/" class="comment"
+				><i class="fa-solid fa-message"></i>&ensp;Comment</a
+			>
+			<a href="#/" class="share"
+				><i class="fa-solid fa-share"></i>&ensp;Share</a
+			>
+		</div>
+	</div>
 	<div class="post-comments">
+		<!-- If user is signed in then only he can comment -->
 		<% if(locals.user){ %>
 		<form
 			action="/comments/create"
 			id="post-<%= post._id %>-comments-form"
 			method="post"
 		>
+			<% if(locals.user.avatar){ %>
+			<img
+				class="user-avatar create-post-avatar"
+				src="<%= user.avatar%>"
+				alt="<%= user.name %>"
+				style="margin: auto"
+				onclick="window.location.href='/users/profile/<%= user.id %>'"
+				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+			/>
+			<% }else{ %>
+			<img
+				class="user-avatar create-post-avatar"
+				src="/images/empty-avatar.png"
+				alt="<%= user.name %>"
+				style="margin: auto"
+				onclick="window.location.href='/users/profile/<%= user.id %>'"
+				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+			/>
+			<% } %>
 			<textarea
 				name="content"
-				cols="20"
+				cols="30"
 				rows="3"
 				placeholder="Type Here To Add Comment ..."
 			></textarea>

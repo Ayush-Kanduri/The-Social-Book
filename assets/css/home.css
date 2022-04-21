@@ -15,8 +15,8 @@
 
 .user-avatar {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   padding: 0;
   margin: 0;
   cursor: pointer;
@@ -91,6 +91,141 @@
       #home-container #feed-posts #new-post-form .create-post-avatar:hover {
         filter: brightness(0.8);
         transition: 0.15s; }
+    #home-container #feed-posts #posts-list-container {
+      width: 100%;
+      height: auto;
+      display: block; }
+      #home-container #feed-posts #posts-list-container ul.post-ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin: 10px 0px; }
+        #home-container #feed-posts #posts-list-container ul.post-ul li.post-li {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          margin-bottom: 0%;
+          text-align: center;
+          min-height: 300px;
+          list-style: none; }
+          #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column; }
+            #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading {
+              width: 100%;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center; }
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading img.user-avatar:hover {
+                -webkit-filter: brightness(0.8);
+                filter: brightness(0.8);
+                transition: 0.15s; }
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading p.post-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                margin-left: 15px;
+                width: 80%; }
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading p.post-info :not(:last-child) {
+                  font-family: var(--text-font-family);
+                  font-weight: 600;
+                  font-size: 0.9rem;
+                  cursor: pointer;
+                  color: var(--logo-color); }
+                  #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading p.post-info :not(:last-child):hover {
+                    text-decoration: underline; }
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading p.post-info :not(:first-child) {
+                  font-family: var(--text-font-family);
+                  margin-top: 0.1rem;
+                  font-size: 0.7rem;
+                  font-weight: 600;
+                  letter-spacing: 0.035rem;
+                  color: #515151; }
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a,
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:active,
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:focus,
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:visited {
+                width: 100%;
+                color: var(--logo-color);
+                text-decoration: none;
+                font-size: 1.25rem;
+                transition: 0.15s; }
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:hover,
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:active:hover,
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:focus:hover,
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-heading :last-child a:visited:hover {
+                  color: red; }
+            #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-content {
+              width: 100%;
+              padding: 3%;
+              margin-bottom: 0.5rem;
+              margin-top: 0.5rem; }
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-content p {
+                border-left: 2px solid var(--logo-color);
+                padding-left: 10px;
+                color: var(--logo-color);
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-weight: 500;
+                font-size: 0.9rem;
+                font-family: var(--text-font-family);
+                margin: 0;
+                text-align: justify;
+                word-spacing: 0.1rem;
+                word-break: break-all;
+                line-height: 1.5rem;
+                overflow-wrap: break-word;
+                letter-spacing: 0.03rem; }
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-content img {
+                width: 100%;
+                height: auto;
+                min-height: 370px;
+                max-height: 450px;
+                object-fit: cover;
+                object-position: center;
+                -o-object-fit: cover;
+                -o-object-position: center;
+                margin-top: 1.3rem;
+                margin-bottom: 0.5rem;
+                aspect-ratio: 16/9; }
+            #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react {
+              width: 100%;
+              padding: 3%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-top: 1px solid var(--logo-color);
+              border-bottom: 1px solid var(--logo-color); }
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a,
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:active,
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:focus,
+              #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:visited {
+                color: var(--logo-color);
+                text-decoration: none;
+                font-size: 1.25rem;
+                transition: 0.15s;
+                width: 30%;
+                height: 100%;
+                transition: 0.15s; }
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:hover,
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:active:hover,
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:focus:hover,
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:visited:hover {
+                  color: red; }
   #home-container #user-friends {
     width: 30%;
     padding: 50px;

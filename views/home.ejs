@@ -14,6 +14,7 @@
 			method="post"
 			class="card"
 		>
+			<% if(locals.user.avatar){ %>
 			<img
 				class="user-avatar create-post-avatar"
 				src="<%= user.avatar%>"
@@ -22,6 +23,17 @@
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 			/>
+			<% }else{ %>
+			<img
+				class="user-avatar create-post-avatar"
+				src="/images/empty-avatar.png"
+				alt="<%= user.name %>"
+				style="margin: auto"
+				onclick="window.location.href='/users/profile/<%= user.id %>'"
+				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+			/>
+			<% } %>
+
 			<textarea
 				name="content"
 				cols="30"
@@ -40,7 +52,7 @@
 		</form>
 		<% } %>
 		<div id="posts-list-container">
-			<ul>
+			<ul class="post-ul">
 				<% for(post of posts){ %> <%- include('_post.ejs'); -%> <% } %>
 			</ul>
 		</div>
