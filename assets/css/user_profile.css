@@ -9,7 +9,64 @@
   font-weight: 500;
   letter-spacing: 0.1rem;
   word-spacing: 0.2rem;
-  margin-top: 10rem; }
-  #details .btn-grad {
-    margin: auto;
-    margin-top: 40px; }
+  margin: 10rem 0 5rem 0; }
+  #details table {
+    border-collapse: separate;
+    border-spacing: 8px; }
+    #details table .input {
+      width: 70%; }
+    #details table .btn {
+      width: 100%;
+      height: 100%; }
+    #details table .upload-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block; }
+    #details table input[type="file"],
+    #details table input[type="file"]::-webkit-file-upload-button {
+      cursor: pointer; }
+    #details table .upload-wrapper input[type="file"] {
+      cursor: pointer;
+      font-size: 35px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0; }
+    #details table img {
+      margin: auto;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      object-position: center;
+      -o-object-fit: cover;
+      -o-object-position: center;
+      aspect-ratio: 1/1;
+      border-radius: 50%; }
+    #details table input[type="text"],
+    #details table input[type="email"] {
+      width: 90%;
+      height: 2rem;
+      border: 1px solid var(--logo-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      color: var(--logo-color);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.06rem;
+      word-spacing: 0.2rem; }
+    #details table input[type="text"]:focus,
+    #details table input[type="email"]:focus {
+      outline: none;
+      border: 1px solid var(--logo-color); }
+    #details table .btn-grad {
+      margin: auto;
+      margin-top: 40px; }
+
+#details table .btn-grad {
+  margin: auto;
+  margin-top: 0px;
+  padding: 0.7rem; }
+
+@media screen and (max-width: 600px) {
+  #details {
+    margin: 8rem 0 5rem 0; } }

@@ -90,6 +90,16 @@ header {
 				a {
 					color: var(--text-color);
 					cursor: default;
+					img {
+						width: 70px;
+						height: 70px;
+						object-fit: cover;
+						object-position: center;
+						-o-object-fit: cover;
+						-o-object-position: center;
+						aspect-ratio: 1/1;
+						border-radius: 50%;
+					}
 				}
 				cursor: default;
 				background-color: var(--logo-color);
@@ -113,12 +123,11 @@ header {
 					justify-content: space-evenly;
 					align-items: center;
 					width: 100%;
-					padding: 2%;
 					font-size: 1.5rem;
 					color: rgb(19, 126, 176);
 					text-decoration: none;
 					transition: 0.3s;
-					font-size: 3.7vw;
+					font-size: 1rem;
 					font-weight: 500;
 					font-family: var(--sub-heading-font-family);
 					&:hover,

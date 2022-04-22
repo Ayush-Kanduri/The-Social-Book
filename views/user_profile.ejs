@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
+<script defer src="/js/profile.js"></script>
 
 <div id="details">
 	<table>
@@ -8,15 +9,11 @@
 				<img
 					src="<%= profile_user.avatar %>"
 					alt="<%= profile_user.name %>"
-					width="100"
-					style="margin: auto"
 				/>
 				<% }else{ %>
 				<img
 					src="/images/empty-avatar.png"
 					alt="<%= profile_user.name %>"
-					width="100"
-					style="margin: auto"
 				/>
 				<% } %>
 			</td>
@@ -32,7 +29,7 @@
 				<th>
 					<span>Name:</span>
 				</th>
-				<td>
+				<td class="input">
 					<span
 						>&nbsp;<input
 							type="text"
@@ -47,7 +44,7 @@
 				<th>
 					<span>Email:</span>
 				</th>
-				<td>
+				<td class="input">
 					<span
 						>&nbsp;<input
 							type="email"
@@ -63,17 +60,21 @@
 					<span>Profile Picture:</span>
 				</th>
 				<td>
-					<span
-						>&nbsp;<input
+					&nbsp;
+					<div class="upload-wrapper">
+						<button class="btn btn-grad">Profile Picture</button>
+						<input
 							type="file"
 							name="avatar"
+							class="image"
 							placeholder="Profile Picture"
-					/></span>
+						/>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3" style="text-align: center; padding-top: 1rem">
-					<input type="submit" value="Update" />
+					<input type="submit" value="Update" class="btn-grad" />
 				</td>
 			</tr>
 		</form>

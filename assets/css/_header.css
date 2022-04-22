@@ -82,6 +82,15 @@ header {
         header .sidebar .sidebar-links #li-info a {
           color: var(--text-color);
           cursor: default; }
+          header .sidebar .sidebar-links #li-info a img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            object-position: center;
+            -o-object-fit: cover;
+            -o-object-position: center;
+            aspect-ratio: 1/1;
+            border-radius: 50%; }
       header .sidebar .sidebar-links li {
         margin: 0 0 10% 0;
         list-style: none;
@@ -99,12 +108,11 @@ header {
           justify-content: space-evenly;
           align-items: center;
           width: 100%;
-          padding: 2%;
           font-size: 1.5rem;
           color: #137eb0;
           text-decoration: none;
           transition: 0.3s;
-          font-size: 3.7vw;
+          font-size: 1rem;
           font-weight: 500;
           font-family: var(--sub-heading-font-family); }
           header .sidebar .sidebar-links li a:hover, header .sidebar .sidebar-links li a:active, header .sidebar .sidebar-links li a:focus,
