@@ -40,6 +40,7 @@
 		<div class="post-content">
 			<p><%= post.content %></p>
 			<!-- <img src="/images/intro-1.jpg" alt="alt-post-image" /> -->
+			<!-- <video src="/images/video.mp4" alt="alt-post-video" controls /> -->
 		</div>
 		<div class="post-react">
 			<a href="#/" class="like"
@@ -66,7 +67,6 @@
 				class="user-avatar create-post-avatar"
 				src="<%= user.avatar%>"
 				alt="<%= user.name %>"
-				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 			/>
@@ -75,7 +75,6 @@
 				class="user-avatar create-post-avatar"
 				src="/images/empty-avatar.png"
 				alt="<%= user.name %>"
-				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 			/>
@@ -88,11 +87,11 @@
 			></textarea>
 			<!-- Send ID of this specific Post where the Comment would be added  -->
 			<input type="hidden" name="post" value="<%= post._id %>" />
-			<input type="submit" value="Add Comment" />
+			<input class="btn-grad" type="submit" value="Add Comment" />
 		</form>
 		<% } %>
 		<div class="post-comments-list">
-			<ul id="post-comments-<%= post._id %>">
+			<ul id="post-comments-<%= post._id %>" class="post-comments-ul">
 				<% for(comment of post.comments){ %> <%- include('_comment') -%> <%
 				} %>
 			</ul>

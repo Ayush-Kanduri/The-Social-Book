@@ -1,15 +1,46 @@
-<li id="comment-<%= comment._id %>">
-	<p>
-		<% if((locals.user) && (locals.user.id == comment.user.id)){ %>
-		<small>
-			<a
-				class="delete-comment-button"
-				href="/comments/delete/<%= comment._id %>"
-				>DELETE</a
+<li id="comment-<%= comment._id %>" class="post-comments-li">
+	<div class="comment">
+		<div class="comment-heading">
+			<% if(comment.user.avatar){ %>
+			<img
+				class="user-avatar"
+				src="<%= comment.user.avatar %>"
+				alt="<%= comment.user.name %>"
+				onclick="window.location.href='/users/profile/<%= comment.user.id %>'"
+			/>
+			<% }else{ %>
+			<img
+				class="user-avatar"
+				src="/images/empty-avatar.png"
+				alt="<%= comment.user.name %>"
+				onclick="window.location.href='/users/profile/<%= comment.user.id %>'"
+			/>
+			<% } %>
+			<p class="comment-info">
+				<small
+					onclick="window.location.href='/users/profile/<%= comment.user.id %>'"
+					><%= comment.user.name %></small
+				>
+				<small><%= comment.updatedAt %></small>
+			</p>
+			<!-- If (User who is signed in == User who created the comment) -->
+			<% if((locals.user) && (locals.user.id == comment.user.id)){ %>
+			<small>
+				<a
+					class="delete-comment-button"
+					href="/comments/delete/<%= comment._id %>"
+					><i class="fa-solid fa-trash"></i
+				></a>
+			</small>
+			<% } %>
+		</div>
+		<div class="comment-content">
+			<p><%= comment.content %></p>
+		</div>
+		<div class="comment-react">
+			<a href="#/" class="like"
+				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
 			>
-		</small>
-		<% } %> <%= comment.content %>
-		<br />
-		<small> <%= comment.user.name %> </small>
-	</p>
+		</div>
+	</div>
 </li>
