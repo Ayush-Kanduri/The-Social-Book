@@ -659,23 +659,25 @@ form
     font-size: 0.5rem; } }
 
 @media screen and (max-width: 450px) {
-  #welcome-container #intro-1 {
-    display: none; }
-  #welcome-container .wrapper {
-    width: 100%;
-    max-width: 300px;
-    height: 200px;
-    min-height: 150px;
-    aspect-ratio: 10/8; }
-    #welcome-container .wrapper svg {
-      aspect-ratio: 10/8;
+  #welcome-container {
+    margin-top: 7rem; }
+    #welcome-container #intro-1 {
+      display: none; }
+    #welcome-container .wrapper {
+      width: 100%;
+      max-width: 300px;
       height: 200px;
       min-height: 150px;
-      width: 100%; }
-      #welcome-container .wrapper svg g {
+      aspect-ratio: 10/8; }
+      #welcome-container .wrapper svg {
+        aspect-ratio: 10/8;
+        height: 200px;
+        min-height: 150px;
         width: 100%; }
-        #welcome-container .wrapper svg g path {
+        #welcome-container .wrapper svg g {
           width: 100%; }
+          #welcome-container .wrapper svg g path {
+            width: 100%; }
   #home-container
 #feed-posts
 #posts-list-container
