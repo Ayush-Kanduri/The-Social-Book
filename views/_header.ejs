@@ -1,3 +1,5 @@
+<script defer src="/js/lazy_loading.js"></script>
+
 <header>
 	<h1 id="logo" onclick="window.location='/';">
 		The Social Book &nbsp; <i class="fa-solid fa-message"></i>
@@ -55,16 +57,20 @@
 					<% if(locals.user.avatar){ %>
 					<img
 						class="user-avatar friend-avatar"
-						src="<%= locals.user.avatar %>"
+						src=""
+						data-src="<%= locals.user.avatar %>"
 						alt="<%= locals.user.name %>"
 						onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+						loading="lazy"
 					/>
 					<% } else { %>
 					<img
 						class="user-avatar friend-avatar"
-						src="/images/empty-avatar.png"
+						src=""
+						data-src="/images/empty-avatar.png"
 						alt="<%= locals.user.name %>"
 						onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+						loading="lazy"
 					/>
 					<% } %>&ensp;<%= locals.user.name %></a
 				>

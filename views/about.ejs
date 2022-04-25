@@ -1,11 +1,17 @@
 <link rel="stylesheet" href="/css/about.css" />
 <script defer src="/js/profile.js"></script>
+<script defer src="/js/lazy_loading.js"></script>
 
 <div class="about-container">
 	<h2><%= title %></h2>
 	<section>
 		<div class="image">
-			<img src="/images/coffee.jpg" alt="coffee image" />
+			<img
+				src=""
+				data-src="/images/coffee.jpg"
+				alt="coffee image"
+				loading="lazy"
+			/>
 		</div>
 		<div class="info">
 			<p>

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
 <script defer src="/js/profile.js"></script>
+<script defer src="/js/lazy_loading.js"></script>
 
 <div id="details">
 	<table>
@@ -7,13 +8,17 @@
 			<td colspan="5" style="text-align: center; padding-bottom: 1rem">
 				<% if(profile_user.avatar){ %>
 				<img
-					src="<%= profile_user.avatar %>"
+					src=""
+					data-src="<%= profile_user.avatar %>"
 					alt="<%= profile_user.name %>"
+					loading="lazy"
 				/>
 				<% }else{ %>
 				<img
-					src="/images/empty-avatar.png"
+					src=""
+					data-src="/images/empty-avatar.png"
 					alt="<%= profile_user.name %>"
+					loading="lazy"
 				/>
 				<% } %>
 			</td>

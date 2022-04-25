@@ -4,16 +4,20 @@
 			<% if(post.user.avatar){ %>
 			<img
 				class="user-avatar"
-				src="<%= post.user.avatar %>"
+				src=""
+				data-src="<%= post.user.avatar %>"
 				alt="<%= post.user.name %>"
 				onclick="window.location.href='/users/profile/<%= post.user.id %>'"
+				loading="lazy"
 			/>
 			<% }else{ %>
 			<img
 				class="user-avatar"
-				src="/images/empty-avatar.png"
+				src=""
+				data-src="/images/empty-avatar.png"
 				alt="<%= post.user.name %>"
 				onclick="window.location.href='/users/profile/<%= post.user.id %>'"
+				loading="lazy"
 			/>
 			<% } %>
 			<p class="post-info">
@@ -39,7 +43,12 @@
 		</div>
 		<div class="post-content">
 			<p><%= post.content %></p>
-			<!-- <img src="/images/intro-1.jpg" alt="alt-post-image" /> -->
+			<img
+				src=""
+				data-src="/images/intro-1.jpg"
+				alt="alt-post-image"
+				loading="lazy"
+			/>
 			<!-- <video src="/images/video.mp4" alt="alt-post-video" controls /> -->
 		</div>
 		<div class="post-react">
@@ -65,18 +74,22 @@
 			<% if(locals.user.avatar){ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src="<%= user.avatar%>"
+				src=""
+				data-src="<%= user.avatar%>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				loading="lazy"
 			/>
 			<% }else{ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src="/images/empty-avatar.png"
+				src=""
+				data-src="/images/empty-avatar.png"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				loading="lazy"
 			/>
 			<% } %>
 			<textarea

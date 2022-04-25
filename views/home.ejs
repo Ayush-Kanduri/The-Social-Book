@@ -2,6 +2,7 @@
 <script defer src="/js/home_post_comments.js"></script>
 <script defer src="/js/home_posts.js"></script>
 <script defer src="/js/home.js"></script>
+<script defer src="/js/lazy_loading.js"></script>
 
 <% if(locals.user){ %>
 <div id="home-container">
@@ -17,20 +18,24 @@
 			<% if(locals.user.avatar){ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src="<%= user.avatar%>"
+				src=""
+				data-src="<%= user.avatar%>"
 				alt="<%= user.name %>"
 				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				loading="lazy"
 			/>
 			<% }else{ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src="/images/empty-avatar.png"
+				src=""
+				data-src="/images/empty-avatar.png"
 				alt="<%= user.name %>"
 				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				loading="lazy"
 			/>
 			<% } %>
 
@@ -68,16 +73,20 @@
 			<% if(person.avatar){ %>
 			<img
 				class="user-avatar friend-avatar"
-				src="<%= person.avatar%>"
+				src=""
+				data-src="<%= person.avatar%>"
 				alt="<%= person.name %>"
 				onclick="window.location.href='/users/profile/<%= person.id %>'"
+				loading="lazy"
 			/>
 			<% } else { %>
 			<img
 				class="user-avatar"
-				src="/images/empty-avatar.png"
+				src=""
+				data-src="/images/empty-avatar.png"
 				alt="<%= person.name %>"
 				onclick="window.location.href='/users/profile/<%= person.id %>'"
+				loading="lazy"
 			/>
 			<% } %>
 
@@ -88,7 +97,13 @@
 </div>
 <% }else{ %>
 <div id="welcome-container">
-	<img id="intro-1" src="../images/intro-1.jpg" alt="social media info" />
+	<img
+		id="intro-1"
+		src=""
+		data-src="../images/intro-1.jpg"
+		alt="social media info"
+		loading="lazy"
+	/>
 	<div class="wrapper">
 		<svg
 			viewBox="0 0 800 500"

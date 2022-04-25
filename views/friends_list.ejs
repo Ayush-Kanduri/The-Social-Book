@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/css/friends_list.css" />
 <script defer src="/js/profile.js"></script>
+<script defer src="/js/lazy_loading.js"></script>
 
 <div class="friends-container">
 	<h2><%= title %></h2>
@@ -14,15 +15,19 @@
 		>
 			<% if (friend.avatar) { %>
 			<img
-				src="<%= friend.avatar %>"
+				src=""
+				data-src="<%= friend.avatar %>"
 				alt="<%= friend.name %>"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				loading="lazy"
 			/>
 			<% } else { %>
 			<img
-				src="/images/empty-avatar.png"
+				src=""
+				data-src="/images/empty-avatar.png"
 				alt="<%= friend.name %>"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				loading="lazy"
 			/>
 			<% } %>
 			<p><%= friend.name %></p>
