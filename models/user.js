@@ -1,5 +1,7 @@
 //Create the same instance of mongoose which is used in the MongoDB configuration inside config
 const mongoose = require("mongoose");
+//Require ValidatorJS for the Validation
+const validator = require("validator");
 
 //We are importing Multer in User Models & not in Config, because we are uploading that file specific to that user & we'll have some specific settings.
 //Avatar would be uploaded somewhere else but we are setting Multer for each Model individually.
@@ -18,15 +20,35 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			unique: true,
+			validate(value) {
+				//Automatic validation of the email using ValidatorJS
+				if (!validator.isEmail(value)) {
+					throw new Error("Email is Invalid");
+				}
+			},
 		},
 		password: {
 			type: String,
 			required: true,
+			//Custom validator for password
+			validate(value) {
+				if (value.length < 6) {
+					throw new Error("Password should be at least 6 characters long");
+				}
+			},
+			//Custom validator for password
+			// validate: {
+			// 	validator: function (value) {
+			// 		return value.length >= 6;
+			// 	},
+			// 	message: "Password should be at least 6 characters long",
+			// },
 		},
 		name: {
 			type: String,
 			required: true,
 			trim: true,
+			//In-built validator for password
 			minlength: [2, "Name must be at least 2 characters long"],
 		},
 		avatar: {

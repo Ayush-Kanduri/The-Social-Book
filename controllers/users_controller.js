@@ -111,11 +111,21 @@ module.exports.createUser = (req, res) => {
 
 		if (!user) {
 			User.create(req.body, (err, user) => {
+				//Transporting the error from the Schema to here.
 				if (err) {
-					console.log("Error in creating user while signing up !!!");
-					req.flash("error", "Enter Valid Name / Email / Password !!!");
+					let error = "Error in creating user while signing up !!!";
+					console.log(error);
+					if (err.message) {
+						let i = err.message.lastIndexOf(":");
+						error = err.message.substr(i + 2);
+					}
+					req.flash(
+						"error",
+						error || "Error in creating user while signing up !!!"
+					);
 					return res.redirect("back");
 				}
+
 				req.flash("success", "User created !!!");
 				return res.redirect("/users/login");
 			});

@@ -1,5 +1,7 @@
 //Create the same instance of mongoose which is used in the MongoDB configuration inside config
 const mongoose = require("mongoose");
+//Require ValidatorJS for the Validation
+const validator = require("validator");
 
 //Create the DB Schema
 const commentSchema = new mongoose.Schema(
