@@ -11,7 +11,8 @@ module.exports.profile = (request, response) => {
 	User.findById(request.params.id, (err, user) => {
 		if (err) {
 			console.log("Error in finding user in profile");
-			return;
+			request.flash("error", "Error in finding user in profile");
+			return response.redirect("back");
 		}
 		return response.render("user_profile", {
 			title: "User Profile",
@@ -33,7 +34,7 @@ module.exports.update = async (req, res) => {
 			User.uploadedAvatar(req, res, (err) => {
 				if (err) {
 					console.log("Error in MULTER: ", err);
-					return;
+					return res.redirect("back");
 				}
 
 				//Set Name & Email
@@ -42,6 +43,9 @@ module.exports.update = async (req, res) => {
 
 				//If Incoming File Exists
 				if (req.file) {
+					//user.avatar ==> /uploads/users/avatars/filename
+					//User.avatarPath ==> /uploads/users/avatars
+
 					//If User Avatar already exists in the Database
 					if (user.avatar) {
 						//If User Avatar already exists in the "/uploads/users/avatars" Directory
@@ -93,6 +97,7 @@ module.exports.signIn = (req, res) => {
 
 //Export the Users Controller's createUser() Function
 module.exports.createUser = (req, res) => {
+	//Custom Back End Form Validation
 	if (req.body.password !== req.body.confirm_password) {
 		req.flash("error", "Password didn't match !!!");
 		return res.redirect("back");
@@ -101,20 +106,21 @@ module.exports.createUser = (req, res) => {
 	User.findOne({ email: req.body.email }, (err, user) => {
 		if (err) {
 			req.flash("error", err);
-			return;
+			return res.redirect("back");
 		}
 
 		if (!user) {
 			User.create(req.body, (err, user) => {
 				if (err) {
-					console.log("Error in creating user while signing up");
-					return;
+					console.log("Error in creating user while signing up !!!");
+					req.flash("error", "Enter Valid Name / Email / Password !!!");
+					return res.redirect("back");
 				}
 				req.flash("success", "User created !!!");
 				return res.redirect("/users/login");
 			});
 		} else {
-			req.flash("error", "User exists !!!");
+			req.flash("error", "User already exists !!!");
 			return res.redirect("back");
 		}
 	});

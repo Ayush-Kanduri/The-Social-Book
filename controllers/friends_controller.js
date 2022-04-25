@@ -10,7 +10,7 @@ module.exports.friends = async (request, response) => {
 			friends: users,
 		});
 	} catch (err) {
-		console.log("Error: ", err);
-		return;
+		request.flash("error", err);
+		return response.redirect("back");
 	}
 };

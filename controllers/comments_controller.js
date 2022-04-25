@@ -31,15 +31,24 @@ module.exports.create = async (req, res) => {
 			post.save();
 
 			if (req.xhr) {
-				// Similar for comments to fetch the user's id!
-				comment = await comment.populate("user", "name");
-
-				return res.status(200).json({
-					data: {
-						comment: comment,
-					},
-					message: "Post created!",
-				});
+				try {
+					// Similar for comments to fetch the user's id!
+					comment = await comment.populate("user", "name");
+					return res.status(200).json({
+						data: {
+							comment: comment,
+						},
+						message: "Post created!",
+					});
+				} catch (err) {
+					console.log("Error: ", err);
+					return res.status(500).json({
+						data: {
+							error: err,
+						},
+						message: "Error in creating the Comment",
+					});
+				}
 			}
 
 			req.flash("success", "Comment added !!!");
@@ -47,7 +56,7 @@ module.exports.create = async (req, res) => {
 		}
 	} catch (err) {
 		req.flash("error", err);
-		return;
+		return res.redirect("back");
 	}
 };
 
@@ -83,6 +92,6 @@ module.exports.destroy = async (req, res) => {
 		}
 	} catch (err) {
 		req.flash("error", err);
-		return;
+		return res.redirect("back");
 	}
 };

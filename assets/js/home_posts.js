@@ -30,7 +30,7 @@
 						text: "Post Published !!!",
 						type: "success",
 						layout: "topRight",
-						timeout: 1500,
+						timeout: 3000,
 					}).show();
 				},
 				error: (error) => {
@@ -96,7 +96,7 @@
 						text: "Post Deleted !!!",
 						type: "success",
 						layout: "topRight",
-						timeout: 1500,
+						timeout: 3000,
 					}).show();
 				},
 				error: (error) => {

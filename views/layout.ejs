@@ -46,16 +46,16 @@
 					text: '<%= flash.success %>',
 					type:'success',
 					layout:'topRight',
-					timeout:1500
+					timeout:3000
 				}).show();
 			<% } %>
 			<% if(flash.error && flash.error.length > 0){ %>
 				new Noty({
-					theme: 'relax',
+					theme: 'metroui',
 					text: '<%= flash.error %>',
 					type:'error',
 					layout:'topRight',
-					timeout:1500
+					timeout:3000
 				}).show();
 			<% } %>
 		</script>

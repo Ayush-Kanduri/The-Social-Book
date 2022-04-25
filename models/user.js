@@ -26,6 +26,8 @@ const userSchema = new mongoose.Schema(
 		name: {
 			type: String,
 			required: true,
+			trim: true,
+			minlength: [2, "Name must be at least 2 characters long"],
 		},
 		avatar: {
 			type: String,

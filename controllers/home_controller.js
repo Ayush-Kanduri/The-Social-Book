@@ -28,6 +28,7 @@ module.exports.home = async (request, response) => {
 		});
 	} catch (err) {
 		console.log("Error: ", err);
-		return;
+		request.flash("error", err);
+		return response.redirect("back");
 	}
 };

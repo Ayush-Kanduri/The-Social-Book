@@ -29,7 +29,12 @@ module.exports.create = async (req, res) => {
 				});
 			} catch (err) {
 				console.log("Error: ", err);
-				return;
+				return res.status(500).json({
+					data: {
+						error: err,
+					},
+					message: "Error in Creating Post !!!",
+				});
 			}
 		}
 
@@ -80,6 +85,6 @@ module.exports.destroy = async (req, res) => {
 		}
 	} catch (err) {
 		req.flash("error", err);
-		return;
+		return res.redirect("back");
 	}
 };
