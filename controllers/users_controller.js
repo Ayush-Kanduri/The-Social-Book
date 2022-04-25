@@ -1,5 +1,7 @@
 //Require the User Model Data Structure
 const User = require("../models/user");
+//Require the Express validator
+const { validationResult } = require("express-validator");
 //Require File System Module for the Directory
 const fs = require("fs");
 //Require Path Module for the Directory
@@ -97,6 +99,21 @@ module.exports.signIn = (req, res) => {
 
 //Export the Users Controller's createUser() Function
 module.exports.createUser = (req, res) => {
+	// Finds the validation errors in this request and wraps them in an object with handy functions
+	const errors = validationResult(req);
+
+	//If there are Errors in the Validation of the Form
+	if (!errors.isEmpty()) {
+		// res.status(422).json({ errors: errors.array() });
+		const error = errors.array();
+		return res.render("user_sign_up", {
+			flash: {
+				error: error[0].msg,
+			},
+			title: "Sign Up",
+		});
+	}
+
 	//Custom Back End Form Validation
 	if (req.body.password !== req.body.confirm_password) {
 		req.flash("error", "Password didn't match !!!");

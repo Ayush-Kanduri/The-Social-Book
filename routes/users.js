@@ -6,6 +6,8 @@ const router = express.Router();
 const passport = require("passport");
 //Requires the Passport Local Strategy Module
 const passportLocal = require("../config/passport-local-strategy");
+//Requires the Middleware Module
+const middleware = require("../config/middleware");
 
 //Require Users Controller
 const usersController = require("../controllers/users_controller");
@@ -16,7 +18,11 @@ router.get("/signup", usersController.signUp);
 //Access the Users Controller's signIn() Function by '/users/login' route.
 router.get("/login", usersController.signIn);
 //Access the Users Controller's createUser() Function by '/users/create-user' route.
-router.post("/create-user", usersController.createUser);
+router.post(
+	"/create-user",
+	middleware.validate("createUser"),
+	usersController.createUser
+);
 //Access the Users Controller's logout() Function by '/users/logout' route.
 router.get("/logout", usersController.destroySession);
 
