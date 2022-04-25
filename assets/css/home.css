@@ -416,7 +416,7 @@
     #home-container #user-friends .friend {
       justify-content: space-between;
       cursor: pointer;
-      flex-wrap: nowrap; }
+      flex-wrap: wrap; }
       #home-container #user-friends .friend a {
         font-size: 1rem;
         font-weight: 500;
@@ -520,7 +520,8 @@
     justify-content: center;
     margin-bottom: 13%; }
     #home-container #user-friends .friend a {
-      flex: 1 0 100%; } }
+      flex: 1 0 100%;
+      font-size: 0.8rem; } }
 
 @media screen and (max-width: 914px) {
   #welcome-container {

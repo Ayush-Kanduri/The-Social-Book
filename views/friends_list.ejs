@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/friends_list.css" />
+<script defer src="/js/profile.js"></script>
+
+<div class="friends-container">
+	<h2><%= title %></h2>
+	<section>
+		<!-- If Friends Exist  -->
+		<% if (friends.length > 0) { %>
+		<!-- Find Friends  -->
+		<% for (const friend of friends) { %>
+		<div
+			class="card"
+			onclick="window.location.href='/users/profile/<%= friend.id %>'"
+		>
+			<% if (friend.avatar) { %>
+			<img
+				src="<%= friend.avatar %>"
+				alt="<%= friend.name %>"
+				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+			/>
+			<% } else { %>
+			<img
+				src="/images/empty-avatar.png"
+				alt="<%= friend.name %>"
+				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+			/>
+			<% } %>
+			<p><%= friend.name %></p>
+		</div>
+		<% } %>
+		<!-- If Friends Don't Exist  -->
+		<% } else { %>
+		<h3 style="margin-top: 3rem">You Have No Friends</h3>
+		<% } %>
+	</section>
+</div>
