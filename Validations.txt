@@ -1,0 +1,9 @@
+• Manual validations inside the controller
+
+• MongoDB Validation
+Inbuilt (checks fields)
+Custom/Manual (Validate field)
+Automatic (Validator-JS)
+
+• Back End Form Data Validation
+Automatic (Express-Validator-JS)
