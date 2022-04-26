@@ -158,4 +158,21 @@
 	} catch (e) {
 		// console.log(e);
 	}
+
+	try {
+		const remove = (e) => {
+			e.target.parentElement.remove();
+		};
+		function postPreview() {
+			const imagePreview = document.querySelector("img.preview");
+			const videoPreview = document.querySelector("video.preview");
+			console.log(imagePreview);
+			console.log(videoPreview);
+			imagePreview.addEventListener("click", remove);
+			videoPreview.addEventListener("click", remove);
+		}
+		postPreview();
+	} catch (e) {
+		// console.log(e);
+	}
 }

@@ -54,13 +54,13 @@
 				text-transform: uppercase;
 				transition: 0.5s;
 				background-size: 200% auto;
-				color: white;
+				color: var(--text-color);
 				display: block;
 				border-radius: 10px;
-				flex: 0 0 70%;
+				flex: 0 0 80%;
 				&:hover {
 					background-position: right center; /* change the direction of the change here */
-					color: #fff;
+					color: var(--text-color);
 					text-decoration: none;
 				}
 			}
@@ -80,6 +80,63 @@
 				left: 0;
 				top: 0;
 				opacity: 0;
+			}
+			.preview-box {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 1rem;
+				word-break: break-all;
+				word-wrap: break-word;
+				position: relative;
+			}
+			.preview-image,
+			.preview-video {
+				width: 40%;
+				height: 40%;
+				border-radius: 5px;
+				aspect-ratio: 16/9;
+				z-index: 9;
+				position: relative;
+				transition: all 0.3s linear;
+				cursor: pointer;
+				.preview {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 5px;
+					aspect-ratio: 16/9;
+					object-position: center;
+					-o-object-fit: cover;
+					transition: all 0.3s linear;
+					-o-object-position: center;
+				}
+				&:hover .preview {
+					-webkit-filter: blur(1px) brightness(0.8) grayscale(0.8);
+					filter: blur(1px) brightness(0.8) grayscale(0.8);
+				}
+			}
+			.preview-image::before,
+			.preview-video::before {
+				content: "";
+				display: inline-block;
+				position: absolute;
+				top: 30%;
+				left: 40%;
+				width: 18%;
+				height: 30%;
+				cursor: pointer;
+				z-index: 10;
+				background-image: url("../images/close.png");
+				background-color: var(--text-color);
+				border-radius: 50%;
+				background-size: cover;
+				background-position: center;
+				transition: all 0.3s linear;
+				background-repeat: no-repeat;
+				pointer-events: none;
 			}
 			textarea {
 				height: 100px;
