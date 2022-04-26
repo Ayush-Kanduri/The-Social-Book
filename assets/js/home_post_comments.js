@@ -32,7 +32,10 @@ class PostComments {
 				url: "/comments/create",
 				data: $(self).serialize(),
 				success: function (data) {
-					let newComment = pSelf.newCommentDom(data.data.comment);
+					let newComment = pSelf.newCommentDom(
+						data.data.comment,
+						data.data.user
+					);
 					$(`#post-comments-${postId}`).prepend(newComment);
 					//Clear the form after submission.
 					$(self).trigger("reset");
@@ -52,23 +55,83 @@ class PostComments {
 		});
 	}
 
-	newCommentDom(comment) {
+	newCommentDom(comment, user) {
 		// I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
-		return $(`<li id="comment-${comment._id}">
-                        <p>
-                            
-                            <small>
-                                <a class="delete-comment-button" href="/comments/delete/${comment._id}">DELETE</a>
-                            </small>
-                            
-                            ${comment.content}
-                            <br>
-                            <small>
-                                ${comment.user.name}
-                            </small>
-                        </p>    
+		let commentUserAvatar, deleteButton;
 
-                </li>`);
+		if (comment.user.avatar) {
+			commentUserAvatar = `<img
+									class="user-avatar"
+									src="${comment.user.avatar}"
+									alt="${comment.user.name}"
+									onclick="window.location.href='/users/profile/${comment.user._id}'"
+									loading="lazy"
+								/>`;
+		} else {
+			commentUserAvatar = `<img
+									class="user-avatar"
+									src="/images/empty-avatar.png"
+									alt="${comment.user.name}"
+									onclick="window.location.href='/users/profile/${comment.user._id}'"
+									loading="lazy"
+								/>`;
+		}
+
+		if (user.id == comment.user.id) {
+			deleteButton = `<small>
+								<a
+									class="delete-comment-button"
+									href="/comments/delete/${comment._id}"
+								>
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							</small>`;
+		} else {
+			deleteButton = ``;
+		}
+
+		return $(`<li id="comment-${comment._id}" class="post-comments-li">
+	<div class="comment">
+		<div class="comment-heading">
+			${commentUserAvatar}
+			<p class="comment-info">
+				<small
+					onclick="window.location.href='/users/profile/${comment.user._id}'"
+					>${comment.user.name}</small
+				>
+				<small>${this.printPostDate(comment.updatedAt)}</small>
+			</p>
+			${deleteButton}
+		</div>
+		<div class="comment-content">
+			<p>${comment.content}</p>
+		</div>
+		<div class="comment-react">
+			<a href="#/" class="like"
+				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
+			>
+		</div>
+	</div>
+</li>
+`);
+	}
+
+	//Method to set the date on which the post was created in the correct format.
+	printPostDate(dat) {
+		let date = dat;
+		date = new Date(date);
+		const day = date.getDate();
+		const year = date.getFullYear();
+		const monthWord = date.toLocaleString("default", {
+			month: "short",
+		});
+		const time = date.toLocaleTimeString("default", {
+			hour: "2-digit",
+			minute: "2-digit",
+		});
+		const today = day + " " + monthWord + ", " + year;
+		const format = today + " | " + time;
+		return format;
 	}
 
 	deleteComment(deleteLink) {

@@ -33,10 +33,13 @@ module.exports.create = async (req, res) => {
 			if (req.xhr) {
 				try {
 					// Similar for comments to fetch the user's id!
-					comment = await comment.populate("user", "name");
+					// comment = await comment.populate("user");
+					// comment = await comment.populate("user", "name");
+					comment = await comment.populate("user", ["name", "avatar"]);
 					return res.status(200).json({
 						data: {
 							comment: comment,
+							user: req.user,
 						},
 						message: "Post created!",
 					});
