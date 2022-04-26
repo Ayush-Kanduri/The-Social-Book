@@ -166,8 +166,6 @@
 		function postPreview() {
 			const imagePreview = document.querySelector("img.preview");
 			const videoPreview = document.querySelector("video.preview");
-			console.log(imagePreview);
-			console.log(videoPreview);
 			imagePreview.addEventListener("click", remove);
 			videoPreview.addEventListener("click", remove);
 		}

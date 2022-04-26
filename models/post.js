@@ -21,6 +21,12 @@ const postSchema = new mongoose.Schema(
 				ref: "Comment",
 			},
 		],
+		// contentImage: {
+		// 	type: String,
+		// },
+		// contentVideo: {
+		// 	type: String,
+		// },
 	},
 	{
 		timestamps: true,
