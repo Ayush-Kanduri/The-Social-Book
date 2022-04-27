@@ -42,6 +42,7 @@ module.exports.update = async (req, res) => {
 				//Set Name & Email
 				user.name = req.body.name;
 				user.email = req.body.email;
+				user.password = req.body.password;
 
 				//If Incoming File Exists
 				if (req.file) {
@@ -131,7 +132,6 @@ module.exports.createUser = (req, res) => {
 				//Transporting the error from the Schema to here.
 				if (err) {
 					let error = "Error in creating user while signing up !!!";
-					console.log(error);
 					if (err.message) {
 						let i = err.message.lastIndexOf(":");
 						error = err.message.substr(i + 2);

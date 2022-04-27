@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
 <script defer src="/js/profile.js"></script>
 <script defer src="/js/lazy_loading.js"></script>
+<script defer src="/js/frontend_form_validation.js"></script>
 
 <div id="details">
 	<table>
@@ -56,6 +57,23 @@
 							name="email"
 							placeholder="Your Email"
 							value="<%= profile_user.email %>"
+							required
+					/></span>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<span>Password:</span>
+				</th>
+				<td class="input">
+					<span
+						>&nbsp;<input
+							type="password"
+							name="password"
+							placeholder="Change password"
+							value="<%= profile_user.password %>"
+							minlength="6"
+							size="6"
 							required
 					/></span>
 				</td>

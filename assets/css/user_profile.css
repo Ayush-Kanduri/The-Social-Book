@@ -43,7 +43,8 @@
       aspect-ratio: 1/1;
       border-radius: 50%; }
     #details table input[type="text"],
-    #details table input[type="email"] {
+    #details table input[type="email"],
+    #details table input[type="password"] {
       width: 90%;
       height: 2rem;
       border: 1px solid var(--logo-color);
@@ -55,7 +56,8 @@
       letter-spacing: 0.06rem;
       word-spacing: 0.2rem; }
     #details table input[type="text"]:focus,
-    #details table input[type="email"]:focus {
+    #details table input[type="email"]:focus,
+    #details table input[type="password"]:focus {
       outline: none;
       border: 1px solid var(--logo-color); }
     #details table .btn-grad {
