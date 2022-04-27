@@ -168,45 +168,61 @@
 				if (!!document.querySelector(".preview-image")) {
 					document.querySelector(".preview-image").remove();
 				}
+
 				const file = e.target.files[0];
+
 				if (
-					file.type.match("image.png") ||
-					file.type.match("image.jpeg") ||
-					file.type.match("image.gif") ||
-					file.type.match("image.jpg")
+					file !== undefined ||
+					file !== "undefined" ||
+					file !== null ||
+					file !== "null" ||
+					file !== ""
 				) {
 					if (
-						file !== undefined ||
-						file !== "undefined" ||
-						file !== null ||
-						file !== "null" ||
-						file !== ""
+						file.type.match("image.png") ||
+						file.type.match("image.jpeg") ||
+						file.type.match("image.gif") ||
+						file.type.match("image.jpg")
 					) {
-						const reader = new FileReader();
-						reader.readAsDataURL(file);
-						reader.onload = (e) => {
-							const preview = document.querySelector(".preview-box");
-							const imgPreview = document.createElement("div");
-							imgPreview.classList.add("preview-image");
-							const img = createImageThumbnail();
-							img.src = e.target.result;
-							img.addEventListener("click", (e) => {
-								image.value = "";
-								e.target.parentElement.remove();
-							});
-							imgPreview.appendChild(img);
-							preview.appendChild(imgPreview);
-						};
+						if (file.size <= 5242880) {
+							// 5242880 Bytes = 5 MB;
+							const reader = new FileReader();
+							reader.readAsDataURL(file);
+							reader.onload = (e) => {
+								const preview = document.querySelector(".preview-box");
+								const imgPreview = document.createElement("div");
+								imgPreview.classList.add("preview-image");
+								const img = createImageThumbnail();
+								img.src = e.target.result;
+								img.addEventListener("click", (e) => {
+									image.value = "";
+									e.target.parentElement.remove();
+								});
+								imgPreview.appendChild(img);
+								preview.appendChild(imgPreview);
+							};
+						} else {
+							new Noty({
+								theme: "metroui",
+								text: "Image File Size Limit is 5MB",
+								type: "error",
+								layout: "topRight",
+								timeout: 3000,
+							}).show();
+							image.value = "";
+							return;
+						}
+					} else {
+						new Noty({
+							theme: "metroui",
+							text: "Only Images (.png .jpg .jpeg .gif) are allowed",
+							type: "error",
+							layout: "topRight",
+							timeout: 3000,
+						}).show();
+						image.value = "";
+						return;
 					}
-				} else {
-					new Noty({
-						theme: "metroui",
-						text: "Only Images (.png .jpg .jpeg .gif) are allowed",
-						type: "error",
-						layout: "topRight",
-						timeout: 3000,
-					}).show();
-					return;
 				}
 			});
 
@@ -214,45 +230,61 @@
 				if (!!document.querySelector(".preview-video")) {
 					document.querySelector(".preview-video").remove();
 				}
+
 				const file = e.target.files[0];
+
 				if (
-					file.type.match("video.mp4") ||
-					file.type.match("video.ogg") ||
-					file.type.match("video.webm") ||
-					file.type.match("video.mkv")
+					file !== undefined ||
+					file !== "undefined" ||
+					file !== null ||
+					file !== "null" ||
+					file !== ""
 				) {
 					if (
-						file !== undefined ||
-						file !== "undefined" ||
-						file !== null ||
-						file !== "null" ||
-						file !== ""
+						file.type.match("video.mp4") ||
+						file.type.match("video.ogg") ||
+						file.type.match("video.webm") ||
+						file.type.match("video.mkv")
 					) {
-						const reader = new FileReader();
-						reader.readAsDataURL(file);
-						reader.onload = (e) => {
-							const preview = document.querySelector(".preview-box");
-							const vidPreview = document.createElement("div");
-							vidPreview.classList.add("preview-video");
-							const vid = createVideoThumbnail();
-							vid.src = e.target.result;
-							vid.addEventListener("click", (e) => {
-								video.value = "";
-								e.target.parentElement.remove();
-							});
-							vidPreview.appendChild(vid);
-							preview.appendChild(vidPreview);
-						};
+						if (file.size <= 15728640) {
+							// 15728640 Bytes = 15 MB;
+							const reader = new FileReader();
+							reader.readAsDataURL(file);
+							reader.onload = (e) => {
+								const preview = document.querySelector(".preview-box");
+								const vidPreview = document.createElement("div");
+								vidPreview.classList.add("preview-video");
+								const vid = createVideoThumbnail();
+								vid.src = e.target.result;
+								vid.addEventListener("click", (e) => {
+									video.value = "";
+									e.target.parentElement.remove();
+								});
+								vidPreview.appendChild(vid);
+								preview.appendChild(vidPreview);
+							};
+						} else {
+							new Noty({
+								theme: "metroui",
+								text: "Video File Size Limit is 15MB",
+								type: "error",
+								layout: "topRight",
+								timeout: 3000,
+							}).show();
+							video.value = "";
+							return;
+						}
+					} else {
+						new Noty({
+							theme: "metroui",
+							text: "Only Videos (.mp4 .ogg .webm .mkv) are allowed",
+							type: "error",
+							layout: "topRight",
+							timeout: 3000,
+						}).show();
+						video.value = "";
+						return;
 					}
-				} else {
-					new Noty({
-						theme: "metroui",
-						text: "Only Videos (.mp4 .ogg .webm .mkv) are allowed",
-						type: "error",
-						layout: "topRight",
-						timeout: 3000,
-					}).show();
-					return;
 				}
 			});
 		};
@@ -273,6 +305,14 @@
 			return video;
 		};
 		fileInput();
+
+		//function to convert bytes to megabytes
+		const bytesToSize = (bytes) => {
+			const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+			if (bytes == 0) return "0 Byte";
+			const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+			return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+		};
 	} catch (e) {
 		// console.log(e);
 	}
