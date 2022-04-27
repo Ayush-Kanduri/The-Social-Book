@@ -48,7 +48,6 @@ module.exports.update = async (req, res) => {
 				if (req.file) {
 					//user.avatar ==> /uploads/users/avatars/filename
 					//User.avatarPath ==> /uploads/users/avatars
-
 					//If User Avatar already exists in the Database
 					if (user.avatar) {
 						//If User Avatar already exists in the "/uploads/users/avatars" Directory

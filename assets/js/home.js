@@ -160,16 +160,119 @@
 	}
 
 	try {
-		const remove = (e) => {
-			e.target.parentElement.remove();
+		const fileInput = () => {
+			const image = document.querySelector("input.image");
+			const video = document.querySelector("input.video");
+
+			image.addEventListener("change", (e) => {
+				if (!!document.querySelector(".preview-image")) {
+					document.querySelector(".preview-image").remove();
+				}
+				const file = e.target.files[0];
+				if (
+					file.type.match("image.png") ||
+					file.type.match("image.jpeg") ||
+					file.type.match("image.gif") ||
+					file.type.match("image.jpg")
+				) {
+					if (
+						file !== undefined ||
+						file !== "undefined" ||
+						file !== null ||
+						file !== "null" ||
+						file !== ""
+					) {
+						const reader = new FileReader();
+						reader.readAsDataURL(file);
+						reader.onload = (e) => {
+							const preview = document.querySelector(".preview-box");
+							const imgPreview = document.createElement("div");
+							imgPreview.classList.add("preview-image");
+							const img = createImageThumbnail();
+							img.src = e.target.result;
+							img.addEventListener("click", (e) => {
+								image.value = "";
+								e.target.parentElement.remove();
+							});
+							imgPreview.appendChild(img);
+							preview.appendChild(imgPreview);
+						};
+					}
+				} else {
+					new Noty({
+						theme: "metroui",
+						text: "Only Images (.png .jpg .jpeg .gif) are allowed",
+						type: "error",
+						layout: "topRight",
+						timeout: 3000,
+					}).show();
+					return;
+				}
+			});
+
+			video.addEventListener("change", (e) => {
+				if (!!document.querySelector(".preview-video")) {
+					document.querySelector(".preview-video").remove();
+				}
+				const file = e.target.files[0];
+				if (
+					file.type.match("video.mp4") ||
+					file.type.match("video.ogg") ||
+					file.type.match("video.webm") ||
+					file.type.match("video.mkv")
+				) {
+					if (
+						file !== undefined ||
+						file !== "undefined" ||
+						file !== null ||
+						file !== "null" ||
+						file !== ""
+					) {
+						const reader = new FileReader();
+						reader.readAsDataURL(file);
+						reader.onload = (e) => {
+							const preview = document.querySelector(".preview-box");
+							const vidPreview = document.createElement("div");
+							vidPreview.classList.add("preview-video");
+							const vid = createVideoThumbnail();
+							vid.src = e.target.result;
+							vid.addEventListener("click", (e) => {
+								video.value = "";
+								e.target.parentElement.remove();
+							});
+							vidPreview.appendChild(vid);
+							preview.appendChild(vidPreview);
+						};
+					}
+				} else {
+					new Noty({
+						theme: "metroui",
+						text: "Only Videos (.mp4 .ogg .webm .mkv) are allowed",
+						type: "error",
+						layout: "topRight",
+						timeout: 3000,
+					}).show();
+					return;
+				}
+			});
 		};
-		function postPreview() {
-			const imagePreview = document.querySelector("img.preview");
-			const videoPreview = document.querySelector("video.preview");
-			imagePreview.addEventListener("click", remove);
-			videoPreview.addEventListener("click", remove);
-		}
-		postPreview();
+		const createImageThumbnail = () => {
+			const img = document.createElement("img");
+			img.classList.add("preview");
+			img.setAttribute("id", "post-image-preview");
+			img.setAttribute("alt", img.id);
+			img.setAttribute("src", "");
+			return img;
+		};
+		const createVideoThumbnail = () => {
+			const video = document.createElement("video");
+			video.classList.add("preview");
+			video.setAttribute("muted", "true");
+			video.setAttribute("id", "post-video-preview");
+			video.setAttribute("src", "");
+			return video;
+		};
+		fileInput();
 	} catch (e) {
 		// console.log(e);
 	}

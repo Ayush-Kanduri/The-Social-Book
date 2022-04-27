@@ -27,7 +27,7 @@ header {
   align-items: center;
   padding: 1.2% 5%;
   padding-bottom: 1.5%;
-  z-index: 5; }
+  z-index: 50; }
   header #open {
     display: none;
     position: absolute;

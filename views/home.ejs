@@ -47,11 +47,23 @@
 			></textarea>
 			<div class="upload-wrapper">
 				<button class="btn btn-grad">Add Image</button>
-				<input type="file" name="image" class="image" />
+				<input
+					type="file"
+					name="image"
+					class="image"
+					accept="image/png, image/gif, image/jpeg, image/jpg"
+				/>
+				<!-- accept="image/*" -->
+				<!-- accept="video/*" -->
 			</div>
 			<div class="upload-wrapper">
 				<button class="btn-grad">Add Video</button>
-				<input type="file" name="video" class="video" />
+				<input
+					type="file"
+					name="video"
+					class="video"
+					accept="video/mp4, video/webm, video/ogg, video/mkv"
+				/>
 			</div>
 			<input type="submit" value="Post" class="btn-grad" />
 			<div class="preview-box">
@@ -59,11 +71,14 @@
 					<img
 						src="/images/coffee.jpg"
 						alt="post-image-preview"
+						id="post-image-preview"
 						class="preview"
 					/>
-				</div> -->
-				<!-- <div class="preview-video">
-					<video src="/images/video.mp4" muted class="preview"></video>
+				</div>
+				<div class="preview-video">
+					<video src="/images/video.mp4" 
+					id="post-video-preview"
+					muted class="preview"></video>
 				</div> -->
 			</div>
 		</form>
