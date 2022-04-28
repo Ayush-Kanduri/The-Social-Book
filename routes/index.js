@@ -18,7 +18,7 @@ const postsRouterFile = require("./posts");
 const commentsRouterFile = require("./comments");
 //Require Friends Router File
 const friendsRouterFile = require("./friends");
-//Require API Router Folder
+//Require API Index Router File
 const api = require("./api");
 
 //SYNTAX: router.METHOD("/Route_Name", Router_File_Name);
@@ -34,7 +34,7 @@ router.use("/posts", postsRouterFile);
 router.use("/comments", commentsRouterFile);
 //Access the Comments Router File on '/friends' route.
 router.use("/friends", friendsRouterFile);
-//Access the API Router Folder on '/api' route.
+//Access the API Index Router File on '/api' route.
 router.use("/api", api);
 
 //Router Loaded Successfully.
