@@ -8,6 +8,8 @@ const postsAPIController = require("../../../controllers/api/v1/posts_api_contro
 
 //Access the Posts-API Controller's index() Function
 router.get("/", postsAPIController.index);
+//Access the Posts-API Controller's destroy() Function
+router.delete("/:id", postsAPIController.destroy);
 
 //Export the Router
 module.exports = router;

@@ -140,7 +140,6 @@
     #home-container #feed-posts #new-post-form input:focus {
       outline: none; }
     #home-container #feed-posts #new-post-form .create-post-avatar {
-      border: 1px solid var(--logo-color);
       flex-grow: 0; }
       #home-container #feed-posts #new-post-form .create-post-avatar:hover {
         filter: brightness(0.8);
@@ -302,8 +301,7 @@
               align-items: center; }
               #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments form .user-avatar {
                 width: 50px;
-                height: 50px;
-                border: 1px solid var(--logo-color); }
+                height: 50px; }
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments form .user-avatar:hover {
                   filter: brightness(0.8);
                   transition: 0.15s; }
