@@ -1,5 +1,5 @@
 # Social-Book_Social_Media_Website
-This project is Social Book, which is a Social Media Website designed using Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS).
+The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS). Users are able to create, share the posts and connect with each other across the platform. Many more functionalities are present as well.
 
 ## Tools Used
 <p align="left">
