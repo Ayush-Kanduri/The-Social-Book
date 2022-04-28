@@ -5,18 +5,18 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 //Require Path Module for the Directory
 const path = require("path");
-//The path where the files will be uploaded
-const POST_IMAGES_PATH = path.join("/uploads/users/posts/images");
-//The path where the files will be uploaded
-const POST_VIDEOS_PATH = path.join("/uploads/users/posts/videos");
+//The path where the Multimedia files will be uploaded
+const MULTIMEDIA_POST_PATH = path.join("/uploads/users/posts");
 
 //Create the DB Schema
 const postSchema = new mongoose.Schema(
 	{
+		//Text Post Content
 		content: {
 			type: String,
 			required: true,
 		},
+		//User Reference to the User Schema & the User who posted the Post
 		user: {
 			// The user is a reference to the user model with User Object ID Field
 			type: mongoose.Schema.Types.ObjectId,
@@ -30,9 +30,11 @@ const postSchema = new mongoose.Schema(
 				ref: "Comment",
 			},
 		],
+		//Image Post Content
 		contentImage: {
 			type: String,
 		},
+		//Video Post Content
 		contentVideo: {
 			type: String,
 		},
@@ -43,10 +45,39 @@ const postSchema = new mongoose.Schema(
 	}
 );
 
-//Setting up the Image Disk Storage Engine
-const imageStorage = multer.diskStorage({
+//Filter Function for Images
+const multimediaTypeFilter = (req, file, cb) => {
+	if (
+		file.mimetype === "image/jpeg" ||
+		file.mimetype === "image/png" ||
+		file.mimetype === "image/jpg" ||
+		file.mimetype === "image/gif"
+	) {
+		if (file.size > 1024 * 1024 * 5) {
+			cb(new Error("File is too large. Max size is 5MB"), false);
+		} else {
+			cb(null, true);
+		}
+	} else if (
+		file.mimetype === "video/mp4" ||
+		file.mimetype === "video/ogg" ||
+		file.mimetype === "video/mkv" ||
+		file.mimetype === "video/webm"
+	) {
+		if (file.size > 1024 * 1024 * 15) {
+			cb(new Error("File is too large. Max size is 15MB"), false);
+		} else {
+			cb(null, true);
+		}
+	} else {
+		cb(null, false);
+	}
+};
+
+//Setting up the Multimedia Disk Storage Engine
+const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, path.join(__dirname, "..", POST_IMAGES_PATH));
+		cb(null, path.join(__dirname, "..", MULTIMEDIA_POST_PATH));
 	},
 	filename: function (req, file, cb) {
 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -54,36 +85,25 @@ const imageStorage = multer.diskStorage({
 	},
 });
 
-//Setting up the Video Disk Storage Engine
-const videoStorage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, path.join(__dirname, "..", POST_VIDEOS_PATH));
+//Attaching the Multimedia Disk Storage Engine to the Multer
+//Static Function
+postSchema.statics.uploadedMultimediaPost = multer({
+	storage: storage,
+	fileFilter: multimediaTypeFilter,
+}).fields([
+	{
+		name: "contentImage",
+		maxCount: 1,
 	},
-	filename: function (req, file, cb) {
-		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-		cb(null, file.fieldname + "-" + uniqueSuffix);
+	{
+		name: "contentVideo",
+		maxCount: 1,
 	},
-});
+]);
 
-//Attaching the Image Disk Storage Engine to the Multer
+//MULTIMEDIA_POST_PATH should be available globally in the User Model using this function() & should tell the controller where the path would be.
 //Static Function
-postSchema.statics.uploadedPostImage = multer({ storage: imageStorage }).single(
-	"contentImage"
-);
-
-//Attaching the Video Disk Storage Engine to the Multer
-//Static Function
-postSchema.statics.uploadedPostVideo = multer({ storage: videoStorage }).single(
-	"contentVideo"
-);
-
-//POST_IMAGES_PATH should be available globally in the User Model using this function() & should tell the controller where the path would be.
-//Static Function
-postSchema.statics.postImagePath = POST_IMAGES_PATH;
-
-//POST_VIDEOS_PATH should be available globally in the User Model using this function() & should tell the controller where the path would be.
-//Static Function
-postSchema.statics.postVideoPath = POST_VIDEOS_PATH;
+postSchema.statics.multimediaPostPath = MULTIMEDIA_POST_PATH;
 
 //Create a Model/Collection to populate the data with the same name for the schema in the DB
 const Post = mongoose.model("Post", postSchema);

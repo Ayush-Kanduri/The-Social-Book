@@ -163,6 +163,16 @@
 		const fileInput = () => {
 			const image = document.querySelector("input.image");
 			const video = document.querySelector("input.video");
+			const form = document.getElementById("new-post-form");
+
+			form.addEventListener("reset", (e) => {
+				if (!!document.querySelector(".preview-image")) {
+					document.querySelector(".preview-image").remove();
+				}
+				if (!!document.querySelector(".preview-video")) {
+					document.querySelector(".preview-video").remove();
+				}
+			});
 
 			image.addEventListener("change", (e) => {
 				if (!!document.querySelector(".preview-image")) {
@@ -184,8 +194,8 @@
 						file.type.match("image.gif") ||
 						file.type.match("image.jpg")
 					) {
-						if (file.size <= 5242880) {
-							// 5242880 Bytes = 5 MB;
+						//file size should be less than equal to 5MB
+						if (file.size <= 1024 * 1024 * 5) {
 							const reader = new FileReader();
 							reader.readAsDataURL(file);
 							reader.onload = (e) => {
@@ -246,8 +256,8 @@
 						file.type.match("video.webm") ||
 						file.type.match("video.mkv")
 					) {
-						if (file.size <= 15728640) {
-							// 15728640 Bytes = 15 MB;
+						//file size should be less than equal to 15MB
+						if (file.size <= 1024 * 1024 * 15) {
 							const reader = new FileReader();
 							reader.readAsDataURL(file);
 							reader.onload = (e) => {
@@ -305,14 +315,6 @@
 			return video;
 		};
 		fileInput();
-
-		//function to convert bytes to megabytes
-		const bytesToSize = (bytes) => {
-			const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
-			if (bytes == 0) return "0 Byte";
-			const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-			return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
-		};
 	} catch (e) {
 		// console.log(e);
 	}

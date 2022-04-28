@@ -6,25 +6,30 @@
 		let newPostForm = $("#new-post-form");
 		newPostForm.submit((event) => {
 			event.preventDefault();
+			const form = new FormData(newPostForm[0]);
 
 			//Sends the request to the server (/posts/create) to create the post via jQuery AJAX.
 			$.ajax({
 				type: "POST",
 				url: "/posts/create",
+				// -----------------------------------
+				//**** Used without Multipart Form ****//
 				//Send the form data to the server. Serialize() converts the form data into JSON.
 				//KEY is content, VALUE is form filled data.
-				data: newPostForm.serialize(),
+
+				// data: newPostForm.serialize(),
+				// -----------------------------------
+				//**** Used with Multipart Form ****//
+				enctype: "multipart/form-data",
+				processData: false, // Important!
+				contentType: false, // Important!
+				cache: false,
+				data: form,
 				success: (data) => {
 					let newPost = createPostInDOM(data.data.post, data.data.user);
 					//Prepend appends the post to the top of the list, at first position.
 					$("#posts-list-container>ul").prepend(newPost);
-					//Clear the form after submission.
-					newPostForm.trigger("reset");
-					//Extracts delete button from the post & calls the deletePost() method with it.
-					deletePostFromDOM($(" .delete-post-button", newPost));
-					// call the create comment class
-					new PostComments(data.data.post._id);
-					//Calls Noty() to display the success message.
+					//Show the success message.
 					new Noty({
 						theme: "relax",
 						text: "Post Published !!!",
@@ -32,9 +37,23 @@
 						layout: "topRight",
 						timeout: 3000,
 					}).show();
+					//Clear the form after submission.
+					newPostForm.trigger("reset");
+					//Extracts delete button from the post & calls the deletePost() method with it.
+					deletePostFromDOM($(" .delete-post-button", newPost));
+					// call the create comment class
+					new PostComments(data.data.post._id);
+					//Calls Noty() to display the success message.
 				},
 				error: (error) => {
-					console.log(error.responseText);
+					console.log("error", error);
+					new Noty({
+						theme: "metroui",
+						text: `${error.responseJSON.error}`,
+						type: "error",
+						layout: "topRight",
+						timeout: 3000,
+					}).show();
 				},
 			});
 		});
@@ -64,19 +83,18 @@
 						/>`;
 		}
 
-		if (post.postImage) {
+		if (post.contentImage !== "") {
 			postImage = `<img
-							src=""
-							data-src="${post.postImage}"
+							src="${post.contentImage}"
 							alt="alt-post-image"
 							loading="lazy"
-							/>`;
+						/>`;
 		} else {
 			postImage = "";
 		}
 
-		if (post.postVideo) {
-			postVideo = `<video src="${post.postVideo}" alt="alt-post-video" controls />`;
+		if (post.contentVideo !== "") {
+			postVideo = `<video src="${post.contentVideo}" alt="alt-post-video" controls />`;
 		} else {
 			postVideo = "";
 		}

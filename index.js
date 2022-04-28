@@ -60,7 +60,7 @@ app.use(express.static("./assets"));
 //** Server is not able to locate the file when the browser asks for it to show.
 //** We need to create a route for it. This path/route should be available to the browser.
 //** For the path/route - /uploads, find the folder using express.static(__dirname + "/uploads")
-//** The directory of index.js + uploads folder, i.e, SOCIAL BOOK/uploads is available to the path/route - /uploads
+//** The directory of index.js + uploads folder, i.e, SOCIAL BOOK/uploads is available to the route - /uploads
 app.use("/uploads", express.static(__dirname + "/uploads"));
 //Middleware - Express App uses expressLayouts to tell that the views which are going to be rendered belongs to some layout.
 app.use(expressLayouts);

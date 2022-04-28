@@ -13,6 +13,7 @@
 			action="/posts/create"
 			id="new-post-form"
 			method="post"
+			enctype="multipart/form-data"
 			class="card"
 		>
 			<% if(locals.user.avatar){ %>
@@ -41,6 +42,7 @@
 
 			<textarea
 				name="content"
+				class="content"
 				cols="30"
 				rows="3"
 				placeholder="Type Here..."
@@ -49,7 +51,7 @@
 				<button class="btn btn-grad">Add Image</button>
 				<input
 					type="file"
-					name="image"
+					name="contentImage"
 					class="image"
 					accept="image/png, image/gif, image/jpeg, image/jpg"
 					size="1"
@@ -61,7 +63,7 @@
 				<button class="btn-grad">Add Video</button>
 				<input
 					type="file"
-					name="video"
+					name="contentVideo"
 					class="video"
 					accept="video/mp4, video/webm, video/ogg, video/mkv"
 					size="1"

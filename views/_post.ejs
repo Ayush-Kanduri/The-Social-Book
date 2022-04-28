@@ -43,6 +43,16 @@
 		</div>
 		<div class="post-content">
 			<p><%= post.content %></p>
+			<% if(post.contentImage){ %>
+			<img
+				src="<%= post.contentImage %>"
+				alt="alt-post-image"
+				loading="lazy"
+			/>
+			<% } %> 
+			<% if(post.contentVideo){ %> 
+				<video src="<%= post.contentVideo %>" alt="alt-post-video" controls />
+			<% } %>
 		</div>
 		<div class="post-react">
 			<a href="#/" class="like"
