@@ -42,3 +42,8 @@ passport.use(
 
 //Export the Passport Module
 module.exports = passport;
+
+//The above process will fetch the token from the header and then decrypt it to fetch the user.
+//Then it will check if the user is found in the database.
+//-------------This is User Authentication Check-------------//
+//It will be performed as a Passport Middleware before the API Routing.

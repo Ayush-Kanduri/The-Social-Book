@@ -8,9 +8,13 @@ const router = express.Router();
 
 //Require Posts-API Router File
 const postsAPIRouterFile = require("./posts");
+//Require Users-API Router File
+const usersAPIRouterFile = require("./users");
 
 //Access the Posts-API Router File on '/api/v1/posts' route.
 router.use("/posts", postsAPIRouterFile);
+//Access the Users-API Router File on '/api/v1/users' route.
+router.use("/users", usersAPIRouterFile);
 
 //Router Loaded Successfully.
 console.log("V1 - API Index Router Loaded Successfully");
