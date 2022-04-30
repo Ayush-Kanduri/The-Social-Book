@@ -29,6 +29,7 @@
 		"nodemon": "^2.0.15",
 		"noty": "^3.2.0-beta-deprecated",
 		"passport": "^0.5.2",
+		"passport-jwt": "^4.0.0",
 		"passport-local": "^1.0.0",
 		"validator": "^13.7.0"
 	}

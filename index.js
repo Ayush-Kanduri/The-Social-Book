@@ -23,8 +23,10 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 //Requires the PassportJS Module for the Authentication
 const passport = require("passport");
-//Requires the Passport Local Strategy used for the Authentication
+//Requires the Passport Local Strategy used for the Authentication & Authorization
 const passportLocal = require("./config/passport-local-strategy");
+//Requires the Passport JWT Strategy used for the Authentication & Authorization
+const passportJWT = require("./config/passport-jwt-strategy");
 //Requires the MongoStore
 const MongoStore = require("connect-mongo");
 //Requires the Node SASS Middleware Module
