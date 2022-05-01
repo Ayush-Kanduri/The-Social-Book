@@ -19,8 +19,7 @@
 			<% if(locals.user.avatar){ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src=""
-				data-src="<%= user.avatar%>"
+				src="<%= user.avatar %>"
 				alt="<%= user.name %>"
 				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
@@ -30,8 +29,7 @@
 			<% }else{ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="/images/empty-avatar.png"
 				alt="<%= user.name %>"
 				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
@@ -104,8 +102,7 @@
 			<% if(person.avatar){ %>
 			<img
 				class="user-avatar friend-avatar"
-				src=""
-				data-src="<%= person.avatar%>"
+				src="<%= person.avatar %>"
 				alt="<%= person.name %>"
 				onclick="window.location.href='/users/profile/<%= person.id %>'"
 				loading="lazy"
@@ -113,8 +110,7 @@
 			<% } else { %>
 			<img
 				class="user-avatar"
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="/images/empty-avatar.png"
 				alt="<%= person.name %>"
 				onclick="window.location.href='/users/profile/<%= person.id %>'"
 				loading="lazy"

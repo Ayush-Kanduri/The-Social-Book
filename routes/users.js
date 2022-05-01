@@ -56,5 +56,18 @@ router.post(
 	usersController.update
 );
 
+//Goes to the Google's OAuth 2.0 Server for Authentication.
+router.get(
+	"/auth/google",
+	passport.authenticate("google", { scope: ["profile", "email"] })
+);
+//At this URL we will receive the data.
+//This is the callback URL that Google will redirect to after the user authenticates.
+router.get(
+	"/auth/google/callback",
+	passport.authenticate("google", { failureRedirect: "/users/login" }),
+	usersController.createSession
+);
+
 //Export the Router
 module.exports = router;

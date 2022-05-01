@@ -9,15 +9,13 @@
 			<td colspan="5" style="text-align: center; padding-bottom: 1rem">
 				<% if(profile_user.avatar){ %>
 				<img
-					src=""
-					data-src="<%= profile_user.avatar %>"
+					src="<%= profile_user.avatar %>"
 					alt="<%= profile_user.name %>"
 					loading="lazy"
 				/>
 				<% }else{ %>
 				<img
-					src=""
-					data-src="/images/empty-avatar.png"
+					src="/images/empty-avatar.png"
 					alt="<%= profile_user.name %>"
 					loading="lazy"
 				/>

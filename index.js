@@ -23,10 +23,12 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 //Requires the PassportJS Module for the Authentication
 const passport = require("passport");
-//Requires the Passport Local Strategy used for the Authentication & Authorization
+//Requires the Passport Local Strategy used for the Authentication
 const passportLocal = require("./config/passport-local-strategy");
-//Requires the Passport JWT Strategy used for the Authentication & Authorization
+//Requires the Passport JWT Strategy used for the Authentication
 const passportJWT = require("./config/passport-jwt-strategy");
+//Requires the Passport Google Strategy used for the Authentication
+const passportGoogle = require("./config/passport-google-oauth2-strategy");
 //Requires the MongoStore
 const MongoStore = require("connect-mongo");
 //Requires the Node SASS Middleware Module

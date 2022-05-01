@@ -19,6 +19,7 @@ passport.use(
 			callbackURL: process.env.GOOGLE_CALLBACK_URL,
 		},
 		(accessToken, refreshToken, profile, done) => {
+			//User's Email can be multiple
 			//Find the User in the Database
 			User.findOne({ email: profile.emails[0].value }, (err, user) => {
 				if (err) {
@@ -26,9 +27,6 @@ passport.use(
 					console.log("Error: ", err);
 					return;
 				}
-
-				//User's Email can be multiple
-				console.log(profile);
 
 				if (user) {
 					//Set req.user = Sign In that user
@@ -41,6 +39,9 @@ passport.use(
 							name: profile.displayName,
 							email: profile.emails[0].value,
 							password: crypto.randomBytes(20).toString("hex"),
+							avatar: !!profile.photos[0].value
+								? profile.photos[0].value
+								: "",
 						},
 						(err, user) => {
 							if (err) {
