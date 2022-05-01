@@ -50,6 +50,53 @@
 			aspect-ratio: 1/1;
 		}
 	}
+	a.facebook-login {
+		transition: all 0.15s ease-in-out;
+		border: 1px solid var(--logo-color);
+		border-radius: 5px;
+		text-decoration: none;
+		color: var(--logo-color);
+		padding: 1.3rem;
+		font-size: 1rem;
+		font-weight: 500;
+		font-family: var(--sub-heading-font-family);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 3rem;
+		&:hover,
+		&:focus,
+		&:active,
+		&:visited,
+		&:link {
+			transition: all 0.15s ease-in-out;
+			border: 1px solid var(--logo-color);
+			border-radius: 7px;
+			color: #fff;
+			text-decoration: none;
+			padding: 1.3rem;
+			color: var(--logo-color);
+			font-size: 1rem;
+			font-weight: 500;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 3rem;
+		}
+		&:hover {
+			background-color: var(--background-color);
+		}
+		img {
+			width: 2.6rem;
+			height: 2.6rem;
+			margin-right: 0.8rem;
+			object-fit: cover;
+			object-position: center;
+			-o-object-fit: cover;
+			-o-object-position: center;
+			aspect-ratio: 1/1;
+		}
+	}
 }
 
 @media screen and (max-width: 730px) {

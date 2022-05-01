@@ -31,6 +31,7 @@
 		"nodemon": "^2.0.15",
 		"noty": "^3.2.0-beta-deprecated",
 		"passport": "^0.5.2",
+		"passport-facebook": "^3.0.0",
 		"passport-google-oauth": "^2.0.0",
 		"passport-jwt": "^4.0.0",
 		"passport-local": "^1.0.0",

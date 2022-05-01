@@ -29,6 +29,8 @@ const passportLocal = require("./config/passport-local-strategy");
 const passportJWT = require("./config/passport-jwt-strategy");
 //Requires the Passport Google Strategy used for the Authentication
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
+//Requires the Passport Facebook Strategy used for the Authentication
+const passportFacebook = require("./config/passport-facebook-strategy");
 //Requires the MongoStore
 const MongoStore = require("connect-mongo");
 //Requires the Node SASS Middleware Module

@@ -69,5 +69,18 @@ router.get(
 	usersController.createSession
 );
 
+//Goes to the Facebook's OAuth Server for Authentication.
+router.get(
+	"/auth/facebook",
+	passport.authenticate("facebook", { scope: ["email"] })
+);
+//At this URL we will receive the data.
+//This is the callback URL that Facebook will redirect to after the user authenticates.
+router.get(
+	"/auth/facebook/callback",
+	passport.authenticate("facebook", { failureRedirect: "/users/login" }),
+	usersController.createSession
+);
+
 //Export the Router
 module.exports = router;
