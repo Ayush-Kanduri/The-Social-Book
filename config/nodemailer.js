@@ -13,8 +13,9 @@ let transporter = nodemailer.createTransport({
 	secure: false, //For 2FA
 	auth: {
 		//To establish our Identity
-		user: "",
-		pass: "",
+		//SENDER'S EMAIL ADDRESS
+		user: process.env.userEmail,
+		pass: process.env.userPass,
 	},
 });
 

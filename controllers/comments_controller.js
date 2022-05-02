@@ -2,6 +2,9 @@
 const Comment = require("../models/comment");
 //Require the Post Model Data Structure
 const Post = require("../models/post");
+//Require the Comments Mailer
+const commentsMailer = require("../mailers/comments_mailer");
+const { populate } = require("../models/comment");
 
 //Export the Comments Controller's create() Function
 module.exports.create = async (req, res) => {
@@ -30,11 +33,22 @@ module.exports.create = async (req, res) => {
 			//Whenever we update something, we call save() method to update the database.
 			post.save();
 
+			let newComment = await comment.populate({
+				path: "post",
+				populate: {
+					path: "user",
+					select: ["name", "email"],
+				},
+			});
+			commentsMailer.newComment(newComment);
+
 			if (req.xhr) {
 				try {
 					// Similar for comments to fetch the user's id!
 					// comment = await comment.populate("user");
 					// comment = await comment.populate("user", "name");
+					// comment = await comment.populate("user", ["name", "avatar"]);
+					// comment = await comment.populate("user", "name avatar");
 					comment = await comment.populate("user", ["name", "avatar"]);
 					return res.status(200).json({
 						data: {
