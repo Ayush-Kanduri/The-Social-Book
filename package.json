@@ -28,6 +28,7 @@
 		"mongoose": "^6.2.4",
 		"multer": "^1.4.4",
 		"node-sass-middleware": "^1.0.1",
+		"nodemailer": "^6.7.4",
 		"nodemon": "^2.0.15",
 		"noty": "^3.2.0-beta-deprecated",
 		"passport": "^0.5.2",
