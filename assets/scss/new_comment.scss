@@ -1,0 +1,61 @@
+.mail-container {
+	width: 50vw;
+	height: auto;
+	background-color: #9af7ff;
+	border-radius: 30px;
+	padding: 3%;
+	padding-left: 5%;
+	padding-right: 5%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 1.2rem;
+	font-weight: 500;
+	word-spacing: 0.1rem;
+	strong {
+		font-size: 1.3rem;
+	}
+	p {
+		text-align: center;
+		color: #00547a;
+		font-family: sans-serif;
+		word-break: break-all;
+		overflow-wrap: break-word;
+	}
+	a:visited,
+	:link,
+	:active,
+	:focus {
+		padding: 2rem;
+		background-color: #00547a;
+		border-radius: 10px;
+		color: #9af7ff;
+		text-decoration: none;
+		word-spacing: 0.1rem;
+		transition: all 0.2s;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		&:hover {
+			background-color: cyan;
+			color: black;
+		}
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.mail-container {
+		font-size: 0.9rem;
+		strong {
+			font-size: 1rem;
+		}
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.mail-container {
+		width: 70vw;
+	}
+}

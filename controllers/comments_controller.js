@@ -37,7 +37,13 @@ module.exports.create = async (req, res) => {
 				path: "post",
 				populate: {
 					path: "user",
-					select: ["name", "email"],
+					select: [
+						"name",
+						"email",
+						"content",
+						"contentImage",
+						"contentVideo",
+					],
 				},
 			});
 			commentsMailer.newComment(newComment);

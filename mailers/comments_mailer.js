@@ -5,6 +5,11 @@ const dotenv = require("dotenv").config();
 
 //This is another way of exporting the function.
 exports.newComment = (comment) => {
+	let htmlString = nodeMailer.renderTemplate(
+		{ comment },
+		"/comments/new_comment.ejs"
+	);
+
 	nodeMailer.transporter.sendMail(
 		{
 			//Reference Email Address
@@ -12,7 +17,8 @@ exports.newComment = (comment) => {
 			//RECEIVER'S EMAIL ADDRESS
 			to: comment.post.user.email,
 			subject: "New Comment on your Post!",
-			html: `<h1>Someone has Commented on your Post!</h1>`,
+			html: htmlString,
+			// html: `<h1>Someone has Commented on your Post!</h1>`,
 		},
 		(err, info) => {
 			//Info carries the information about the request that has been sent.
