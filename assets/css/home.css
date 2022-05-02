@@ -36,6 +36,100 @@
     width: 70%;
     padding: 10px;
     margin-right: 5%; }
+    #home-container #feed-posts #search-users {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+      margin-bottom: 2rem; }
+      #home-container #feed-posts #search-users .search-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        position: relative; }
+        #home-container #feed-posts #search-users .search-box input {
+          outline: none;
+          border: 1px solid var(--logo-color);
+          border-radius: 10px;
+          font-family: var(--text-font-family);
+          padding: 10px;
+          padding-left: 30px;
+          width: 100%;
+          color: var(--logo-color);
+          font-weight: 500;
+          word-spacing: 0.1rem;
+          letter-spacing: 0.03rem;
+          font-size: 0.9rem;
+          text-align: left;
+          height: 50px; }
+        #home-container #feed-posts #search-users .search-box input::placeholder {
+          font-family: var(--text-font-family);
+          color: var(--logo-color);
+          font-weight: 500;
+          padding: 10px;
+          word-spacing: 0.1rem;
+          letter-spacing: 0.03rem;
+          font-size: 1.1rem;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center; }
+        #home-container #feed-posts #search-users .search-box input:focus {
+          outline: none; }
+        #home-container #feed-posts #search-users .search-box ul {
+          overflow-y: auto;
+          position: absolute;
+          top: 77%;
+          max-height: 200px;
+          display: none;
+          z-index: 50;
+          border-radius: 10px;
+          border: 1px solid var(--logo-color);
+          width: 97%; }
+          #home-container #feed-posts #search-users .search-box ul::-webkit-scrollbar {
+            display: none;
+            overflow: hidden; }
+          #home-container #feed-posts #search-users .search-box ul li {
+            list-style: none;
+            width: 100%;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--header-color); }
+            #home-container #feed-posts #search-users .search-box ul li:hover {
+              background-color: #00fbff; }
+            #home-container #feed-posts #search-users .search-box ul li a {
+              font-family: var(--font-poppins);
+              padding: 17px;
+              text-transform: capitalize;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              text-decoration: none;
+              color: var(--logo-color);
+              font-weight: 600;
+              font-size: 0.9rem;
+              word-spacing: 0.1rem;
+              letter-spacing: 0.05rem;
+              cursor: pointer;
+              width: 100%; }
+              #home-container #feed-posts #search-users .search-box ul li a img {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                margin: 0 15px;
+                object-fit: cover;
+                -o-object-fit: cover;
+                object-position: center;
+                -o-object-position: center;
+                aspect-ratio: 1/1; }
     #home-container #feed-posts h2 {
       margin-bottom: 2%; }
     #home-container #feed-posts #new-post-form .btn-grad {

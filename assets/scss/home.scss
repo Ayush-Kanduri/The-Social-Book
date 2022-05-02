@@ -33,10 +33,117 @@
 	margin-top: 6rem;
 	position: relative;
 	width: 100%;
+
 	#feed-posts {
 		width: 70%;
 		padding: 10px;
 		margin-right: 5%;
+		#search-users {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100px;
+			margin-bottom: 2rem;
+			.search-box {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+				z-index: 20;
+				position: relative;
+				input {
+					outline: none;
+					border: 1px solid var(--logo-color);
+					border-radius: 10px;
+					font-family: var(--text-font-family);
+					padding: 10px;
+					padding-left: 30px;
+					width: 100%;
+					color: var(--logo-color);
+					font-weight: 500;
+					word-spacing: 0.1rem;
+					letter-spacing: 0.03rem;
+					font-size: 0.9rem;
+					text-align: left;
+					height: 50px;
+				}
+				input::placeholder {
+					font-family: var(--text-font-family);
+					color: var(--logo-color);
+					font-weight: 500;
+					padding: 10px;
+					word-spacing: 0.1rem;
+					letter-spacing: 0.03rem;
+					font-size: 1.1rem;
+					text-align: center;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				input:focus {
+					outline: none;
+				}
+				ul {
+					overflow-y: auto;
+					position: absolute;
+					top: 77%;
+					max-height: 200px;
+					// visibility: hidden;
+					display: none;
+					z-index: 50;
+					border-radius: 10px;
+					border: 1px solid var(--logo-color);
+					width: 97%;
+					&::-webkit-scrollbar {
+						display: none;
+						overflow: hidden;
+					}
+					li {
+						list-style: none;
+						width: 100%;
+						cursor: pointer;
+						padding: 4px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background-color: var(--header-color);
+						&:hover {
+							background-color: rgb(0, 251, 255);
+						}
+						a {
+							font-family: var(--font-poppins);
+							padding: 17px;
+							text-transform: capitalize;
+							display: flex;
+							justify-content: flex-start;
+							align-items: center;
+							text-decoration: none;
+							color: var(--logo-color);
+							font-weight: 600;
+							font-size: 0.9rem;
+							word-spacing: 0.1rem;
+							letter-spacing: 0.05rem;
+							cursor: pointer;
+							width: 100%;
+							img {
+								width: 25px;
+								height: 25px;
+								border-radius: 50%;
+								margin: 0 15px;
+								object-fit: cover;
+								-o-object-fit: cover;
+								object-position: center;
+								-o-object-position: center;
+								aspect-ratio: 1/1;
+							}
+						}
+					}
+				}
+			}
+		}
 		h2 {
 			margin-bottom: 2%;
 		}

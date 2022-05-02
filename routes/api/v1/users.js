@@ -6,6 +6,8 @@ const router = express.Router();
 //Require Users-API Controller
 const usersAPIController = require("../../../controllers/api/v1/users_api_controller");
 
+//Access the Users-API Controller's index() Function
+router.get("/", usersAPIController.index);
 //Access the Users-API Controller's createSession() Function
 router.post("/create-session", usersAPIController.createSession);
 

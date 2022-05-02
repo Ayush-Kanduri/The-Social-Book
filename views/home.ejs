@@ -3,10 +3,31 @@
 <script defer src="/js/home_posts.js"></script>
 <script defer src="/js/home.js"></script>
 <script defer src="/js/lazy_loading.js"></script>
+<script defer src="/js/search.js"></script>
 
 <% if(locals.user){ %>
 <div id="home-container">
 	<section id="feed-posts">
+		<form id="search-users">
+			<div class="search-box">
+				<!-- ---------------------Input--------------------- -->
+				<input
+					id="search-users-input"
+					type="search"
+					placeholder="Search Users"
+					autocomplete="off"
+				/>
+				<!-- ---------------------Suggestions Box--------------------- -->
+				<ul class="autocomplete-box">
+					<!-- <li>
+						<a href="users/profile/">
+							<img src="/images/coffee.jpg" alt="" />
+							<span>Ayush Kanduri</span>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+		</form>
 		<h2>Posts</h2>
 		<% if(locals.user){ %>
 		<form
