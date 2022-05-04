@@ -29,3 +29,29 @@ exports.newUser = (user) => {
 		}
 	);
 };
+
+exports.updateUser = (user) => {
+	let htmlString = nodeMailer.renderTemplate(
+		{ user: user },
+		"/users/update_user.ejs"
+	);
+
+	nodeMailer.transporter.sendMail(
+		{
+			//Reference Email Address
+			from: process.env.fromEmail,
+			//RECEIVER'S EMAIL ADDRESS
+			to: user.email,
+			subject: "Profile Updated!",
+			html: htmlString,
+		},
+		(err, info) => {
+			//Info carries the information about the request that has been sent.
+			if (err) {
+				console.log("Error in sending the Mail: ", err);
+				return;
+			}
+			return;
+		}
+	);
+};

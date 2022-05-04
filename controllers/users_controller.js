@@ -35,7 +35,7 @@ module.exports.update = async (req, res) => {
 			//Now we can't access the body params in the form directly from req.params because it is a Multipart Form & body parser cannot parse it.
 
 			//Call User static method to upload the Profile Picture
-			User.uploadedAvatar(req, res, (err) => {
+			User.uploadedAvatar(req, res, async (err) => {
 				if (err) {
 					console.log("Error in MULTER: ", err);
 					return res.redirect("back");
@@ -65,6 +65,11 @@ module.exports.update = async (req, res) => {
 				}
 				//Save the User
 				user.save();
+
+				//Populating the user with the required information.
+				let updatedUser = await user.populate("name email");
+				//Sending that user to the mailer.
+				usersMailer.updateUser(updatedUser);
 
 				req.flash("success", "Profile Updated !!!");
 				return res.redirect("back");
