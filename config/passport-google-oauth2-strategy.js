@@ -6,9 +6,10 @@ const googleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const crypto = require("crypto");
 //Require the User Model Data Structure Schema
 const User = require("../models/user");
-const { profile } = require("console");
 //Require the Dotenv Library
 const dotenv = require("dotenv").config();
+//Require the Users Mailer
+const usersMailer = require("../mailers/users_mailer");
 
 //Tell Passport to use a new strategy for Google Login
 passport.use(
@@ -43,7 +44,7 @@ passport.use(
 								? profile.photos[0].value
 								: "",
 						},
-						(err, user) => {
+						async (err, user) => {
 							if (err) {
 								console.log(
 									"Error in creating the user --> Google Strategy Passport"
@@ -51,6 +52,12 @@ passport.use(
 								console.log("Error: ", err);
 								return;
 							}
+
+							//Populating the user with the required information.
+							let newUser = await user.populate("name email");
+							//Sending that user to the mailer.
+							usersMailer.newUser(newUser);
+
 							return done(null, user);
 						}
 					);

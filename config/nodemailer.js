@@ -4,6 +4,8 @@ const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 //Require the Path Module
 const path = require("path");
+//Require the Path Module
+const dotenv = require("dotenv").config();
 
 //Create a SMTP Transporter
 let transporter = nodemailer.createTransport({

@@ -6,6 +6,8 @@ const { validationResult } = require("express-validator");
 const fs = require("fs");
 //Require Path Module for the Directory
 const path = require("path");
+//Require the Users Mailer
+const usersMailer = require("../mailers/users_mailer");
 
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
@@ -127,7 +129,7 @@ module.exports.createUser = (req, res) => {
 		}
 
 		if (!user) {
-			User.create(req.body, (err, user) => {
+			User.create(req.body, async (err, user) => {
 				//Transporting the error from the Schema to here.
 				if (err) {
 					let error = "Error in creating user while signing up !!!";
@@ -141,6 +143,11 @@ module.exports.createUser = (req, res) => {
 					);
 					return res.redirect("back");
 				}
+
+				//Populating the user with the required information.
+				let newUser = await user.populate("name email");
+				//Sending that user to the mailer.
+				usersMailer.newUser(newUser);
 
 				req.flash("success", "User created !!!");
 				return res.redirect("/users/login");
