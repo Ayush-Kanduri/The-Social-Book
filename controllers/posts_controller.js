@@ -8,6 +8,8 @@ const Comment = require("../models/comment");
 const fs = require("fs");
 //Require Path Module for the Directory
 const path = require("path");
+//Require the Posts Mailer
+const postsMailer = require("../mailers/posts_mailer");
 
 //Export the Posts Controller's create() Function
 module.exports.create = async (req, res) => {
@@ -80,6 +82,11 @@ module.exports.create = async (req, res) => {
 				contentImage: contentImage,
 				contentVideo: contentVideo,
 			});
+
+			//Populating the post with the required information.
+			let newPost = await post.populate("user", ["name", "email"]);
+			//Sending that post to the mailer.
+			postsMailer.newPost(newPost);
 
 			if (req.xhr) {
 				try {

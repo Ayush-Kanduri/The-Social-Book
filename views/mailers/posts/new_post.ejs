@@ -23,10 +23,10 @@
 		"
 	>
 		Hi,
-		<strong style="font-size: 1.3rem"><%= comment.post.user.name %></strong>
+		<strong style="font-size: 1.3rem"><%= post.user.name %></strong>
 		!!
 	</p>
-	<% if(comment.post.content){ %>
+	<% if(post.content){ %>
 	<p
 		style="
 			text-align: center;
@@ -36,9 +36,8 @@
 			overflow-wrap: break-word;
 		"
 	>
-		Someone has commented on your Post '<strong style="font-size: 1.3rem"
-			><%= comment.post.content %></strong
-		>'
+		Your Post '<strong style="font-size: 1.3rem"><%= post.content %></strong>'
+		has been Published !!
 	</p>
 	<% }else{ %>
 	<p
@@ -50,9 +49,8 @@
 			overflow-wrap: break-word;
 		"
 	>
-		Someone has commented on your '<strong style="font-size: 1.3rem"
-			>Image / Video</strong
-		>' Post !!
+		Your Post with '<strong style="font-size: 1.3rem">Image / Video</strong>'
+		Multimedia has been Published !!
 	</p>
 	<% } %>
 	<p

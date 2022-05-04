@@ -4,7 +4,6 @@ const Comment = require("../models/comment");
 const Post = require("../models/post");
 //Require the Comments Mailer
 const commentsMailer = require("../mailers/comments_mailer");
-const { populate } = require("../models/comment");
 
 //Export the Comments Controller's create() Function
 module.exports.create = async (req, res) => {
@@ -33,6 +32,7 @@ module.exports.create = async (req, res) => {
 			//Whenever we update something, we call save() method to update the database.
 			post.save();
 
+			//Populating the required comment with required details.
 			let newComment = await comment.populate({
 				path: "post",
 				populate: {
@@ -46,6 +46,7 @@ module.exports.create = async (req, res) => {
 					],
 				},
 			});
+			//Sending that comment information to the mailer.
 			commentsMailer.newComment(newComment);
 
 			if (req.xhr) {
