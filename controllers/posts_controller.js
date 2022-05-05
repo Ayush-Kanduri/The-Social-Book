@@ -10,6 +10,10 @@ const fs = require("fs");
 const path = require("path");
 //Require the Posts Mailer
 const postsMailer = require("../mailers/posts_mailer");
+//Require the Queue from KUE
+const queue = require("../config/kue");
+//Require the Post Email Worker
+const postEmailWorker = require("../workers/post_email_worker");
 
 //Export the Posts Controller's create() Function
 module.exports.create = async (req, res) => {
@@ -85,8 +89,20 @@ module.exports.create = async (req, res) => {
 
 			//Populating the post with the required information.
 			let newPost = await post.populate("user", ["name", "email"]);
+
+			// ------------------------------------------------------------------
 			//Sending that post to the mailer.
-			postsMailer.newPost(newPost);
+			// postsMailer.newPost(newPost);
+			// ------------------------------------------------------------------
+
+			//Parallel Job / Delayed Job for the Post Email Worker
+			let job = queue.create("emails", newPost).save((err) => {
+				if (err) {
+					console.log("Error in adding the Job to the Queue: ", err);
+					return;
+				}
+				console.log("Job Added to the Queue: ", job.id);
+			});
 
 			if (req.xhr) {
 				try {
