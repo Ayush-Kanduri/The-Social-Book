@@ -8,6 +8,12 @@ const fs = require("fs");
 const path = require("path");
 //Require the Users Mailer
 const usersMailer = require("../mailers/users_mailer");
+//Require the Queue from KUE
+const queue = require("../config/kue");
+//Require the User Creation Email Worker
+const userCreationEmailWorker = require("../workers/userCreation_email_worker");
+//Require the User Updation Email Worker
+const userUpdationEmailWorker = require("../workers/userUpdation_email_worker");
 
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
@@ -68,8 +74,20 @@ module.exports.update = async (req, res) => {
 
 				//Populating the user with the required information.
 				let updatedUser = await user.populate("name email");
+
+				// ------------------------------------------------------------------
 				//Sending that user to the mailer.
-				usersMailer.updateUser(updatedUser);
+				// usersMailer.updateUser(updatedUser);
+				// ------------------------------------------------------------------
+
+				//Parallel Job / Delayed Job for the User Updation Email Worker
+				let job = queue.create("emails", updatedUser).save((err) => {
+					if (err) {
+						console.log("Error in adding the Job to the Queue: ", err);
+						return;
+					}
+					console.log("Job Added to the Queue: ", job.id);
+				});
 
 				req.flash("success", "Profile Updated !!!");
 				return res.redirect("back");
@@ -151,8 +169,20 @@ module.exports.createUser = (req, res) => {
 
 				//Populating the user with the required information.
 				let newUser = await user.populate("name email");
+
+				// ------------------------------------------------------------------
 				//Sending that user to the mailer.
-				usersMailer.newUser(newUser);
+				// usersMailer.newUser(newUser);
+				// ------------------------------------------------------------------
+
+				//Parallel Job / Delayed Job for the User Creation Email Worker
+				let job = queue.create("emails", newUser).save((err) => {
+					if (err) {
+						console.log("Error in adding the Job to the Queue: ", err);
+						return;
+					}
+					console.log("Job Added to the Queue: ", job.id);
+				});
 
 				req.flash("success", "User created !!!");
 				return res.redirect("/users/login");

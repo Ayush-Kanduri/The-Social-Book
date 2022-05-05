@@ -10,6 +10,10 @@ const User = require("../models/user");
 const dotenv = require("dotenv").config();
 //Require the Users Mailer
 const usersMailer = require("../mailers/users_mailer");
+//Require the Queue from KUE
+const queue = require("../config/kue");
+//Require the User Creation Email Worker
+const userCreationEmailWorker = require("../workers/userCreation_email_worker");
 
 //Tell Passport to use a new strategy for Google Login
 passport.use(
@@ -55,8 +59,23 @@ passport.use(
 
 							//Populating the user with the required information.
 							let newUser = await user.populate("name email");
+
+							// ------------------------------------------------------------------
 							//Sending that user to the mailer.
-							usersMailer.newUser(newUser);
+							// usersMailer.newUser(newUser);
+							// ------------------------------------------------------------------
+
+							//Parallel Job / Delayed Job for the User Creation Email Worker
+							let job = queue.create("emails", newUser).save((err) => {
+								if (err) {
+									console.log(
+										"Error in adding the Job to the Queue: ",
+										err
+									);
+									return;
+								}
+								console.log("Job Added to the Queue: ", job.id);
+							});
 
 							return done(null, user);
 						}
