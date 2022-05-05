@@ -4,6 +4,10 @@ const Comment = require("../models/comment");
 const Post = require("../models/post");
 //Require the Comments Mailer
 const commentsMailer = require("../mailers/comments_mailer");
+//Require the Queue from KUE
+const queue = require("../config/kue");
+//Require the Comment Email Worker
+const commentEmailWorker = require("../workers/comment_email_worker");
 
 //Export the Comments Controller's create() Function
 module.exports.create = async (req, res) => {
@@ -46,8 +50,24 @@ module.exports.create = async (req, res) => {
 					],
 				},
 			});
+
 			//Sending that comment information to the mailer.
-			commentsMailer.newComment(newComment);
+			// commentsMailer.newComment(newComment);
+
+			//newComment is added to the Queue where the Worker will process the Job to send the Mail.
+			//Creating a new Job inside the "Emails" Queue.
+			//If a Queue doesn't exist, it will create a new Queue & add the Job to it.
+			//If a Queue already exists, it will add the Job to that existing Queue.
+			//Save() saves the new comment into the database.
+			//Whenever something is Enqueued, it will create a new Job with an ID.
+			//Every task that we put into the queue is a job.
+			let job = queue.create("emails", newComment).save((err) => {
+				if (err) {
+					console.log("Error in sending the Job to the Queue: ", err);
+					return;
+				}
+				console.log("Job Enqueued: ", job.id);
+			});
 
 			if (req.xhr) {
 				try {
