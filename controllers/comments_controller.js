@@ -37,39 +37,29 @@ module.exports.create = async (req, res) => {
 			post.save();
 
 			//Populating the required comment with required details.
-			let newComment = await comment.populate({
-				path: "post",
-				populate: {
-					path: "user",
-					select: [
-						"name",
-						"email",
-						"content",
-						"contentImage",
-						"contentVideo",
-					],
-				},
-			});
+			let newPost = await post.populate("user", ["name", "email"]);
 
 			// ------------------------------------------------------------------
-			//Sending that comment information to the mailer.
-			// commentsMailer.newComment(newComment);
+			//Sending that post information to the mailer.
+			// commentsMailer.newComment(newPost);
 			// ------------------------------------------------------------------
 
-			//newComment is added to the Queue where the Worker will process the Job to send the Mail.
-			//Creating a new Job inside the "Emails" Queue.
+			//newPost is added to the Queue where the Worker will process the Job to send the Mail.
+			//Creating a new Job inside the "commentEmails" Queue.
 			//If a Queue doesn't exist, it will create a new Queue & add the Job to it.
 			//If a Queue already exists, it will add the Job to that existing Queue.
 			//Save() saves the new comment into the database.
 			//Whenever something is Enqueued, it will create a new Job with an ID.
 			//Every task that we put into the queue is a job.
-			let job = queue.create("emails", newComment).save((err) => {
+			let job = queue.create("commentEmails", newPost).save((err) => {
 				if (err) {
 					console.log("Error in sending the Job to the Queue: ", err);
 					return;
 				}
 				console.log("Job Enqueued: ", job.id);
 			});
+
+			comment = await comment.populate("user", ["name", "avatar"]);
 
 			if (req.xhr) {
 				try {
@@ -78,7 +68,6 @@ module.exports.create = async (req, res) => {
 					// comment = await comment.populate("user", "name");
 					// comment = await comment.populate("user", ["name", "avatar"]);
 					// comment = await comment.populate("user", "name avatar");
-					comment = await comment.populate("user", ["name", "avatar"]);
 					return res.status(200).json({
 						data: {
 							comment: comment,

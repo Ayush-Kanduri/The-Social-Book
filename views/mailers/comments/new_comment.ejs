@@ -23,10 +23,10 @@
 		"
 	>
 		Hi,
-		<strong style="font-size: 1.3rem"><%= comment.post.user.name %></strong>
+		<strong style="font-size: 1.3rem"><%= post.user.name %></strong>
 		!!
 	</p>
-	<% if(comment.post.content){ %>
+	<% if(post.content){ %>
 	<p
 		style="
 			text-align: center;
@@ -37,7 +37,7 @@
 		"
 	>
 		Someone has commented on your Post '<strong style="font-size: 1.3rem"
-			><%= comment.post.content %></strong
+			><%= post.content %></strong
 		>'
 	</p>
 	<% }else{ %>

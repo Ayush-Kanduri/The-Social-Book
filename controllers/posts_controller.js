@@ -96,7 +96,7 @@ module.exports.create = async (req, res) => {
 			// ------------------------------------------------------------------
 
 			//Parallel Job / Delayed Job for the Post Email Worker
-			let job = queue.create("emails", newPost).save((err) => {
+			let job = queue.create("postEmails", newPost).save((err) => {
 				if (err) {
 					console.log("Error in adding the Job to the Queue: ", err);
 					return;
@@ -104,9 +104,10 @@ module.exports.create = async (req, res) => {
 				console.log("Job Added to the Queue: ", job.id);
 			});
 
+			post = await post.populate("user", ["name", "avatar"]);
+
 			if (req.xhr) {
 				try {
-					post = await post.populate("user", ["name", "avatar"]);
 					//Return JSON with a status of 200(Success) because the post is created.
 					return res.status(200).json({
 						data: {

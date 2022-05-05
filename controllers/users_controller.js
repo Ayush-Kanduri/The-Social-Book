@@ -10,10 +10,8 @@ const path = require("path");
 const usersMailer = require("../mailers/users_mailer");
 //Require the Queue from KUE
 const queue = require("../config/kue");
-//Require the User Creation Email Worker
-const userCreationEmailWorker = require("../workers/userCreation_email_worker");
-//Require the User Updation Email Worker
-const userUpdationEmailWorker = require("../workers/userUpdation_email_worker");
+//Require the User Email Worker
+const userEmailWorker = require("../workers/user_email_worker");
 
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
@@ -41,7 +39,7 @@ module.exports.update = async (req, res) => {
 			//Now we can't access the body params in the form directly from req.params because it is a Multipart Form & body parser cannot parse it.
 
 			//Call User static method to upload the Profile Picture
-			User.uploadedAvatar(req, res, async (err) => {
+			User.uploadedAvatar(req, res, (err) => {
 				if (err) {
 					console.log("Error in MULTER: ", err);
 					return res.redirect("back");
@@ -73,21 +71,26 @@ module.exports.update = async (req, res) => {
 				user.save();
 
 				//Populating the user with the required information.
-				let updatedUser = await user.populate("name email");
+				let updatedUser = {
+					name: user.name,
+					email: user.email,
+				};
 
 				// ------------------------------------------------------------------
 				//Sending that user to the mailer.
 				// usersMailer.updateUser(updatedUser);
 				// ------------------------------------------------------------------
 
-				//Parallel Job / Delayed Job for the User Updation Email Worker
-				let job = queue.create("emails", updatedUser).save((err) => {
-					if (err) {
-						console.log("Error in adding the Job to the Queue: ", err);
-						return;
-					}
-					console.log("Job Added to the Queue: ", job.id);
-				});
+				//Parallel Job / Delayed Job for the User Worker
+				let job = queue
+					.create("userUpdationEmails", updatedUser)
+					.save((err) => {
+						if (err) {
+							console.log("Error in adding the Job to the Queue: ", err);
+							return;
+						}
+						console.log("Job Added to the Queue: ", job.id);
+					});
 
 				req.flash("success", "Profile Updated !!!");
 				return res.redirect("back");
@@ -152,7 +155,7 @@ module.exports.createUser = (req, res) => {
 		}
 
 		if (!user) {
-			User.create(req.body, async (err, user) => {
+			User.create(req.body, (err, user) => {
 				//Transporting the error from the Schema to here.
 				if (err) {
 					let error = "Error in creating user while signing up !!!";
@@ -168,21 +171,26 @@ module.exports.createUser = (req, res) => {
 				}
 
 				//Populating the user with the required information.
-				let newUser = await user.populate("name email");
+				let newUser = {
+					name: user.name,
+					email: user.email,
+				};
 
 				// ------------------------------------------------------------------
 				//Sending that user to the mailer.
 				// usersMailer.newUser(newUser);
 				// ------------------------------------------------------------------
 
-				//Parallel Job / Delayed Job for the User Creation Email Worker
-				let job = queue.create("emails", newUser).save((err) => {
-					if (err) {
-						console.log("Error in adding the Job to the Queue: ", err);
-						return;
-					}
-					console.log("Job Added to the Queue: ", job.id);
-				});
+				//Parallel Job / Delayed Job for the User Worker
+				let job = queue
+					.create("userCreationEmails", newUser)
+					.save((err) => {
+						if (err) {
+							console.log("Error in adding the Job to the Queue: ", err);
+							return;
+						}
+						console.log("Job Added to the Queue: ", job.id);
+					});
 
 				req.flash("success", "User created !!!");
 				return res.redirect("/users/login");
