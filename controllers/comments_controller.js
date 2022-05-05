@@ -51,8 +51,10 @@ module.exports.create = async (req, res) => {
 				},
 			});
 
+			// ------------------------------------------------------------------
 			//Sending that comment information to the mailer.
 			// commentsMailer.newComment(newComment);
+			// ------------------------------------------------------------------
 
 			//newComment is added to the Queue where the Worker will process the Job to send the Mail.
 			//Creating a new Job inside the "Emails" Queue.
