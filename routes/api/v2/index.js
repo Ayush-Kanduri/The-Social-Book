@@ -13,6 +13,6 @@ const postsAPIRouterFile = require("./posts");
 router.use("/posts", postsAPIRouterFile);
 
 //Router Loaded Successfully.
-console.log("V2 - API Index Router Loaded Successfully");
+// console.log("V2 - API Index Router Loaded Successfully");
 //Export the Index Router
 module.exports = router;

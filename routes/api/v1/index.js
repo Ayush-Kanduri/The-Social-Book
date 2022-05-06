@@ -17,6 +17,6 @@ router.use("/posts", postsAPIRouterFile);
 router.use("/users", usersAPIRouterFile);
 
 //Router Loaded Successfully.
-console.log("V1 - API Index Router Loaded Successfully");
+// console.log("V1 - API Index Router Loaded Successfully");
 //Export the Index Router
 module.exports = router;

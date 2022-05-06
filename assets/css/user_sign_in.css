@@ -42,6 +42,18 @@
       -o-object-fit: cover;
       -o-object-position: center;
       aspect-ratio: 1/1; }
+  .form-container a.forgot-password {
+    color: var(--logo-color);
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.03rem;
+    word-spacing: 0.05rem; }
+    .form-container a.forgot-password:hover {
+      text-decoration: none; }
   .form-container a.facebook-login {
     transition: all 0.15s ease-in-out;
     border: 1px solid var(--logo-color);

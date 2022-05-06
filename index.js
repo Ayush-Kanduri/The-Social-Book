@@ -49,7 +49,8 @@ app.use(
 		//Where to put the compiled CSS files
 		dest: "./assets/css",
 		//Reports error. If in production mode, set as false.
-		debug: true,
+		// debug: true,
+		debug: false,
 		//The code should be in a single line - "compressed" or multiple lines - "expanded"
 		outputStyle: "extended",
 		//Prefix for the CSS files - where to look out for the css files in the assets folder

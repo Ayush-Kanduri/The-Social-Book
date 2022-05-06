@@ -18,6 +18,10 @@ const postsRouterFile = require("./posts");
 const commentsRouterFile = require("./comments");
 //Require Friends Router File
 const friendsRouterFile = require("./friends");
+//Require Forgot Password Router File
+const forgotPasswordRouterFile = require("./forgot_password");
+//Require Reset Password Router File
+const resetPasswordRouterFile = require("./reset_password");
 //Require API Index Router File
 const api = require("./api");
 
@@ -34,6 +38,10 @@ router.use("/posts", postsRouterFile);
 router.use("/comments", commentsRouterFile);
 //Access the Comments Router File on '/friends' route.
 router.use("/friends", friendsRouterFile);
+//Access the Forgot Password Router File on '/forgot_password' route.
+router.use("/forgot_password", forgotPasswordRouterFile);
+//Access the Reset Password Router File on '/reset_password' route.
+router.use("/reset_password", resetPasswordRouterFile);
 //Access the API Index Router File on '/api' route.
 router.use("/api", api);
 

@@ -17,6 +17,6 @@ router.use("/v1", v1);
 router.use("/v2", v2);
 
 //Router Loaded Successfully.
-console.log("API Index Router Loaded Successfully");
+// console.log("API Index Router Loaded Successfully");
 //Export the Index Router
 module.exports = router;
