@@ -42,8 +42,13 @@
 			<p><%= comment.content %></p>
 		</div>
 		<div class="comment-react">
-			<a href="#/" class="like"
-				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
+			<a
+				href="/likes/toggle/?id=<%= comment._id %>&type=Comment"
+				class="like toggle-like-button"
+				data-likes="<%= comment.likes.length %>"
+				><i class="fa-solid fa-thumbs-up"></i>&ensp;<span
+					><%= comment.likes.length %> Like</span
+				></a
 			>
 		</div>
 	</div>

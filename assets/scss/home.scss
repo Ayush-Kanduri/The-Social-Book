@@ -427,8 +427,9 @@
 								width: 30%;
 								height: 100%;
 								transition: 0.15s;
+								font-weight: 500;
 								&:hover {
-									color: rgb(255, 0, 0);
+									color: rgb(199, 0, 0) !important;
 								}
 							}
 						}

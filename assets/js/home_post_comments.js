@@ -40,6 +40,8 @@ class PostComments {
 					//Clear the form after submission.
 					$(self).trigger("reset");
 					pSelf.deleteComment($(" .delete-comment-button", newComment));
+					//CHANGE :: enable the functionality of the toggle like button on the new comment
+					new ToggleLike($(" .toggle-like-button", newComment));
 					new Noty({
 						theme: "relax",
 						text: "Comment published!",
@@ -90,6 +92,8 @@ class PostComments {
 			deleteButton = ``;
 		}
 
+		//CHANGE :: Show the count of 0 likes on this new comment.
+
 		return $(`<li id="comment-${comment._id}" class="post-comments-li">
 	<div class="comment">
 		<div class="comment-heading">
@@ -107,8 +111,10 @@ class PostComments {
 			<p>${comment.content}</p>
 		</div>
 		<div class="comment-react">
-			<a href="#/" class="like"
-				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
+			<a href="/likes/toggle/?id=${
+				comment._id
+			}&type=Comment" class="like toggle-like-button" data-likes='0'>
+				<i class="fa-solid fa-thumbs-up"></i>&ensp;<span>0 Like</span></a
 			>
 		</div>
 	</div>

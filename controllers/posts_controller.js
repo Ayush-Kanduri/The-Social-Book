@@ -4,6 +4,8 @@ const Post = require("../models/post");
 const User = require("../models/user");
 //Require the Comment Model Data Structure
 const Comment = require("../models/comment");
+//Require the Like Model Data Structure
+const Like = require("../models/like");
 //Require File System Module for the Directory
 const fs = require("fs");
 //Require Path Module for the Directory
@@ -164,6 +166,11 @@ module.exports.destroy = async (req, res) => {
 					fs.unlinkSync(path.join(__dirname, "..", post.contentVideo));
 				}
 			}
+
+			//Deleting a Post: Delete associated contentImage, contentVideo, comments, post likes, comment likes.
+			//CHANGE :: Delete the associated likes for that post & all its comment's likes too.
+			await Like.deleteMany({ likeable: post, onModel: "Post" });
+			await Like.deleteMany({ _id: { $in: post.comments } });
 
 			//Delete the Post
 			post.remove();

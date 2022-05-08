@@ -1,9 +1,13 @@
 <link rel="stylesheet" href="/css/home.css" />
+<!-- Importing the Script for creating the comments -->
 <script defer src="/js/home_post_comments.js"></script>
+<!-- Importing the Script for creating the posts -->
 <script defer src="/js/home_posts.js"></script>
 <script defer src="/js/home.js"></script>
 <script defer src="/js/lazy_loading.js"></script>
 <script defer src="/js/search.js"></script>
+<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+<script defer src="/js/toggle_likes.js"></script>
 
 <% if(locals.user){ %>
 <div id="home-container">

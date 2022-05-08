@@ -55,14 +55,13 @@
 			<% } %>
 		</div>
 		<div class="post-react">
-			<a href="#/" class="like"
-				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
+			<a href="/likes/toggle/?id=<%= post._id %>&type=Post" class="like toggle-like-button" data-likes="<%= post.likes.length %>">
+				<i class="fa-solid fa-thumbs-up"></i>&ensp;<span><%= post.likes.length %> Like</span></a
 			>
-			<a href="#/" class="comment"
+			<a href="" class="comment" onclick="event.preventDefault();"
 				><i class="fa-solid fa-message"></i>&ensp;Comment</a
 			>
-			<a href="#/" class="share"
-				><i class="fa-solid fa-share"></i>&ensp;Share</a
+			<a href="" class="share"><i class="fa-solid fa-share"></i>&ensp;Share</a
 			>
 		</div>
 	</div>

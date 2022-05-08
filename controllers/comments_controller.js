@@ -2,6 +2,8 @@
 const Comment = require("../models/comment");
 //Require the Post Model Data Structure
 const Post = require("../models/post");
+//Require the Like Model Data Structure
+const Like = require("../models/like");
 //Require the Comments Mailer
 const commentsMailer = require("../mailers/comments_mailer");
 //Require the Queue from KUE
@@ -102,12 +104,17 @@ module.exports.destroy = async (req, res) => {
 		let comment = await Comment.findById(req.params.id);
 		if (comment.user == req.user.id) {
 			let postID = comment.post;
+
 			//Delete the Comment
 			comment.remove();
+
 			//Find the Post & Remove the Comment-id from the comments array
-			await Post.findByIdAndUpdate(postID, {
+			let post = await Post.findByIdAndUpdate(postID, {
 				$pull: { comments: req.params.id },
 			});
+
+			//CHANGE :: Delete the associated likes for the comment.
+			await Like.deleteMany({ likeable: comment._id, onModel: "Comment" });
 
 			// send the comment id which was deleted back to the views
 			if (req.xhr) {

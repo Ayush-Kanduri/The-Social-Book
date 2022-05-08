@@ -29,6 +29,8 @@
 					let newPost = createPostInDOM(data.data.post, data.data.user);
 					//Prepend appends the post to the top of the list, at first position.
 					$("#posts-list-container>ul").prepend(newPost);
+					//CHANGE :: enable the functionality of the toggle like button on the new post
+					new ToggleLike($(" .toggle-like-button", newPost));
 					//Show the success message.
 					new Noty({
 						theme: "relax",
@@ -117,6 +119,8 @@
 							/>`;
 		}
 
+		//CHANGE :: Show the count of 0 likes on this new post.
+
 		return $(`<li id="post-${post._id}" class="card post-li">
 	<div class="post">
 		<div class="post-heading">
@@ -143,10 +147,14 @@
 			${postVideo}
 		</div>
 		<div class="post-react">
-			<a href="#/" class="like"
-				><i class="fa-solid fa-thumbs-up"></i>&ensp;Like</a
+			<a
+				href="/likes/toggle/?id=${post._id}&type=Post"
+				class="like toggle-like-button"
+				data-likes="0"
 			>
-			<a href="#/" class="comment"
+				<i class="fa-solid fa-thumbs-up"></i>&ensp;<span>0 Like</span>
+			</a>
+			<a href="" class="comment" onclick="event.preventDefault();"
 				><i class="fa-solid fa-message"></i>&ensp;Comment</a
 			>
 			<a href="#/" class="share"
@@ -243,6 +251,13 @@
 		});
 	};
 
+	let shareWhatsapp = () => {
+		$(".share").click((event) => {
+			event.preventDefault();
+		});
+	};
+
 	createPost();
 	convertPostsToAjax();
+	shareWhatsapp();
 }

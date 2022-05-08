@@ -379,12 +379,13 @@
                 transition: 0.15s;
                 width: 30%;
                 height: 100%;
-                transition: 0.15s; }
+                transition: 0.15s;
+                font-weight: 500; }
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:hover,
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:active:hover,
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:focus:hover,
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:visited:hover {
-                  color: red; }
+                  color: #c70000 !important; }
           #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments {
             width: 100%;
             padding: 3%; }

@@ -22,6 +22,8 @@ const friendsRouterFile = require("./friends");
 const forgotPasswordRouterFile = require("./forgot_password");
 //Require Reset Password Router File
 const resetPasswordRouterFile = require("./reset_password");
+//Require Likes Router File
+const likesRouterFile = require("./likes");
 //Require API Index Router File
 const api = require("./api");
 
@@ -36,8 +38,10 @@ router.use("/contact", contactRouterFile);
 router.use("/posts", postsRouterFile);
 //Access the Comments Router File on '/comments' route.
 router.use("/comments", commentsRouterFile);
-//Access the Comments Router File on '/friends' route.
+//Access the Friends Router File on '/friends' route.
 router.use("/friends", friendsRouterFile);
+//Access the Likes Router File on '/likes' route.
+router.use("/likes", likesRouterFile);
 //Access the Forgot Password Router File on '/forgot_password' route.
 router.use("/forgot_password", forgotPasswordRouterFile);
 //Access the Reset Password Router File on '/reset_password' route.
