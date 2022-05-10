@@ -19,8 +19,18 @@ class ToggleLike {
 					let likesCount = parseInt($(self).attr("data-likes"));
 					if (data.data.deleted) {
 						likesCount--;
+						if ($(self).hasClass("comment-like-button")) {
+							this.setColor(self, "#b8fff9");
+						} else {
+							this.setColor(self, "#00547a");
+						}
 					} else {
 						likesCount++;
+						if ($(self).hasClass("comment-like-button")) {
+							this.setColor(self, "rgb(255, 0, 0)");
+						} else {
+							this.setColor(self, "rgb(199, 0, 0)");
+						}
 					}
 					$(self).attr("data-likes", likesCount);
 					// let i = $(self).children("i");

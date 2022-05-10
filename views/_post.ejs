@@ -55,9 +55,28 @@
 			<% } %>
 		</div>
 		<div class="post-react">
-			<a href="/likes/toggle/?id=<%= post._id %>&type=Post" class="like toggle-like-button" data-likes="<%= post.likes.length %>">
-				<i class="fa-solid fa-thumbs-up"></i>&ensp;<span><%= post.likes.length %> Like</span></a
-			>
+			<%	let likes = [];
+			
+			likes = post.likes.filter(like => (like.user._id.toString() === locals.user._id.toString()) && (like.onModel === "Post") && (post._id.toString() === like.likeable._id.toString())); 
+			
+			if(likes.length > 0){ %>
+				<a href="/likes/toggle/?id=<%= post._id %>&type=Post" 
+				class="like toggle-like-button" 
+				data-likes="<%= post.likes.length %>" 
+				style="color: rgb(199, 0, 0);">
+					<i class="fa-solid fa-thumbs-up"></i>
+					&ensp;<span><%= post.likes.length %> Like</span>
+				</a>
+		<%	}else{	%>
+				<a href="/likes/toggle/?id=<%= post._id %>&type=Post" 
+				class="like toggle-like-button" 
+				data-likes="<%= post.likes.length %>" 
+				style="color: #00547a;">
+					<i class="fa-solid fa-thumbs-up"></i>
+					&ensp;<span><%= post.likes.length %> Like</span>
+				</a>
+		<%	}	%>
+			
 			<a href="" class="comment" onclick="event.preventDefault();"
 				><i class="fa-solid fa-message"></i>&ensp;Comment</a
 			>

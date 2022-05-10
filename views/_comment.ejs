@@ -42,14 +42,30 @@
 			<p><%= comment.content %></p>
 		</div>
 		<div class="comment-react">
+			<% try{ let likes = []; likes = comment.likes.filter(like =>
+			(like.user._id.toString() === locals.user._id.toString()) &&
+			(like.onModel === "Comment") && (comment._id.toString() ===
+			like.likeable._id.toString())); if(likes.length > 0){ %>
 			<a
 				href="/likes/toggle/?id=<%= comment._id %>&type=Comment"
-				class="like toggle-like-button"
+				class="like toggle-like-button comment-like-button"
 				data-likes="<%= comment.likes.length %>"
-				><i class="fa-solid fa-thumbs-up"></i>&ensp;<span
-					><%= comment.likes.length %> Like</span
-				></a
+				style="color: rgb(255, 0, 0)"
 			>
+				<i class="fa-solid fa-thumbs-up"></i>
+				&ensp;<span><%= comment.likes.length %> Like</span>
+			</a>
+			<% }else{ %>
+			<a
+				href="/likes/toggle/?id=<%= comment._id %>&type=Comment"
+				class="like toggle-like-button comment-like-button"
+				data-likes="<%= comment.likes.length %>"
+				style="color: #b8fff9"
+			>
+				<i class="fa-solid fa-thumbs-up"></i>
+				&ensp;<span><%= comment.likes.length %> Like</span>
+			</a>
+			<% }}catch(err){} %>
 		</div>
 	</div>
 </li>

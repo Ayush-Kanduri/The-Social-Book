@@ -9,19 +9,29 @@ module.exports.home = async (request, response) => {
 	//Populate the User (from user field) of each Post, Comments from comments array and the User making the comment from the Comment Schema.
 	try {
 		//CHANGE :: Populate the likes of each post and comment.
+		const query = [
+			{
+				path: "user",
+				// select: "title pages",
+			},
+			{
+				path: "likes",
+				// select: "director",
+			},
+		];
+
 		let posts = await Post.find({})
 			// .sort({ createdAt: "desc" })
 			.sort("-createdAt") // To sort the posts in descending order.
 			.populate("user")
 			.populate({
 				path: "comments",
-				populate: {
-					path: "likes",
-				},
 				options: { sort: { createdAt: "desc" } },
-				populate: {
-					path: "user",
-				},
+				populate: query,
+				// populate: {
+				// 	path: "user",
+				// 	select: "title pages",
+				// },
 			})
 			.populate("likes");
 

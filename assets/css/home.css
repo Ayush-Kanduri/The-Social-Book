@@ -373,7 +373,6 @@
               #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:active,
               #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:focus,
               #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:visited {
-                color: var(--logo-color);
                 text-decoration: none;
                 font-size: 1.25rem;
                 transition: 0.15s;
@@ -381,6 +380,11 @@
                 height: 100%;
                 transition: 0.15s;
                 font-weight: 500; }
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:not(.like),
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:active:not(.like),
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:focus:not(.like),
+                #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:visited:not(.like) {
+                  color: var(--logo-color); }
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:hover,
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:active:hover,
                 #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post .post-react a:focus:hover,
@@ -542,7 +546,6 @@
                       #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments .post-comments-list .post-comments-ul .post-comments-li .comment .comment-react a:active,
                       #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments .post-comments-list .post-comments-ul .post-comments-li .comment .comment-react a:focus,
                       #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments .post-comments-list .post-comments-ul .post-comments-li .comment .comment-react a:visited {
-                        color: var(--background-color);
                         text-decoration: none;
                         transition: 0.15s;
                         width: 20%;
@@ -552,7 +555,7 @@
                         #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments .post-comments-list .post-comments-ul .post-comments-li .comment .comment-react a:active:hover,
                         #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments .post-comments-list .post-comments-ul .post-comments-li .comment .comment-react a:focus:hover,
                         #home-container #feed-posts #posts-list-container ul.post-ul li.post-li .post-comments .post-comments-list .post-comments-ul .post-comments-li .comment .comment-react a:visited:hover {
-                          color: red; }
+                          color: red !important; }
   #home-container #user-friends {
     width: 30%;
     padding: 50px;

@@ -420,7 +420,9 @@
 							a:active,
 							a:focus,
 							a:visited {
-								color: var(--logo-color);
+								&:not(.like) {
+									color: var(--logo-color);
+								}
 								text-decoration: none;
 								font-size: 1.25rem;
 								transition: 0.15s;
@@ -612,14 +614,14 @@
 											a:active,
 											a:focus,
 											a:visited {
-												color: var(--background-color);
+												// color: var(--background-color);
 												text-decoration: none;
 												transition: 0.15s;
 												width: 20%;
 												height: 100%;
 												transition: 0.15s;
 												&:hover {
-													color: rgb(255, 0, 0);
+													color: rgb(255, 0, 0) !important;
 												}
 											}
 										}
