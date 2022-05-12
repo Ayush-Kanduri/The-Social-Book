@@ -1,5 +1,7 @@
 //Require the User Model Data Structure
 const User = require("../models/user");
+//Require the Friendship Model Data Structure
+const Friendship = require("../models/friendship");
 //Require the Express validator
 const { validationResult } = require("express-validator");
 //Require File System Module for the Directory
@@ -16,15 +18,42 @@ const userEmailWorker = require("../workers/user_email_worker");
 //Export the Users Controller's profile() Function
 module.exports.profile = (request, response) => {
 	// return response.end("<h1>Users Profile</h1>");
-	User.findById(request.params.id, (err, user) => {
+	User.findById(request.params.id, async (err, user) => {
 		if (err) {
 			console.log("Error in finding user in profile");
 			request.flash("error", "Error in finding user in profile");
 			return response.redirect("back");
 		}
+
+		let friend = await Friendship.find({
+			$or: [
+				{
+					$and: [
+						{
+							from_user: request.user._id,
+						},
+						{
+							to_user: user._id,
+						},
+					],
+				},
+				{
+					$and: [
+						{
+							from_user: user._id,
+						},
+						{
+							to_user: request.user._id,
+						},
+					],
+				},
+			],
+		});
+
 		return response.render("user_profile", {
 			title: "User Profile",
 			profile_user: user,
+			friends_list: friend,
 		});
 	});
 };

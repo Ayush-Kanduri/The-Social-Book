@@ -63,10 +63,12 @@
 
 	//Method to create the post in DOM
 	let createPostInDOM = (post, user) => {
-		let postImage, postVideo, postUserAvatar, userAvatar;
+		let postImage, postVideo, postUserAvatar, userAvatar, likeButton;
+		let likes = [];
 
-		if (user.avatar) {
-			userAvatar = `<img
+		try {
+			if (user.avatar) {
+				userAvatar = `<img
 							class="user-avatar create-post-avatar"
 							src="${user.avatar}"
 							alt="${user.name}"
@@ -74,8 +76,8 @@
 							onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 							loading="lazy"
 						/>`;
-		} else {
-			userAvatar = `<img
+			} else {
+				userAvatar = `<img
 							class="user-avatar create-post-avatar"
 							src="/images/empty-avatar.png"
 							alt="${user.name}"
@@ -83,42 +85,69 @@
 							onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 							loading="lazy"
 						/>`;
-		}
+			}
 
-		if (post.contentImage !== "") {
-			postImage = `<img
+			if (post.contentImage !== "") {
+				postImage = `<img
 							src="${post.contentImage}"
 							alt="alt-post-image"
 							loading="lazy"
 						/>`;
-		} else {
-			postImage = "";
-		}
+			} else {
+				postImage = "";
+			}
 
-		if (post.contentVideo !== "") {
-			postVideo = `<video src="${post.contentVideo}" alt="alt-post-video" controls />`;
-		} else {
-			postVideo = "";
-		}
+			if (post.contentVideo !== "") {
+				postVideo = `<video src="${post.contentVideo}" alt="alt-post-video" controls />`;
+			} else {
+				postVideo = "";
+			}
 
-		if (post.user.avatar) {
-			postUserAvatar = `<img
+			if (post.user.avatar) {
+				postUserAvatar = `<img
 								class="user-avatar"
 								src="${post.user.avatar}"
 								alt="${post.user.name}"
 								onclick="window.location.href='/users/profile/${post.user._id}'"
 								loading="lazy"
 							/>`;
-		} else {
-			postUserAvatar = `<img
+			} else {
+				postUserAvatar = `<img
 								class="user-avatar"
 								src="/images/empty-avatar.png"
 								alt="${post.user.name}"
 								onclick="window.location.href='/users/profile/${post.user._id}'"
 								loading="lazy"
 							/>`;
-		}
+			}
 
+			likes = post.likes.filter(
+				(like) =>
+					like.user._id.toString() === locals.user._id.toString() &&
+					like.onModel === "Post" &&
+					post._id.toString() === like.likeable._id.toString()
+			);
+
+			if (likes.length > 0) {
+				likeButton = `<a href="/likes/toggle/?id=${post._id}&type=Post" 
+				class="like toggle-like-button" 
+				data-likes="0" 
+				style="color: rgb(199, 0, 0);">
+					<i class="fa-solid fa-thumbs-up"></i>
+					&ensp;<span>0 Like</span>
+				</a>`;
+			} else {
+				likeButton = `<a href="/likes/toggle/?id=${post._id}&type=Post" 
+				class="like toggle-like-button" 
+				data-likes="0" 
+				style="color: #00547a;">
+					<i class="fa-solid fa-thumbs-up"></i>
+					&ensp;<span>0 Like</span>
+				</a>`;
+			}
+		} catch (error) {
+			console.log("error", error);
+		}
 		//CHANGE :: Show the count of 0 likes on this new post.
 
 		return $(`<li id="post-${post._id}" class="card post-li">
@@ -147,13 +176,7 @@
 			${postVideo}
 		</div>
 		<div class="post-react">
-			<a
-				href="/likes/toggle/?id=${post._id}&type=Post"
-				class="like toggle-like-button"
-				data-likes="0"
-			>
-				<i class="fa-solid fa-thumbs-up"></i>&ensp;<span>0 Like</span>
-			</a>
+			${likeButton}
 			<a href="" class="comment" onclick="event.preventDefault();"
 				><i class="fa-solid fa-message"></i>&ensp;Comment</a
 			>

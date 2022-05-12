@@ -22,4 +22,4 @@ const friendshipSchema = new mongoose.Schema(
 const Friendship = mongoose.model("Friendship", friendshipSchema);
 
 //Export the Model/Collection
-module.exports = Comment;
+module.exports = Friendship;

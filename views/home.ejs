@@ -8,6 +8,7 @@
 <script defer src="/js/search.js"></script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
 <script defer src="/js/toggle_likes.js"></script>
+<script defer src="/js/friendship.js"></script>
 
 <% if(locals.user){ %>
 <div id="home-container">
@@ -32,7 +33,7 @@
 				</ul>
 			</div>
 		</form>
-		<h2>Posts</h2>
+		<h2><i class="fa-solid fa-address-card"></i>&ensp;Posts</h2>
 		<% if(locals.user){ %>
 		<form
 			action="/posts/create"
@@ -118,34 +119,75 @@
 		</div>
 	</section>
 
-	<section id="user-friends">
-		<h2>Friends List</h2>
-		<% for(person of all_users){ %>
-		<p
-			class="friend card"
-			onclick="window.location.href='/users/profile/<%= person.id %>'"
-		>
-			<% if(person.avatar){ %>
-			<img
-				class="user-avatar friend-avatar"
-				src="<%= person.avatar %>"
-				alt="<%= person.name %>"
+	<section id="user-sidebar">
+		<section id="user-friends">
+			<h2><i class="fa-solid fa-user-group"></i>&ensp;Friends List</h2>
+			<% if(friends.length > 0){ for(let person of friends){
+			if(person.from_user._id.toString() === locals.user._id.toString()){
+			person = person.to_user; }else{ person = person.from_user; } %>
+			<p
+				class="friend card"
 				onclick="window.location.href='/users/profile/<%= person.id %>'"
-				loading="lazy"
-			/>
-			<% } else { %>
-			<img
-				class="user-avatar"
-				src="/images/empty-avatar.png"
-				alt="<%= person.name %>"
-				onclick="window.location.href='/users/profile/<%= person.id %>'"
-				loading="lazy"
-			/>
-			<% } %>
+			>
+				<% if(person.avatar){ %>
+				<img
+					class="user-avatar friend-avatar"
+					src="<%= person.avatar %>"
+					alt="<%= person.name %>"
+					onclick="window.location.href='/users/profile/<%= person.id %>'"
+					loading="lazy"
+				/>
+				<% } else { %>
+				<img
+					class="user-avatar"
+					src="/images/empty-avatar.png"
+					alt="<%= person.name %>"
+					onclick="window.location.href='/users/profile/<%= person.id %>'"
+					loading="lazy"
+				/>
+				<% } %>
 
-			<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
-		</p>
-		<% } %>
+				<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
+				<a
+					class="remove"
+					id="friendship_button"
+					href="/friends/delete/<%= person.id %>"
+				>
+					Remove Friend
+				</a>
+			</p>
+			<% }} %>
+		</section>
+
+		<section id="all-users">
+			<h2><i class="fa-solid fa-user"></i>&ensp;All Users</h2>
+			<% for(person of all_users){ %>
+			<p
+				class="friend card"
+				onclick="window.location.href='/users/profile/<%= person.id %>'"
+			>
+				<% if(person.avatar){ %>
+				<img
+					class="user-avatar friend-avatar"
+					src="<%= person.avatar %>"
+					alt="<%= person.name %>"
+					onclick="window.location.href='/users/profile/<%= person.id %>'"
+					loading="lazy"
+				/>
+				<% } else { %>
+				<img
+					class="user-avatar"
+					src="/images/empty-avatar.png"
+					alt="<%= person.name %>"
+					onclick="window.location.href='/users/profile/<%= person.id %>'"
+					loading="lazy"
+				/>
+				<% } %>
+
+				<a href="/users/profile/<%= person.id %>"><%= person.name %></a>
+			</p>
+			<% } %>
+		</section>
 	</section>
 </div>
 <% }else{ %>

@@ -55,7 +55,7 @@
 			<% } %>
 		</div>
 		<div class="post-react">
-			<%	let likes = [];
+			<%	try{ let likes = [];
 			
 			likes = post.likes.filter(like => (like.user._id.toString() === locals.user._id.toString()) && (like.onModel === "Post") && (post._id.toString() === like.likeable._id.toString())); 
 			
@@ -75,8 +75,7 @@
 					<i class="fa-solid fa-thumbs-up"></i>
 					&ensp;<span><%= post.likes.length %> Like</span>
 				</a>
-		<%	}	%>
-			
+		<%	}}catch(err){console.log(err);}	%>
 			<a href="" class="comment" onclick="event.preventDefault();"
 				><i class="fa-solid fa-message"></i>&ensp;Comment</a
 			>

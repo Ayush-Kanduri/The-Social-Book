@@ -62,17 +62,18 @@
 					padding: 10px;
 					padding-left: 30px;
 					width: 100%;
-					color: var(--logo-color);
+					color: var(--text-color);
 					font-weight: 500;
 					word-spacing: 0.1rem;
 					letter-spacing: 0.03rem;
 					font-size: 0.9rem;
 					text-align: left;
 					height: 50px;
+					background-color: var(--logo-color);
 				}
 				input::placeholder {
 					font-family: var(--text-font-family);
-					color: var(--logo-color);
+					color: var(--text-color);
 					font-weight: 500;
 					padding: 10px;
 					word-spacing: 0.1rem;
@@ -634,32 +635,84 @@
 			}
 		}
 	}
-	#user-friends {
+	#user-sidebar {
 		width: 30%;
 		padding: 50px;
 		border-left: 1px solid var(--logo-color);
 		height: 100%;
-		h2 {
-			margin-bottom: 5%;
-		}
-		.friend {
-			justify-content: space-between;
-			cursor: pointer;
-			flex-wrap: wrap;
-			a {
-				font-size: 1rem;
-				font-weight: 500;
-				color: var(--logo-color);
-				text-align: center;
-				margin: 0;
-				// flex: 1 0 100%;
-				text-decoration: none;
-				color: var(--logo-color);
-				word-break: break-all;
-				word-wrap: break-word;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		#user-friends {
+			width: 100%;
+			height: 100%;
+			h2 {
+				margin-bottom: 5%;
 			}
-			&:hover {
-				background-color: #5cecf9;
+			.friend {
+				padding: 5% 0%;
+				justify-content: space-between;
+				cursor: pointer;
+				flex-wrap: wrap;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				a.remove {
+					background-color: var(--logo-color);
+					border-radius: 7px;
+					transition: 0.15s;
+					color: var(--text-color);
+					padding: 0.5rem;
+					&:hover {
+						background-color: rgb(158, 0, 0);
+					}
+				}
+				a {
+					font-size: 1rem;
+					font-weight: 500;
+					color: var(--logo-color);
+					text-align: center;
+					margin: 0;
+					// flex: 1 0 100%;
+					text-decoration: none;
+					color: var(--logo-color);
+					word-break: break-all;
+					word-wrap: break-word;
+					// width: 100%;
+				}
+				&:hover {
+					background-color: #5cecf9;
+				}
+			}
+		}
+		#all-users {
+			width: 100%;
+			height: 100%;
+			margin-top: 3rem;
+			h2 {
+				margin-bottom: 5%;
+			}
+			.friend {
+				justify-content: space-between;
+				cursor: pointer;
+				flex-wrap: wrap;
+				a {
+					font-size: 1rem;
+					font-weight: 500;
+					color: var(--logo-color);
+					text-align: center;
+					margin: 0;
+					// flex: 1 0 100%;
+					text-decoration: none;
+					color: var(--logo-color);
+					word-break: break-all;
+					word-wrap: break-word;
+				}
+				&:hover {
+					background-color: #5cecf9;
+				}
 			}
 		}
 	}
@@ -761,7 +814,16 @@
 }
 
 @media screen and (max-width: 1000px) {
-	#home-container #user-friends .friend {
+	#home-container #user-sidebar #user-friends .friend {
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-bottom: 13%;
+		a {
+			flex: 1 0 100%;
+			font-size: 0.8rem;
+		}
+	}
+	#home-container #user-sidebar #all-users .friend {
 		flex-wrap: wrap;
 		justify-content: center;
 		margin-bottom: 13%;
@@ -798,23 +860,7 @@
 	}
 }
 
-@media screen and (max-width: 780px) {
-	#home-container
-		#feed-posts
-		#posts-list-container
-		ul.post-ul
-		li.post-li
-		.post
-		.post-react
-		a,
-	a:active,
-	a:visited,
-	a:focus {
-		font-size: 1rem;
-	}
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 845px) {
 	#home-container {
 		#feed-posts {
 			width: 100%;
@@ -837,9 +883,25 @@
 				}
 			}
 		}
-		#user-friends {
+		#user-sidebar {
 			display: none;
 		}
+	}
+}
+
+@media screen and (max-width: 780px) {
+	#home-container
+		#feed-posts
+		#posts-list-container
+		ul.post-ul
+		li.post-li
+		.post
+		.post-react
+		a,
+	a:active,
+	a:visited,
+	a:focus {
+		font-size: 1rem;
 	}
 }
 

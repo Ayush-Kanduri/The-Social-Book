@@ -70,11 +70,12 @@ header {
         background-color: var(--logo-color);
         border-radius: 50px; }
     header .sidebar .sidebar-links {
-      padding: 5px;
       width: 100%;
       display: flex;
       align-items: center;
-      flex-direction: column; }
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1.5rem; }
       header .sidebar .sidebar-links #li-info {
         cursor: default;
         background-color: var(--logo-color);
@@ -92,9 +93,8 @@ header {
             aspect-ratio: 1/1;
             border-radius: 50%; }
       header .sidebar .sidebar-links li {
-        margin: 0 0 10% 0;
         list-style: none;
-        padding: 5%;
+        padding: 3%;
         width: 100%; }
         header .sidebar .sidebar-links li #info {
           font-size: 2.5vw;
@@ -143,17 +143,17 @@ header {
     list-style: none;
     margin: 10px 30px; }
 
+@media screen and (max-width: 845px) {
+  header #open {
+    display: initial; }
+  header #home-nav {
+    display: none; } }
+
 @media screen and (max-width: 805px) {
   header h1 {
     font-size: 2rem; }
   header nav ul li {
     margin: 10px 10px; } }
-
-@media screen and (max-width: 700px) {
-  header #open {
-    display: initial; }
-  header #home-nav {
-    display: none; } }
 
 @media screen and (max-width: 642px) {
   header h1 {

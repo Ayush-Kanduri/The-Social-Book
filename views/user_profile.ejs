@@ -2,6 +2,7 @@
 <script defer src="/js/profile.js"></script>
 <script defer src="/js/lazy_loading.js"></script>
 <script defer src="/js/frontend_form_validation.js"></script>
+<script defer src="/js/toggle_friendship.js"></script>
 
 <div id="details">
 	<table>
@@ -115,7 +116,37 @@
 		</tr>
 		<tr>
 			<td colspan="3">
-				<button class="btn-grad" onclick="window.location='/';">
+				<% let friends = []; friends = friends_list.filter((friend)=>{
+				return (friend.from_user._id.toString() ===
+				profile_user._id.toString()) || (friend.to_user._id.toString() ===
+				profile_user._id.toString()); }); if(friends.length > 0){ %>
+				<a
+					class="btn-grad"
+					id="friendship_button"
+					href="/friends/toggle/<%= profile_user._id %>"
+					style="margin-top: 1.5rem; width: 100%"
+				>
+					Remove Friend
+				</a>
+				<% }else{ %>
+				<a
+					class="btn-grad"
+					id="friendship_button"
+					href="/friends/toggle/<%= profile_user._id %>"
+					style="margin-top: 1.5rem; width: 100%"
+				>
+					Add Friend
+				</a>
+				<% } %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<button
+					class="btn-grad"
+					onclick="window.location='/';"
+					style="margin-top: 1.5rem; width: 100%"
+				>
 					Home Page
 				</button>
 			</td>

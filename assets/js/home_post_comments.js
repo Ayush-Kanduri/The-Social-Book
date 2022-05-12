@@ -59,28 +59,30 @@ class PostComments {
 
 	newCommentDom(comment, user) {
 		// I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
-		let commentUserAvatar, deleteButton;
+		let commentUserAvatar, deleteButton, likeButton;
+		let likes = [];
 
-		if (comment.user.avatar) {
-			commentUserAvatar = `<img
+		try {
+			if (comment.user.avatar) {
+				commentUserAvatar = `<img
 									class="user-avatar"
 									src="${comment.user.avatar}"
 									alt="${comment.user.name}"
 									onclick="window.location.href='/users/profile/${comment.user._id}'"
 									loading="lazy"
 								/>`;
-		} else {
-			commentUserAvatar = `<img
+			} else {
+				commentUserAvatar = `<img
 									class="user-avatar"
 									src="/images/empty-avatar.png"
 									alt="${comment.user.name}"
 									onclick="window.location.href='/users/profile/${comment.user._id}'"
 									loading="lazy"
 								/>`;
-		}
+			}
 
-		if (user.id == comment.user.id) {
-			deleteButton = `<small>
+			if (user.id == comment.user.id) {
+				deleteButton = `<small>
 								<a
 									class="delete-comment-button"
 									href="/comments/delete/${comment._id}"
@@ -88,10 +90,41 @@ class PostComments {
 									<i class="fa-solid fa-trash"></i>
 								</a>
 							</small>`;
-		} else {
-			deleteButton = ``;
-		}
+			} else {
+				deleteButton = ``;
+			}
 
+			likes = comment.likes.filter(
+				(like) =>
+					like.user._id.toString() === locals.user._id.toString() &&
+					like.onModel === "Comment" &&
+					comment._id.toString() === like.likeable._id.toString()
+			);
+
+			if (likes.length > 0) {
+				likeButton = `<a
+				href="/likes/toggle/?id=${comment._id}&type=Comment"
+				class="like toggle-like-button comment-like-button"
+				data-likes="0"
+				style="color: rgb(255, 0, 0)"
+			>
+				<i class="fa-solid fa-thumbs-up"></i>
+				&ensp;<span>0 Like</span>
+			</a>`;
+			} else {
+				likeButton = `<a
+				href="/likes/toggle/?id=${comment._id}&type=Comment"
+				class="like toggle-like-button comment-like-button"
+				data-likes="0"
+				style="color: #b8fff9"
+			>
+				<i class="fa-solid fa-thumbs-up"></i>
+				&ensp;<span>0 Like</span>
+			</a>`;
+			}
+		} catch (e) {
+			console.log(e);
+		}
 		//CHANGE :: Show the count of 0 likes on this new comment.
 
 		return $(`<li id="comment-${comment._id}" class="post-comments-li">
@@ -111,11 +144,7 @@ class PostComments {
 			<p>${comment.content}</p>
 		</div>
 		<div class="comment-react">
-			<a href="/likes/toggle/?id=${
-				comment._id
-			}&type=Comment" class="like toggle-like-button" data-likes='0'>
-				<i class="fa-solid fa-thumbs-up"></i>&ensp;<span>0 Like</span></a
-			>
+			${likeButton}
 		</div>
 	</div>
 </li>

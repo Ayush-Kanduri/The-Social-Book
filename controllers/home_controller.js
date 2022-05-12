@@ -2,6 +2,8 @@
 const Post = require("../models/post");
 //Require the User Model Data Structure
 const User = require("../models/user");
+//Require the Friendship Model Data Structure
+const Friendship = require("../models/friendship");
 
 //We need to give this function a name, since it is an object.
 //Export the Home Controller's Home() Function to the "/" Route.
@@ -37,10 +39,35 @@ module.exports.home = async (request, response) => {
 
 		let users = await User.find({});
 
+		let friends;
+
+		try {
+			friends = await Friendship.find({
+				$or: [
+					{
+						from_user: request.user._id,
+					},
+					{
+						to_user: request.user._id,
+					},
+				],
+			})
+				.populate("to_user", "-password -__v")
+				.populate("from_user", "-password -__v");
+		} catch (err) {
+			// console.log(err);
+			friends = [];
+		}
+
+		if (friends.length === 0) {
+			friends = [];
+		}
+
 		return response.render("home", {
 			title: "Home Page",
 			posts: posts,
 			all_users: users,
+			friends: friends,
 		});
 	} catch (err) {
 		console.log("Error: ", err);

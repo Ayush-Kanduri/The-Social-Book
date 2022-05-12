@@ -11,7 +11,7 @@
 		}
 
 		function sidebar() {
-			const width = window.matchMedia("(min-width: 700px)");
+			const width = window.matchMedia("(min-width: 845px)");
 			jsMediaQuery(width);
 			width.addEventListener("change", jsMediaQuery);
 
