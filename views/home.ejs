@@ -189,6 +189,27 @@
 			<% } %>
 		</section>
 	</section>
+
+	<section id="chatbox">
+		<div class="top">
+			<div class="heading">
+				<h4>New Message</h4>
+				<span><i class="fa-solid fa-angle-down"></i></span>
+			</div>
+			<p>Rajeev Tiwari</p>
+		</div>
+		<div class="bottom">
+			<div class="chat-screen">
+				<ul class="chat-ul">
+					<%- include('_chat.ejs'); -%>
+				</ul>
+			</div>
+			<div class="chat-input">
+				<input type="text" placeholder="Type a message..." />
+				<button>Send</button>
+			</div>
+		</div>
+	</section>
 </div>
 <% }else{ %>
 <div id="welcome-container">
