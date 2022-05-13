@@ -23,7 +23,28 @@ module.exports.chatSockets = function (socketServer) {
 		//It detects that the socket is not connected anymore.
 		socket.on("disconnect", function () {
 			console.log("User Disconnected using Sockets: ", socket.id);
+			//On refreshing the Server, the User gets Disconnected & gets Reconnected again.
 		});
-		//On refreshing the Server, the User gets Disconnected & gets Reconnected again.
+
+		socket.on("join_room", function (data) {
+			console.log(
+				"User's Request for Joining the Room has been Received: ",
+				data
+			);
+
+			//After Receiving the Request, we want that User/Socket to be Joined to that Particular Chat Room.
+			//If a Chat Room with the name "data.chat_room" exists, then the User will be Joined to that Chat Room.
+			//If a Chat Room with the name "data.chat_room" does not exist, then that Chat Room will be created & then the User will be entered into it.
+			socket.join(data.chat_room);
+
+			//After Joining that Chat Room, everyone present in that Chat Room should be notified that a new User has Joined the Chat Room.
+			//Emit an Event inside this Chat Room & tell the Whole Room about it.
+
+			/* To Emit an Event in a specific Chat Room - 'io.in(data.chat_room).emit()',
+			Otherwise - 'socket.emit()' */
+			//To Emit an Event to all the Users - 'io.emit()'
+			//To Emit an Event to a Specific User - 'socket.emit()'
+			io.in(data.chat_room).emit("user_joined", data);
+		});
 	});
 };
