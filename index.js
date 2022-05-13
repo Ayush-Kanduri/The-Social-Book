@@ -1,6 +1,10 @@
 //----------------------------------------------------------------//
 //Main Entry Point of the Express Server App//
 //----------------------------------------------------------------//
+
+//----------------------------------------------------------------//
+//Basic Module/Library Imports//
+//----------------------------------------------------------------//
 //Require Express Module for running the Express Server
 const express = require("express");
 //Create Express App for Request-Response Cycle & to create the Express Server
@@ -39,7 +43,25 @@ const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 //Requires the Custom Middleware
 const customMiddleware = require("./config/middleware");
+//----------------------------------------------------------------//
 
+//----------------------------------------------------------------//
+//Setup the Chat Server to be used with Socket.io//
+//----------------------------------------------------------------//
+//Create Chat Server :: Require the HTTP Module for the Socket.io Server
+const chatServer = require("http").Server(app);
+//Create Chat Sockets for the Socket.io Server
+const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
+//Create Chat Server Port
+const chatPort = 5000;
+//Run the Chat Server
+chatServer.listen(chatPort);
+console.log("Chat Server is Running Successfully on Port: " + chatPort);
+//----------------------------------------------------------------//
+
+//----------------------------------------------------------------//
+//Run Application Middlewares//
+//----------------------------------------------------------------//
 //We have to put SASS just before the server is starting, because the files should be pre-compiled before the server starts. Whenever templates/browser ask for it, these pre-compiled files will be served.
 //Middleware - SASS Middleware
 app.use(
@@ -129,11 +151,15 @@ app.use(flash());
 app.use(customMiddleware.setFlash);
 //Middleware - App calls index.js - Route File, whenever '/' route is called in the request.
 app.use("/", route);
+//----------------------------------------------------------------//
 
+//----------------------------------------------------------------//
 //Run the ExpressJS Server
+//----------------------------------------------------------------//
 app.listen(port, (err) => {
 	if (err) {
 		console.log(err);
 	}
 	console.log(`Server is Up & Running Successfully on Port ${port}`);
 });
+//----------------------------------------------------------------//

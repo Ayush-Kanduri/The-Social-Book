@@ -721,6 +721,8 @@
 		bottom: 0%;
 		right: 5%;
 		width: 25%;
+		max-width: 400px;
+		min-width: 300px;
 		height: 350px;
 		// height: 41px;
 		display: flex;
@@ -850,20 +852,20 @@
 								font-size: 1rem;
 							}
 						}
-						&:nth-child(odd) {
-							background-color: var(--logo-color);
-							color: var(--text-color);
-							font-weight: 400;
-							float: left;
-							clear: left;
-						}
-						&:nth-child(even) {
-							background-color: rgb(240, 240, 240);
-							color: var(--logo-color);
-							font-weight: 500;
-							float: right;
-							clear: right;
-						}
+					}
+					.sender {
+						background-color: var(--logo-color);
+						color: var(--text-color);
+						font-weight: 400;
+						float: left;
+						clear: left;
+					}
+					.receiver {
+						background-color: rgb(240, 240, 240);
+						color: var(--logo-color);
+						font-weight: 500;
+						float: right;
+						clear: right;
 					}
 				}
 			}
@@ -896,6 +898,7 @@
 				}
 				button {
 					width: 15%;
+					min-width: 50px;
 					height: 100%;
 					border: none;
 					border-radius: 7px;
@@ -1123,6 +1126,9 @@
 					height: 220px;
 				}
 			}
+		}
+		#chatbox {
+			right: 0%;
 		}
 	}
 	#welcome-container {

@@ -9,6 +9,14 @@
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
 <script defer src="/js/toggle_likes.js"></script>
 <script defer src="/js/friendship.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"
+	integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw=="
+	crossorigin="anonymous"
+	referrerpolicy="no-referrer"
+	defer
+></script>
+<script defer src="/js/chat_engine.js"></script>
 
 <% if(locals.user){ %>
 <div id="home-container">
