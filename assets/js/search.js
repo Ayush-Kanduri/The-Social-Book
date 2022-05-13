@@ -82,7 +82,7 @@
 					return;
 				}
 			} catch (err) {
-				console.log(err);
+				// console.log(err);
 			}
 		};
 
@@ -112,6 +112,6 @@
 		const search = document.getElementById("search-users-input");
 		search.addEventListener("input", searchUsers);
 	} catch (err) {
-		console.log(err);
+		// console.log(err);
 	}
 }

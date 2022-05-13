@@ -1,14 +1,21 @@
 <link rel="stylesheet" href="/css/home.css" />
-<!-- Importing the Script for creating the comments -->
+
+<!-- Importing the Script for Creating the Comments -->
 <script defer src="/js/home_post_comments.js"></script>
-<!-- Importing the Script for creating the posts -->
+<!-- Importing the Script for Creating the Posts -->
 <script defer src="/js/home_posts.js"></script>
+<!-- Importing the Script for Basic Functionalities -->
 <script defer src="/js/home.js"></script>
+<!-- Importing the Script to Implement Lazy Loading -->
 <script defer src="/js/lazy_loading.js"></script>
+<!-- Importing the Script for Search Bar Functionality -->
 <script defer src="/js/search.js"></script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
 <script defer src="/js/toggle_likes.js"></script>
+<!-- Importing the Script for Toggling Friendships through AJAX -->
 <script defer src="/js/friendship.js"></script>
+
+<!-- Web Socket :: Socket.io CDN Import -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"
 	integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw=="
@@ -16,8 +23,25 @@
 	referrerpolicy="no-referrer"
 	defer
 ></script>
+<!-- Importing the Script for Sending the Request to Create the Connection -->
 <script defer src="/js/chat_engine.js"></script>
+<!-- Script for Creating / Establishing the Connection -->
+<% if(locals.user){ %>
+<script defer src="/js/chat_connection.js"></script>
+<% } %>
 
+<!-- Hidden Files -->
+<% if(locals.user){ %>
+<input
+	type="hidden"
+	id="hidden-user-id"
+	name="user"
+	value="<%= locals.user._id %>"
+/>
+<% } %>
+<input type="hidden" id="hidden-chat-id" name="chat" value="chatbox" />
+
+<!-- HomePage -->
 <% if(locals.user){ %>
 <div id="home-container">
 	<section id="feed-posts">
