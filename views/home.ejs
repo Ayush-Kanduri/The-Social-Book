@@ -38,8 +38,14 @@
 	name="user"
 	value="<%= locals.user.email %>"
 />
-<% } %>
+<input
+	type="hidden"
+	id="hidden-user-name"
+	name="chat"
+	value="<%= locals.user.name %>"
+/>
 <input type="hidden" id="hidden-chat-id" name="chat" value="chatbox" />
+<% } %>
 
 <!-- HomePage -->
 <% if(locals.user){ %>
@@ -228,17 +234,21 @@
 				<h4>New Message</h4>
 				<span><i class="fa-solid fa-angle-down"></i></span>
 			</div>
-			<p>Rajeev Tiwari</p>
+			<p id="other-chat-user">Rajeev Tiwari</p>
 		</div>
 		<div class="bottom">
 			<div class="chat-screen">
-				<ul class="chat-ul">
+				<ul class="chat-ul" id="chat-ul">
 					<%- include('_chat.ejs'); -%>
 				</ul>
 			</div>
 			<div class="chat-input">
-				<input type="text" placeholder="Type a message..." />
-				<button>Send</button>
+				<input
+					id="message-input"
+					type="text"
+					placeholder="Type a message..."
+				/>
+				<button id="send-message-button">Send</button>
 			</div>
 		</div>
 	</section>

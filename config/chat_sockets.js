@@ -46,5 +46,10 @@ module.exports.chatSockets = function (socketServer) {
 			//To Emit an Event to a Specific User - 'socket.emit()'
 			io.in(data.chat_room).emit("user_joined", data);
 		});
+
+		// CHANGE :: Detect 'send_message' Event & broadcast the message to everyone in the room
+		socket.on("send_message", function (data) {
+			io.in(data.chat_room).emit("receive_message", data);
+		});
 	});
 };
