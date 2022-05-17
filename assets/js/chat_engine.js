@@ -26,6 +26,36 @@ class ChatEngine {
 		//It Detects if the Connection has been Established
 		this.socket.on("connect", function () {
 			console.log("Connection Established using Sockets");
+			console.log("Your Socket ID: ", self.socket.id);
+
+			self.socket.emit("online_status", {
+				user_email: self.userEmail,
+			});
+
+			self.socket.on("user_online", function (data) {
+				console.log("All Online Users: ", data);
+				// Convert Object to a [key, value] Array
+				let arr = Object.entries(data);
+				// Remove the Self User from the Online Users List
+				arr = arr.filter((item) => item[0] != self.socket.id);
+				// Convert the [key, value] Array back to an Object
+				let obj = Object.fromEntries(arr);
+				// Highlight the Online Users in the ChatBox
+				self.onlineStatus(obj);
+			});
+
+			self.socket.on("user_offline", function (data) {
+				console.log("All Online Users: ", data);
+				//Convert Object to a [key, value] Array
+				let arr = Object.entries(data);
+				//Remove the Self User from the Online Users List
+				arr = arr.filter((item) => item[0] != self.socket.id);
+				//Convert the [key, value] Array back to an Object
+				let obj = Object.fromEntries(arr);
+				//Highlight the Offline Users in the ChatBox
+				self.onlineStatus(obj);
+			});
+
 			//'this' scope has been changed inside the on() function
 
 			//Name of the Event can be anything but should be meaningful & should correspond with the Event on the Server Side.
@@ -42,11 +72,9 @@ class ChatEngine {
 
 			//Receives the Event - 'user_joined'
 			self.socket.on("user_joined", function (data) {
+				console.log("---------------------------");
 				console.log("New User has Joined the Chat Room: ", data);
-				if (data.user_name !== self.userName) {
-					document.getElementById("other-chat-user").textContent =
-						data.user_name;
-				}
+				console.log("---------------------------");
 			});
 		});
 
@@ -76,33 +104,87 @@ class ChatEngine {
 
 		//Receives/Detects the Event - 'receive_message'
 		self.socket.on("receive_message", function (data) {
+			console.log("---------------------------");
 			console.log("Message Received: ", data.message);
-			let newMessage = document.createElement("li");
-			let p = document.createElement("p");
-			let nameSpan = document.createElement("span");
-			let timeSpan = document.createElement("span");
-			let textSpan = document.createElement("span");
+			console.log("---------------------------");
+			let newData = {};
 
-			let messageType = "sender";
-			if (data.user_email === self.userEmail) {
-				messageType = "receiver";
-			}
+			//AJAX Call
+			$.ajax({
+				type: "POST",
+				url: "/messages/create",
+				data: {
+					message: data.message,
+					user_email: data.user_email,
+					user_name: data.user_name,
+					timestamp: data.timestamp,
+					chat_room: data.chat_room,
+				},
+				success: function (data) {
+					data = data.data;
+					console.log(data.message);
 
-			p.classList.add("chat-message", messageType);
-			newMessage.classList.add("chat-li", messageType);
-			nameSpan.classList.add("chat-message-name");
-			timeSpan.classList.add("chat-message-time");
-			textSpan.classList.add("chat-message-text");
+					let chatUL = document.getElementById("chat-ul");
+					let newMessage = document.createElement("li");
+					let p = document.createElement("p");
+					let nameSpan = document.createElement("span");
+					let timeSpan = document.createElement("span");
+					let textSpan = document.createElement("span");
 
-			nameSpan.textContent = data.user_name;
-			timeSpan.textContent = data.timestamp;
-			textSpan.textContent = data.message;
+					let messageType = "sender";
+					if (data.user_email === self.userEmail) {
+						messageType = "receiver";
+					}
 
-			p.appendChild(nameSpan);
-			p.appendChild(timeSpan);
-			p.appendChild(textSpan);
-			newMessage.appendChild(p);
-			document.getElementById("chat-ul").appendChild(newMessage);
+					p.classList.add("chat-message", messageType);
+					newMessage.classList.add("chat-li", messageType);
+					nameSpan.classList.add("chat-message-name");
+					timeSpan.classList.add("chat-message-time");
+					textSpan.classList.add("chat-message-text");
+
+					nameSpan.textContent = data.user_name;
+					timeSpan.textContent = data.timestamp;
+					textSpan.textContent = data.message;
+
+					p.appendChild(nameSpan);
+					p.appendChild(timeSpan);
+					p.appendChild(textSpan);
+					newMessage.appendChild(p);
+					chatUL.appendChild(newMessage);
+					chatUL.scrollTop = chatUL.scrollHeight;
+				},
+				error: function (error) {
+					console.log("Error: ", error);
+				},
+			});
 		});
+	}
+
+	chatAJAX() {}
+
+	onlineStatus(data) {
+		let arr = document.getElementsByClassName("chat-friend");
+		//Check if there are any Online Users :: If the Object is Empty
+		if (
+			data &&
+			Object.keys(data).length === 0 &&
+			data.constructor === Object
+		) {
+			for (let item of arr) {
+				item.children[2].children[0].children[0].style.color =
+					"rgb(111, 0, 0)";
+			}
+			return;
+		}
+		//Update the Online Status of the Users
+		for (const [socketID, email] of Object.entries(data)) {
+			for (let item of arr) {
+				item.children[2].children[0].children[0].style.color =
+					"rgb(111, 0, 0)";
+				if (item.getAttribute("data-email") === email) {
+					item.children[2].children[0].children[0].style.color = "green";
+				}
+			}
+		}
 	}
 }

@@ -13,10 +13,36 @@ module.exports.chatSockets = function (socketServer) {
 		},
 	});
 
+	let users = {};
+
 	//Once the Connection is Established, it sends back an acknowledgement to the Client, that the Connection has been Established, by Emitting the 'connect' Event to the Client automatically.
 	io.sockets.on("connection", function (socket) {
 		//Receives the Connection & Emits back that you're Connected, using the Event - 'connect'
+		console.log("---------------------------------------------------------");
 		console.log("New User Connected using Sockets: ", socket.id);
+		console.log("---------------------------------------------------------");
+
+		socket.on("online_status", function (data) {
+			users[socket.id] = data.user_email;
+			console.log("Online Users: ", users);
+			//Emit the Event to all other Clients except the one who sent the Event last
+			//Only on refreshing the page of the Client who sent the Event, he will get the Event
+			// User 1 comes Online
+			// User 2 comes Online
+			// User 2 gets the Event
+			//socket.broadcast.emit("user_online", users);
+
+			//Emit the Event to all other Clients except the one who sent the Event first
+			//Only on refreshing the page of the Client who sent the Event, he will get the Event
+			// User 1 comes Online
+			// User 2 comes Online
+			// User 1 gets the Event
+			//socket.emit("user_online", users);
+
+			//Emit the Event to all the Clients in the Connection at the same time
+			io.emit("user_online", users);
+		});
+
 		//'socket' is the Connection Object with the information about the User sending the Message
 
 		//Whenever the Client Disconnects, an automatic Event - 'disconnect' is Emitted/Fired
@@ -24,13 +50,17 @@ module.exports.chatSockets = function (socketServer) {
 		socket.on("disconnect", function () {
 			console.log("User Disconnected using Sockets: ", socket.id);
 			//On refreshing the Server, the User gets Disconnected & gets Reconnected again.
+			delete users[socket.id];
+			io.emit("user_offline", users);
 		});
 
 		socket.on("join_room", function (data) {
+			console.log("-----------------------------------------------------");
 			console.log(
 				"User's Request for Joining the Room has been Received: ",
 				data
 			);
+			console.log("-----------------------------------------------------");
 
 			//After Receiving the Request, we want that User/Socket to be Joined to that Particular Chat Room.
 			//If a Chat Room with the name "data.chat_room" exists, then the User will be Joined to that Chat Room.

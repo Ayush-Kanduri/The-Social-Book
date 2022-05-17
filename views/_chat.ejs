@@ -1,14 +1,70 @@
-<!-- <li class="chat-li sender">
-	<p class="chat-message">
-		<span class="chat-message-name"> Rajeev Tiwari </span>
-		<span class="chat-message-time"> 12/12/20, 12:12 </span>
-		<span class="chat-message-text"> Hello, how are you? </span>
-	</p>
-</li>
-<li class="chat-li receiver">
-	<p class="chat-message">
-		<span class="chat-message-name"> Rajeev Tiwari </span>
-		<span class="chat-message-time"> 12/12/20, 12:12 </span>
-		<span class="chat-message-text"> Hello, how are you? </span>
-	</p>
-</li> -->
+<link rel="stylesheet" href="/css/_chat.css" />
+
+<div class="top">
+	<div class="heading">
+		<h4>New Message</h4>
+		<span
+			><i class="fa-solid fa-circle-arrow-left" id="toggle-back"></i
+		></span>
+		<span><i class="fa-solid fa-angle-up" id="toggle-down"></i></span>
+	</div>
+	<p id="other-chat-user"></p>
+</div>
+
+<div class="bottom">
+	<div class="chat-friends-list show">
+		<% if(friends.length > 0){ for(let person of friends){
+		if(person.from_user._id.toString() === locals.user._id.toString()){ person
+		= person.to_user; }else{ person = person.from_user; } %>
+		<div
+			class="chat-friend"
+			data-email="<%= person.email %>"
+			data-name="<%= person.name %>"
+		>
+			<% if(person.avatar){ %>
+			<img
+				src="<%= person.avatar %>"
+				alt="<%= person.name %>"
+				loading="lazy"
+			/>
+			<% }else{ %>
+			<img
+				src="/images/empty-avatar.png"
+				alt="<%= person.name %>"
+				loading="lazy"
+			/>
+			<% } %>
+			<p><%= person.name %></p>
+			<div
+				style="display: flex; justify-content: center; align-items: center"
+			>
+				<p>
+					<i
+						class="fa-solid fa-circle"
+						style="font-size: 0.7rem; color: rgb(111, 0, 0)"
+						id="online-status"
+					></i>
+				</p>
+				<p>
+					<i
+						class="fa-solid fa-message"
+						style="color: rgb(111, 0, 0)"
+						id="new-messages"
+					></i>
+				</p>
+			</div>
+		</div>
+		<% }}else{ %>
+		<div class="chat-friend">
+			<p id="no-chat-friends">Nothing Here.</p>
+		</div>
+		<% } %>
+	</div>
+	<div class="chat-screen hide">
+		<ul class="chat-ul" id="chat-ul"></ul>
+	</div>
+	<div class="chat-input hide">
+		<input id="message-input" type="text" placeholder="Type a message..." />
+		<button id="send-message-button">Send</button>
+	</div>
+</div>
