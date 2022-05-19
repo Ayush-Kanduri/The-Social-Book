@@ -4,7 +4,7 @@
 	<div class="heading">
 		<h4>New Message</h4>
 		<span
-			><i class="fa-solid fa-circle-arrow-left" id="toggle-back"></i
+			><i class="fa-solid fa-circle-arrow-left hide" id="toggle-back"></i
 		></span>
 		<span><i class="fa-solid fa-angle-up" id="toggle-down"></i></span>
 	</div>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<% }}else{ %>
-		<div class="chat-friend">
+		<div class="chat-friend" id="nothing" onclick="(e)=>{e.preventDefault();}">
 			<p id="no-chat-friends">Nothing Here.</p>
 		</div>
 		<% } %>

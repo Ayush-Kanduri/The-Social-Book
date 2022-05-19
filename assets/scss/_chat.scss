@@ -101,6 +101,20 @@
 			overflow: hidden;
 		}
 		.chat-friend {
+			&#nothing {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				p {
+					font-size: 1.5rem !important;
+				}
+				height: 100%;
+				width: 100%;
+				&:hover {
+					cursor: default;
+					background-color: var(--header-color);
+				}
+			}
 			width: 100%;
 			display: flex;
 			justify-content: space-between;

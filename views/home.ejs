@@ -45,7 +45,11 @@
 	value="<%= locals.user.name %>"
 />
 <input type="hidden" id="hidden-chat-id" name="chat" value="chatbox" />
-<% } %>
+<% if(friends.length === 0){ %>
+<input type="hidden" id="hidden-friend-length" name="friend" value="0" />
+<% }else{ %>
+<input type="hidden" id="hidden-friend-length" name="friend" value="1" />
+<% } %> <% } %>
 
 <!-- HomePage -->
 <% if(locals.user){ %>

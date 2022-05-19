@@ -60,6 +60,18 @@ const userSchema = new mongoose.Schema(
 				ref: "Friendship",
 			},
 		],
+		rooms: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Room",
+			},
+		],
+		chats: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Chat",
+			},
+		],
 	},
 	{ timestamps: true }
 	// Timestamp will create the createdAt and the updatedAt fields

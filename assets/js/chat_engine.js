@@ -25,37 +25,6 @@ class ChatEngine {
 		//As JavaScript is an Event Driven Language, 'On' detects an Event.
 		//It Detects if the Connection has been Established
 		this.socket.on("connect", function () {
-			console.log("Connection Established using Sockets");
-			console.log("Your Socket ID: ", self.socket.id);
-
-			self.socket.emit("online_status", {
-				user_email: self.userEmail,
-			});
-
-			self.socket.on("user_online", function (data) {
-				console.log("All Online Users: ", data);
-				// Convert Object to a [key, value] Array
-				let arr = Object.entries(data);
-				// Remove the Self User from the Online Users List
-				arr = arr.filter((item) => item[0] != self.socket.id);
-				// Convert the [key, value] Array back to an Object
-				let obj = Object.fromEntries(arr);
-				// Highlight the Online Users in the ChatBox
-				self.onlineStatus(obj);
-			});
-
-			self.socket.on("user_offline", function (data) {
-				console.log("All Online Users: ", data);
-				//Convert Object to a [key, value] Array
-				let arr = Object.entries(data);
-				//Remove the Self User from the Online Users List
-				arr = arr.filter((item) => item[0] != self.socket.id);
-				//Convert the [key, value] Array back to an Object
-				let obj = Object.fromEntries(arr);
-				//Highlight the Offline Users in the ChatBox
-				self.onlineStatus(obj);
-			});
-
 			//'this' scope has been changed inside the on() function
 
 			//Name of the Event can be anything but should be meaningful & should correspond with the Event on the Server Side.
@@ -64,20 +33,27 @@ class ChatEngine {
 			/* We are Sending/Emitting an Event from the Client Side,
 			On() Detects/Receives that sent Event on the Server Side,
 			Just like how an Event Listener Detects an Event. */
-			self.socket.emit("join_room", {
-				user_email: self.userEmail,
-				user_name: self.userName,
-				chat_room: "TheSocialBook",
-			});
+			console.log("Connection Established using Sockets");
+			console.log("Your Socket ID: ", self.socket.id);
 
-			//Receives the Event - 'user_joined'
-			self.socket.on("user_joined", function (data) {
-				console.log("---------------------------");
-				console.log("New User has Joined the Chat Room: ", data);
-				console.log("---------------------------");
-			});
+			self.onlineStatusUpdate(self);
+			self.configureChatBox(self);
+			self.userJoined(self);
+			self.userLeft(self);
 		});
 
+		self.receiveMessage(self);
+		self.socket.on("new_message_notify", function (data) {
+			const el = document.getElementsByClassName("chat-friend");
+			for (let i of el) {
+				if (i.dataset.email === data.user_email) {
+					i.querySelector("#new-messages").style.color = "black";
+				}
+			}
+		});
+	}
+
+	sendMessage(self, data) {
 		// CHANGE :: Send the message on clicking the Send button
 		$(" #send-message-button").click((event) => {
 			let msg = $(" #message-input").val();
@@ -96,19 +72,18 @@ class ChatEngine {
 					user_email: self.userEmail,
 					user_name: self.userName,
 					timestamp: new Date().toLocaleString("default", options),
-					chat_room: "TheSocialBook",
+					chat_room: data.chat_room,
+					friend_email: data.friend_email,
 				});
 			}
 			$(" #message-input").val("");
 		});
+	}
 
+	receiveMessage(self) {
 		//Receives/Detects the Event - 'receive_message'
 		self.socket.on("receive_message", function (data) {
-			console.log("---------------------------");
 			console.log("Message Received: ", data.message);
-			console.log("---------------------------");
-			let newData = {};
-
 			//AJAX Call
 			$.ajax({
 				type: "POST",
@@ -119,39 +94,12 @@ class ChatEngine {
 					user_name: data.user_name,
 					timestamp: data.timestamp,
 					chat_room: data.chat_room,
+					friend_email: data.friend_email,
 				},
 				success: function (data) {
 					data = data.data;
-					console.log(data.message);
-
-					let chatUL = document.getElementById("chat-ul");
-					let newMessage = document.createElement("li");
-					let p = document.createElement("p");
-					let nameSpan = document.createElement("span");
-					let timeSpan = document.createElement("span");
-					let textSpan = document.createElement("span");
-
-					let messageType = "sender";
-					if (data.user_email === self.userEmail) {
-						messageType = "receiver";
-					}
-
-					p.classList.add("chat-message", messageType);
-					newMessage.classList.add("chat-li", messageType);
-					nameSpan.classList.add("chat-message-name");
-					timeSpan.classList.add("chat-message-time");
-					textSpan.classList.add("chat-message-text");
-
-					nameSpan.textContent = data.user_name;
-					timeSpan.textContent = data.timestamp;
-					textSpan.textContent = data.message;
-
-					p.appendChild(nameSpan);
-					p.appendChild(timeSpan);
-					p.appendChild(textSpan);
-					newMessage.appendChild(p);
-					chatUL.appendChild(newMessage);
-					chatUL.scrollTop = chatUL.scrollHeight;
+					self.chatMessage(data);
+					self.socket.emit("new_message", data);
 				},
 				error: function (error) {
 					console.log("Error: ", error);
@@ -160,9 +108,181 @@ class ChatEngine {
 		});
 	}
 
-	chatAJAX() {}
+	chatMessage(data) {
+		let chatUL = document.getElementById("chat-ul");
+		let newMessage = document.createElement("li");
+		let p = document.createElement("p");
+		let nameSpan = document.createElement("span");
+		let timeSpan = document.createElement("span");
+		let textSpan = document.createElement("span");
 
-	onlineStatus(data) {
+		let messageType = data.alignment;
+
+		p.classList.add("chat-message", messageType);
+		newMessage.classList.add("chat-li", messageType);
+		nameSpan.classList.add("chat-message-name");
+		timeSpan.classList.add("chat-message-time");
+		textSpan.classList.add("chat-message-text");
+
+		nameSpan.textContent = data.user_name;
+		timeSpan.textContent = data.timestamp;
+		textSpan.textContent = data.message;
+
+		p.appendChild(nameSpan);
+		p.appendChild(timeSpan);
+		p.appendChild(textSpan);
+		newMessage.appendChild(p);
+		chatUL.appendChild(newMessage);
+		chatUL.scrollTop = chatUL.scrollHeight;
+	}
+
+	chatRoomAJAX(user_email, friend_email, self) {
+		let room = "";
+		//AJAX Call
+		$.ajax({
+			type: "POST",
+			url: "/messages/join",
+			async: false,
+			data: {
+				sender_email: user_email,
+				receiver_email: friend_email,
+			},
+			success: function (data) {
+				room = data.data.chatRoom;
+				if (data.data.chats.length > 0) {
+					for (let chat of data.data.chats) {
+						let newData = {
+							message: chat.content,
+							user_name: chat.sender.name,
+							timestamp: chat.time,
+							alignment:
+								chat.sender.email === self.userEmail
+									? "receiver"
+									: "sender",
+						};
+						self.chatMessage(newData);
+					}
+				}
+			},
+			error: function (error) {
+				console.log("Error: ", error);
+			},
+		});
+		return room;
+	}
+
+	onlineStatusUpdate(self) {
+		self.socket.emit("online_status", {
+			user_email: self.userEmail,
+		});
+
+		self.socket.on("user_online", function (data) {
+			console.log("Online Users: ", data);
+			// Convert Object to a [key, value] Array
+			let arr = Object.entries(data);
+			// Remove the Self User from the Online Users List
+			arr = arr.filter((item) => item[0] != self.socket.id);
+			// Convert the [key, value] Array back to an Object
+			let obj = Object.fromEntries(arr);
+			// Highlight the Online Users in the ChatBox
+			self.onlineStatusToggle(obj);
+		});
+
+		self.socket.on("user_offline", function (data) {
+			console.log("Online Users: ", data);
+			//Convert Object to a [key, value] Array
+			let arr = Object.entries(data);
+			//Remove the Self User from the Online Users List
+			arr = arr.filter((item) => item[0] != self.socket.id);
+			//Convert the [key, value] Array back to an Object
+			let obj = Object.fromEntries(arr);
+			//Highlight the Offline Users in the ChatBox
+			self.onlineStatusToggle(obj);
+		});
+	}
+
+	userJoined(self) {
+		//Receives the Event - 'user_joined'
+		self.socket.on("user_joined", function (data) {
+			console.log(
+				`${data.user_name} has Joined the Chat Room ${data.chat_room}`
+			);
+			self.sendMessage(self, data);
+		});
+	}
+
+	userLeft(self) {
+		//Receives the Event - 'user_left'
+		self.socket.on("user_left", function (data) {
+			console.log(
+				`${data.user_name} has Left the Chat Room ${data.chat_room}`
+			);
+		});
+	}
+
+	configureChatBox(self) {
+		let chatBox = document.getElementById("chatbox");
+		let friends = document.getElementsByClassName("chat-friend");
+		let frndList = document.getElementsByClassName("chat-friends-list")[0];
+		let chatScreen = document.getElementsByClassName("chat-screen")[0];
+		let input = document.getElementsByClassName("chat-input")[0];
+		let back = document.getElementById("toggle-back");
+		let down = document.getElementById("toggle-down");
+		let name = "";
+		let email = "";
+		let chatRoom = "";
+
+		document.getElementById("other-chat-user").textContent = "";
+
+		down.addEventListener("click", () => {
+			chatBox.classList.toggle("ht-350");
+			if (down.classList.contains("fa-angle-down")) {
+				down.classList.remove("fa-angle-down");
+				down.classList.add("fa-angle-up");
+			} else {
+				down.classList.remove("fa-angle-up");
+				down.classList.add("fa-angle-down");
+			}
+		});
+
+		const frnd = document.getElementById("hidden-friend-length").value;
+		if (frnd === "0") return;
+
+		for (let friend of friends) {
+			friend.addEventListener("click", () => {
+				frndList.classList.toggle("show");
+				chatScreen.classList.toggle("hide");
+				input.classList.toggle("hide");
+				back.classList.toggle("hide");
+				name = friend.getAttribute("data-name");
+				email = friend.getAttribute("data-email");
+				document.getElementById("other-chat-user").textContent = name;
+				document.querySelectorAll("#chat-ul > li").forEach((item) => {
+					item.remove();
+				});
+				back.onclick = () => {
+					friend.querySelector("#new-messages").style.color =
+						"rgb(111, 0, 0)";
+				};
+				chatRoom = self.chatRoomAJAX(self.userEmail, email, self);
+				self.joinRoom(self, chatRoom, email);
+			});
+		}
+
+		back.addEventListener("click", () => {
+			frndList.classList.toggle("show");
+			chatScreen.classList.toggle("hide");
+			input.classList.toggle("hide");
+			back.classList.toggle("hide");
+			document.getElementById("other-chat-user").textContent = "";
+			self.leaveRoom(self, chatRoom);
+		});
+	}
+
+	onlineStatusToggle(data) {
+		const frnd = document.getElementById("hidden-friend-length").value;
+		if (frnd === "0") return;
+
 		let arr = document.getElementsByClassName("chat-friend");
 		//Check if there are any Online Users :: If the Object is Empty
 		if (
@@ -186,5 +306,22 @@ class ChatEngine {
 				}
 			}
 		}
+	}
+
+	joinRoom(self, room, email) {
+		self.socket.emit("join_room", {
+			user_email: self.userEmail,
+			user_name: self.userName,
+			friend_email: email,
+			chat_room: room,
+		});
+	}
+
+	leaveRoom(self, room) {
+		self.socket.emit("leave_room", {
+			user_email: self.userEmail,
+			user_name: self.userName,
+			chat_room: room,
+		});
 	}
 }
