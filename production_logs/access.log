@@ -1,3 +1,4 @@
 ::1 - - [20/May/2022:08:25:46 +0000] "GET / HTTP/1.1" 200 5995 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
 ::1 - - [20/May/2022:08:26:36 +0000] "GET /contact/about HTTP/1.1" 200 3758 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
 ::1 - - [20/May/2022:08:26:47 +0000] "GET /contact HTTP/1.1" 200 3379 "http://localhost:8000/contact/about" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
+::1 - - [20/May/2022:09:37:22 +0000] "GET / HTTP/1.1" 304 - "http://localhost:8000/contact" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
