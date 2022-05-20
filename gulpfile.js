@@ -11,9 +11,10 @@ const rev = require("gulp-rev");
 const uglify = require("gulp-uglify-es").default;
 //Require the ImageMin Module for Minifying the Images
 const imagemin = require("gulp-imagemin");
-//Require the Del Module for Deleting the Old CSS Files
+//Require the Del Module for Deleting the Old Asset Files
 const del = require("del");
 
+//Minifies the CSS Files
 gulp.task("css", (done) => {
 	console.log("Minifying CSS...");
 	//** means any folder and sub-folders inside
@@ -54,6 +55,7 @@ gulp.task("css", (done) => {
 	done();
 });
 
+//Minify the JS Files
 gulp.task("js", (done) => {
 	console.log("Minifying JavaScript...");
 	gulp
@@ -72,6 +74,7 @@ gulp.task("js", (done) => {
 	done();
 });
 
+//Minifies the Images
 gulp.task("images", (done) => {
 	console.log("Compressing Images...");
 	gulp
@@ -89,3 +92,22 @@ gulp.task("images", (done) => {
 	console.log("Compressed Images...");
 	done();
 });
+
+//Empty the public/assets Directory
+gulp.task("clean:assets", (done) => {
+	//Whenever we are building the project, we need to clear the previous builds & build it from the scratch.
+	console.log("Clearing Previous Builds...");
+	del.sync(["./public/assets"], { force: true });
+	console.log("Cleared Previous Builds...");
+	done();
+});
+
+//Building the Assets by running the all the Gulp Tasks in the correct order
+gulp.task(
+	"build",
+	gulp.series("clean:assets", "css", "js", "images"),
+	(done) => {
+		console.log("Building Assets...");
+		done();
+	}
+);
