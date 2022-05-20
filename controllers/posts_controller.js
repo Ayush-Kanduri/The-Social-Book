@@ -103,7 +103,9 @@ module.exports.create = async (req, res) => {
 					console.log("Error in adding the Job to the Queue: ", err);
 					return;
 				}
-				console.log("Job Added to the Queue: ", job.id);
+				//---------//
+				// console.log("Job Added to the Queue: ", job.id);
+				//---------//
 			});
 
 			post = await post.populate("user", ["name", "avatar"]);

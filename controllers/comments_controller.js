@@ -58,7 +58,9 @@ module.exports.create = async (req, res) => {
 					console.log("Error in sending the Job to the Queue: ", err);
 					return;
 				}
-				console.log("Job Enqueued: ", job.id);
+				//---------//
+				// console.log("Job Enqueued: ", job.id);
+				//---------//
 			});
 
 			comment = await comment.populate("user", ["name", "avatar"]);

@@ -38,9 +38,11 @@ module.exports.destroy = async (req, res) => {
 		//User Authorization Check.
 		if (post.user == req.user.id) {
 			try {
-				console.log("Post User ", post.user, typeof post.user);
-				console.log("Req User ID ", req.user.id, typeof req.user.id);
-				console.log("Req User _ID ", req.user._id, typeof req.user._id);
+				//---------//
+				// console.log("Post User ", post.user, typeof post.user);
+				// console.log("Req User ID ", req.user.id, typeof req.user.id);
+				// console.log("Req User _ID ", req.user._id, typeof req.user._id);
+				//---------//
 			} catch {}
 
 			//If Post Image already exists in the Database

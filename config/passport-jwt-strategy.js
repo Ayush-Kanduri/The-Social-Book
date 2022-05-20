@@ -6,13 +6,15 @@ const JWTStrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 //Require the User Model Data Structure Schema
 const User = require("../models/user");
+//Require the Environment File for the Environment Variables
+const env = require("./environment");
 
 //Header contains a list of items. Header has Authorization: Bearer: JWT Token
 const options = {
 	//Extract the JWT from the Header
 	jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
 	//The secret key used to sign the JWT
-	secretOrKey: "TheSocialBook",
+	secretOrKey: env.jwt_secret,
 };
 
 // Payload contains the information about the User.

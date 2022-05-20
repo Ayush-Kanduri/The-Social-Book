@@ -54,6 +54,8 @@ router.use("/messages", chatsRouterFile);
 router.use("/api", api);
 
 //Router Loaded Successfully.
-console.log("Main Index Router Loaded Successfully");
+//---------//
+// console.log("Main Index Router Loaded Successfully");
+//---------//
 //Export the Index Router
 module.exports = router;

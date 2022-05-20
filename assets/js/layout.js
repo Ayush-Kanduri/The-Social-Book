@@ -1,1 +1,3 @@
-console.log("Implementing Layout in ExpressJS");
+//---------//
+// console.log("Implementing Layout in ExpressJS");
+//---------//

@@ -25,17 +25,23 @@ module.exports.updatePassword = async function (req, res) {
 		});
 
 		if (!resetPasswordToken) {
-			console.log("Invalid Token");
+			//---------//
+			// console.log("Invalid Token");
+			//---------//
 			req.flash("error", "Invalid Access Token!");
 			return res.redirect("/users/login");
 		}
 		if (!resetPasswordToken.isValid) {
-			console.log("Token Expired");
+			//---------//
+			// console.log("Token Expired");
+			//---------//
 			req.flash("error", "Access Token has Expired!");
 			return res.redirect("/users/login");
 		}
 		if (password !== confirm_password) {
-			console.log("Password Mismatch");
+			//---------//
+			// console.log("Password Mismatch");
+			//---------//
 			req.flash("error", "Password didn't match!");
 			return res.redirect("back");
 		}

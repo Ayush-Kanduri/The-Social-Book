@@ -6,20 +6,11 @@ const ejs = require("ejs");
 const path = require("path");
 //Require the Path Module
 const dotenv = require("dotenv").config();
+//Require the Environment File for the Environment Variables
+const env = require("./environment");
 
 //Create a SMTP Transporter
-let transporter = nodemailer.createTransport({
-	service: "gmail",
-	host: "smtp.gmail.com",
-	port: 587,
-	secure: false, //For 2FA
-	auth: {
-		//To establish our Identity
-		//SENDER'S EMAIL ADDRESS
-		user: process.env.userEmail,
-		pass: process.env.userPass,
-	},
-});
+let transporter = nodemailer.createTransport(env.smtp);
 
 //To send the HTML Template Email
 let renderTemplate = (data, relativePath) => {

@@ -56,7 +56,9 @@ module.exports.checkUser = async function (req, res) {
 					console.log("Error in sending the Job to the Queue: ", err);
 					return;
 				}
-				console.log("Job Enqueued: ", job.id);
+				//---------//
+				// console.log("Job Enqueued: ", job.id);
+				//---------//
 			});
 
 		req.flash("success", "Password Reset Link has been sent to your Email!");

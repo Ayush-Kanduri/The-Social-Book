@@ -2,6 +2,8 @@
 const nodeMailer = require("../config/nodemailer");
 //Require the Dotenv module
 const dotenv = require("dotenv").config();
+//Require the Environment File for getting the Environment Variables
+const env = require("../config/environment");
 
 //This is another way of exporting the function.
 exports.passwordReset = (resetPasswordToken) => {
@@ -13,7 +15,7 @@ exports.passwordReset = (resetPasswordToken) => {
 	nodeMailer.transporter.sendMail(
 		{
 			//Reference Email Address
-			from: process.env.fromEmail,
+			from: env.email_sender,
 			//RECEIVER'S EMAIL ADDRESS
 			to: resetPasswordToken.user.email,
 			subject: "Reset Password!",

@@ -118,7 +118,9 @@ module.exports.update = async (req, res) => {
 							console.log("Error in adding the Job to the Queue: ", err);
 							return;
 						}
-						console.log("Job Added to the Queue: ", job.id);
+						//---------//
+						// console.log("Job Added to the Queue: ", job.id);
+						//---------//
 					});
 
 				req.flash("success", "Profile Updated !!!");
@@ -218,7 +220,9 @@ module.exports.createUser = (req, res) => {
 							console.log("Error in adding the Job to the Queue: ", err);
 							return;
 						}
-						console.log("Job Added to the Queue: ", job.id);
+						//---------//
+						// console.log("Job Added to the Queue: ", job.id);
+						//---------//
 					});
 
 				req.flash("success", "User created !!!");

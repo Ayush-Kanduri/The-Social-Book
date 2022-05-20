@@ -1,7 +1,9 @@
 {
 	try {
 		function togglePassword() {
-			console.log("reset_password.js");
+			//---------//
+			// console.log("reset_password.js");
+			//---------//
 			const icon1 = document.getElementsByTagName("button")[2];
 			const icon2 = document.getElementsByTagName("button")[3];
 			const password = document.querySelectorAll(

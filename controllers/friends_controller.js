@@ -44,8 +44,6 @@ module.exports.toggleFriendship = async (request, response) => {
 			return response.redirect("/users/login");
 		}
 
-		console.log("INSIDE");
-
 		let param = request.params.id;
 		let unfriended = false;
 
@@ -80,7 +78,9 @@ module.exports.toggleFriendship = async (request, response) => {
 			await to_user.save();
 			unfriended = false;
 
-			console.log("Friendship Created");
+			//---------//
+			// console.log("Friendship Created");
+			//---------//
 
 			if (request.xhr) {
 				return response.status(200).json({
@@ -110,7 +110,9 @@ module.exports.toggleFriendship = async (request, response) => {
 			});
 			unfriended = true;
 
-			console.log("Friendship Removed");
+			//---------//
+			// console.log("Friendship Removed");
+			//---------//
 
 			if (request.xhr) {
 				return response.status(200).json({

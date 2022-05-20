@@ -33,8 +33,10 @@ class ChatEngine {
 			/* We are Sending/Emitting an Event from the Client Side,
 			On() Detects/Receives that sent Event on the Server Side,
 			Just like how an Event Listener Detects an Event. */
-			console.log("Connection Established using Sockets");
-			console.log("Your Socket ID: ", self.socket.id);
+			//---------//
+			// console.log("Connection Established using Sockets");
+			// console.log("Your Socket ID: ", self.socket.id);
+			//---------//
 
 			self.onlineStatusUpdate(self);
 			self.configureChatBox(self);
@@ -83,7 +85,9 @@ class ChatEngine {
 	receiveMessage(self) {
 		//Receives/Detects the Event - 'receive_message'
 		self.socket.on("receive_message", function (data) {
-			console.log("Message Received: ", data.message);
+			//---------//
+			// console.log("Message Received: ", data.message);
+			//---------//
 			//AJAX Call
 			$.ajax({
 				type: "POST",
@@ -177,7 +181,9 @@ class ChatEngine {
 		});
 
 		self.socket.on("user_online", function (data) {
-			console.log("Online Users: ", data);
+			//---------//
+			// console.log("Online Users: ", data);
+			//---------//
 			// Convert Object to a [key, value] Array
 			let arr = Object.entries(data);
 			// Remove the Self User from the Online Users List
@@ -189,7 +195,9 @@ class ChatEngine {
 		});
 
 		self.socket.on("user_offline", function (data) {
-			console.log("Online Users: ", data);
+			//---------//
+			// console.log("Online Users: ", data);
+			//---------//
 			//Convert Object to a [key, value] Array
 			let arr = Object.entries(data);
 			//Remove the Self User from the Online Users List
@@ -204,9 +212,11 @@ class ChatEngine {
 	userJoined(self) {
 		//Receives the Event - 'user_joined'
 		self.socket.on("user_joined", function (data) {
-			console.log(
-				`${data.user_name} has Joined the Chat Room ${data.chat_room}`
-			);
+			//---------//
+			// console.log(
+			// 	`${data.user_name} has Joined the Chat Room ${data.chat_room}`
+			// );
+			//---------//
 			self.sendMessage(self, data);
 		});
 	}
@@ -214,9 +224,11 @@ class ChatEngine {
 	userLeft(self) {
 		//Receives the Event - 'user_left'
 		self.socket.on("user_left", function (data) {
-			console.log(
-				`${data.user_name} has Left the Chat Room ${data.chat_room}`
-			);
+			//---------//
+			// console.log(
+			// 	`${data.user_name} has Left the Chat Room ${data.chat_room}`
+			// );
+			//---------//
 		});
 	}
 

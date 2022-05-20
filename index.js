@@ -7,10 +7,14 @@
 //----------------------------------------------------------------//
 //Require Express Module for running the Express Server
 const express = require("express");
+//Require the Environment File for getting the Environment Variables
+const env = require("./config/environment");
+//Require the Morgan Module for Logging
+const logger = require("morgan");
 //Create Express App for Request-Response Cycle & to create the Express Server
 const app = express();
 //Create Port
-const port = 8000;
+const port = env.express_server_port;
 //Require Path Module for the Directory
 const path = require("path");
 //Requires the index.js - Route File, from the Routes Folder.
@@ -53,44 +57,52 @@ const chatServer = require("http").Server(app);
 //Create Chat Sockets for the Socket.io Server
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
 //Create Chat Server Port
-const chatPort = 5000;
+const chatPort = env.chat_server_port;
 //Run the Chat Server
 chatServer.listen(chatPort);
-console.log("Chat Server is Running Successfully on Port: " + chatPort);
+//---------//
+// console.log("Chat Server is Running Successfully on Port: " + chatPort);
+//---------//
 //----------------------------------------------------------------//
 
 //----------------------------------------------------------------//
 //Run Application Middlewares//
 //----------------------------------------------------------------//
 //We have to put SASS just before the server is starting, because the files should be pre-compiled before the server starts. Whenever templates/browser ask for it, these pre-compiled files will be served.
+
 //Middleware - SASS Middleware
-app.use(
-	sassMiddleware({
-		//Where to look for the SASS files
-		src: "./assets/scss",
-		//Where to put the compiled CSS files
-		dest: "./assets/css",
-		//Reports error. If in production mode, set as false.
-		// debug: true,
-		debug: false,
-		//The code should be in a single line - "compressed" or multiple lines - "expanded"
-		outputStyle: "extended",
-		//Prefix for the CSS files - where to look out for the css files in the assets folder
-		prefix: "/css",
-	})
-);
+//SASS Middleware should only Run in Development Mode
+if (env.name == "development") {
+	app.use(
+		sassMiddleware({
+			//Where to look for the SASS files
+			src: path.join(__dirname, env.asset_path, "scss"),
+			//Where to put the compiled CSS files
+			dest: path.join(__dirname, env.asset_path, "css"),
+			//Reports error. If in production mode, set as false.
+			// debug: true,
+			debug: false,
+			//The code should be in a single line - "compressed" or multiple lines - "expanded"
+			outputStyle: "extended",
+			//Prefix for the CSS files - where to look out for the css files in the assets folder
+			prefix: "/css",
+		})
+	);
+}
 //Middleware - URL Encoder
 app.use(express.urlencoded({ extended: true }));
 //Middleware - Cookie Parser for accessing the cookies
 app.use(cookieParser());
 //Middleware - Express App uses Static Files in the Assets Folder
-app.use(express.static("./assets"));
+app.use(express.static(env.asset_path));
 //Middleware - Make the uploads path available to the browser
 //** Server is not able to locate the file when the browser asks for it to show.
 //** We need to create a route for it. This path/route should be available to the browser.
 //** For the path/route - /uploads, find the folder using express.static(__dirname + "/uploads")
 //** The directory of index.js + uploads folder, i.e, SOCIAL BOOK/uploads is available to the route - /uploads
 app.use("/uploads", express.static(__dirname + "/uploads"));
+//Middleware - Morgan used for Logging
+app.use(logger(env.morgan.mode, env.morgan.options));
 //Middleware - Express App uses expressLayouts to tell that the views which are going to be rendered belongs to some layout.
 app.use(expressLayouts);
 
@@ -110,7 +122,7 @@ app.use(
 		name: "socialBook",
 		//Secret Key for encrypting the session cookie
 		//** TODO - Change the Secret Key before Deployment in Production Mode **//
-		secret: "social_book",
+		secret: env.session_cookie_key,
 		//Don't save the uninitialized session
 		saveUninitialized: false,
 		//Dont re-save the session if it is not modified
@@ -124,7 +136,7 @@ app.use(
 		store: MongoStore.create(
 			{
 				//DB Connection URL
-				mongoUrl: "mongodb://localhost/social_book_development",
+				mongoUrl: `mongodb://localhost/${env.db}`,
 				//Interacts with the mongoose to connect to the MongoDB
 				mongooseConnection: db,
 				//To auto remove the store
@@ -160,6 +172,8 @@ app.listen(port, (err) => {
 	if (err) {
 		console.log(err);
 	}
-	console.log(`Server is Up & Running Successfully on Port ${port}`);
+	//---------//
+	// console.log(`Server is Up & Running Successfully on Port ${port}`);
+	//---------//
 });
 //----------------------------------------------------------------//

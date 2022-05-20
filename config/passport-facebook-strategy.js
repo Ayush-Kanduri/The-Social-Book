@@ -8,18 +8,22 @@ const crypto = require("crypto");
 const User = require("../models/user");
 //Require the Dotenv Library
 const dotenv = require("dotenv").config();
+//Require the Environment File for the Environment Variables
+const env = require("./environment");
 
 //Tell Passport to use a new strategy for Facebook Login
 passport.use(
 	new facebookStrategy(
 		{
-			clientID: process.env.FACEBOOK_CLIENT_ID,
-			clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-			callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+			clientID: env.facebook_client_id,
+			clientSecret: env.facebook_client_secret,
+			callbackURL: env.facebook_callback_url,
 			profileFields: ["displayName", "photos", "email"],
 		},
 		(accessToken, refreshToken, profile, done) => {
-			console.log(profile);
+			//---------//
+			// console.log(profile);
+			//---------//
 			//Find the User in the Database
 			User.findOne({ email: profile.emails[0].value }, (err, user) => {
 				if (err) {

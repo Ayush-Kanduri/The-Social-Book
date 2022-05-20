@@ -2,6 +2,8 @@
 const User = require("../../../models/user");
 //Require JSON Web Token Module
 const jwt = require("jsonwebtoken");
+//Require the Environment File for the Environment Variables
+const env = require("../../../config/environment");
 
 module.exports.index = async function (req, res) {
 	try {
@@ -39,7 +41,7 @@ module.exports.createSession = async (req, res) => {
 			data: {
 				//We need to create a JSON Web Token for that user.
 				//Signing the token with the secret key, JSON user object and the expiration time.
-				token: jwt.sign(user.toJSON(), "TheSocialBook", {
+				token: jwt.sign(user.toJSON(), env.jwt_secret, {
 					expiresIn: "10000",
 					//"20" - 20 milliseconds
 					//"20h" - 20 hours

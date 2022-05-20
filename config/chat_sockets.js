@@ -18,10 +18,14 @@ module.exports.chatSockets = function (socketServer) {
 	//Once the Connection is Established, it sends back an acknowledgement to the Client, that the Connection has been Established, by Emitting the 'connect' Event to the Client automatically.
 	io.sockets.on("connection", function (socket) {
 		//Receives the Connection & Emits back that you're Connected, using the Event - 'connect'
-		console.log("New User Connected using Sockets: ", socket.id);
+		//---------//
+		// console.log("New User Connected using Sockets: ", socket.id);
+		//---------//
 		socket.on("online_status", function (data) {
 			users[socket.id] = data.user_email;
-			console.log("Online Users: ", users);
+			//---------//
+			// console.log("Online Users: ", users);
+			//---------//
 			//Emit the Event to all other Clients except the one who sent the Event last
 			//Only on refreshing the page of the Client who sent the Event, he will get the Event
 			// User 1 comes Online
@@ -45,16 +49,20 @@ module.exports.chatSockets = function (socketServer) {
 		//Whenever the Client Disconnects, an automatic Event - 'disconnect' is Emitted/Fired
 		//It detects that the socket is not connected anymore.
 		socket.on("disconnect", function () {
-			console.log("User Disconnected using Sockets: ", socket.id);
+			//---------//
+			// console.log("User Disconnected using Sockets: ", socket.id);
+			//---------//
 			//On refreshing the Server, the User gets Disconnected & gets Reconnected again.
 			delete users[socket.id];
 			io.emit("user_offline", users);
 		});
 
 		socket.on("join_room", function (data) {
-			console.log(
-				`${data.user_name} has requested to Join the Room: ${data.chat_room}`
-			);
+			//---------//
+			// console.log(
+			// 	`${data.user_name} has requested to Join the Room: ${data.chat_room}`
+			// );
+			//---------//
 			//After Receiving the Request, we want that User/Socket to be Joined to that Particular Chat Room.
 			//If a Chat Room with the name "data.chat_room" exists, then the User will be Joined to that Chat Room.
 			//If a Chat Room with the name "data.chat_room" does not exist, then that Chat Room will be created & then the User will be entered into it.
@@ -70,9 +78,11 @@ module.exports.chatSockets = function (socketServer) {
 		});
 
 		socket.on("leave_room", function (data) {
-			console.log(
-				`${data.user_name} has requested to Leave the Room: ${data.chat_room}`
-			);
+			//---------//
+			// console.log(
+			// 	`${data.user_name} has requested to Leave the Room: ${data.chat_room}`
+			// );
+			//---------//
 			socket.leave(data.chat_room);
 			io.in(data.chat_room).emit("user_left", data);
 		});
