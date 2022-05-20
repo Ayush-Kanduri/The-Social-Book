@@ -1,14 +1,14 @@
-<link rel="stylesheet" href="/css/about.css" />
-<script defer src="/js/profile.js"></script>
-<script defer src="/js/lazy_loading.js"></script>
+<link rel="stylesheet" href="<%= assetPath('css/about.css') %>" />
+<script defer src="<%= assetPath('js/profile.js') %>"></script>
+<script defer src="<%= assetPath('js/lazy_loading.js') %>"></script>
 
 <div class="about-container">
 	<h2><%= title %></h2>
 	<section>
 		<div class="image">
 			<img
-				src=""
-				data-src="/images/coffee.jpg"
+				src="<%= assetPath('images/coffee.jpg') %>"
+				data-src="<%= assetPath('images/coffee.jpg') %>"
 				alt="coffee image"
 				loading="lazy"
 			/>

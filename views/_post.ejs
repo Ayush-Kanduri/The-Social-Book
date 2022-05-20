@@ -4,7 +4,7 @@
 			<% if(post.user.avatar){ %>
 			<img
 				class="user-avatar"
-				src=""
+				src="<%= post.user.avatar %>"
 				data-src="<%= post.user.avatar %>"
 				alt="<%= post.user.name %>"
 				onclick="window.location.href='/users/profile/<%= post.user.id %>'"
@@ -13,8 +13,8 @@
 			<% }else{ %>
 			<img
 				class="user-avatar"
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="<%= assetPath('images/empty-avatar.png') %>"
+				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= post.user.name %>"
 				onclick="window.location.href='/users/profile/<%= post.user.id %>'"
 				loading="lazy"
@@ -94,7 +94,7 @@
 			<% if(locals.user.avatar){ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src=""
+				src="<%= user.avatar%>"
 				data-src="<%= user.avatar%>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
@@ -104,8 +104,8 @@
 			<% }else{ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="<%= assetPath('images/empty-avatar.png') %>"
+				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"

@@ -11,12 +11,12 @@
 		/>
 		<link
 			rel="shortcut icon"
-			href="/images/favicon.png"
+			href="<%= assetPath('images/favicon.png') %>"
 			type="image/x-icon"
 		/>
-		<link rel="stylesheet" href="/css/layout.css" />
-		<link rel="stylesheet" href="/css/_header.css" />
-		<link rel="stylesheet" href="/css/_footer.css" />
+		<link rel="stylesheet" href="<%= assetPath('css/layout.css') %>" />
+		<link rel="stylesheet" href="<%= assetPath('css/_header.css') %>" />
+		<link rel="stylesheet" href="<%= assetPath('css/_footer.css') %>" />
 		<%- style%>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 		<!-- jQuery below NotyJS as NotyJS doesn't use jQuery -->
@@ -30,7 +30,7 @@
 			src="https://kit.fontawesome.com/34162fcf4d.js"
 			crossorigin="anonymous"
 		></script>
-		<script defer src="/js/layout.js"></script>
+		<script defer src="<%= assetPath('js/layout.js') %>"></script>
 		<%- script%>
 	</head>
 	<body>

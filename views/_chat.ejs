@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/_chat.css" />
+<link rel="stylesheet" href="<%= assetPath('css/_chat.css') %>" />
 
 <div class="top">
 	<div class="heading">
@@ -55,7 +55,11 @@
 			</div>
 		</div>
 		<% }}else{ %>
-		<div class="chat-friend" id="nothing" onclick="(e)=>{e.preventDefault();}">
+		<div
+			class="chat-friend"
+			id="nothing"
+			onclick="(e)=>{e.preventDefault();}"
+		>
 			<p id="no-chat-friends">Nothing Here.</p>
 		</div>
 		<% } %>

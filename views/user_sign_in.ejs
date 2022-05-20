@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/user_sign_in.css" />
+<link rel="stylesheet" href="<%= assetPath('css/user_sign_in.css') %>" />
 
 <div class="form-container">
 	<h3 class="form-heading"><%= title %></h3>
@@ -29,7 +29,10 @@
 		</div>
 	</form>
 	<a href="/users/auth/google" class="google-login">
-		<img src="/images/google-logo.png" alt="Sign in with Google" />
+		<img
+			src="<%= assetPath('images/google-logo.png') %>"
+			alt="Sign in with Google"
+		/>
 		Continue With Google
 	</a>
 	<a href="/forgot_password" class="forgot-password"> Forgot Password? </a>

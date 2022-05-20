@@ -1,4 +1,4 @@
-<script defer src="/js/lazy_loading.js"></script>
+<script defer src="<%= assetPath('js/lazy_loading.js') %>"></script>
 
 <header>
 	<h1 id="logo" onclick="window.location='/';">
@@ -57,19 +57,19 @@
 					<% if(locals.user.avatar){ %>
 					<img
 						class="user-avatar friend-avatar"
-						src=""
+						src="<%= locals.user.avatar %>"
 						data-src="<%= locals.user.avatar %>"
 						alt="<%= locals.user.name %>"
-						onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+						onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 						loading="lazy"
 					/>
 					<% } else { %>
 					<img
 						class="user-avatar friend-avatar"
-						src=""
-						data-src="/images/empty-avatar.png"
+						src="<%= assetPath('images/empty-avatar.png') %>"
+						data-src="<%= assetPath('images/empty-avatar.png') %>"
 						alt="<%= locals.user.name %>"
-						onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+						onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 						loading="lazy"
 					/>
 					<% } %>&ensp;<%= locals.user.name %></a

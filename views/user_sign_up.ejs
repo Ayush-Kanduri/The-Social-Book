@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/css/user_sign_up.css" />
-<script defer src="/js/frontend_form_validation.js"></script>
+<link rel="stylesheet" href="<%= assetPath('css/user_sign_up.css') %>" />
+<script defer src="<%= assetPath('js/frontend_form_validation.js') %>"></script>
 
 <div class="form-container">
 	<h3 class="form-heading"><%= title %></h3>
@@ -55,7 +55,10 @@
 		</div>
 	</form>
 	<a href="/users/auth/google" class="google-login">
-		<img src="/images/google-logo.png" alt="Sign in with Google" />
+		<img
+			src="<%= assetPath('images/google-logo.png') %>"
+			alt="Sign in with Google"
+		/>
 		Continue With Google
 	</a>
 	<!-- <a href="/users/auth/facebook" class="facebook-login">

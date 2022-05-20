@@ -4,7 +4,7 @@
 			<% if(comment.user.avatar){ %>
 			<img
 				class="user-avatar"
-				src=""
+				src="<%= comment.user.avatar %>"
 				data-src="<%= comment.user.avatar %>"
 				alt="<%= comment.user.name %>"
 				onclick="window.location.href='/users/profile/<%= comment.user.id %>'"
@@ -13,8 +13,8 @@
 			<% }else{ %>
 			<img
 				class="user-avatar"
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="<%= assetPath('images/empty-avatar.png') %>"
+				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= comment.user.name %>"
 				onclick="window.location.href='/users/profile/<%= comment.user.id %>'"
 				loading="lazy"

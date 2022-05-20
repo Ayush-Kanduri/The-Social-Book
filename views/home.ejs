@@ -1,19 +1,19 @@
-<link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="<%= assetPath('css/home.css') %>" />
 
 <!-- Importing the Script for Creating the Comments -->
-<script defer src="/js/home_post_comments.js"></script>
+<script defer src="<%= assetPath('js/home_post_comments.js') %>"></script>
 <!-- Importing the Script for Creating the Posts -->
-<script defer src="/js/home_posts.js"></script>
+<script defer src="<%= assetPath('js/home_posts.js') %>"></script>
 <!-- Importing the Script for Basic Functionalities -->
-<script defer src="/js/home.js"></script>
+<script defer src="<%= assetPath('js/home.js') %>"></script>
 <!-- Importing the Script to Implement Lazy Loading -->
-<script defer src="/js/lazy_loading.js"></script>
+<script defer src="<%= assetPath('js/lazy_loading.js') %>"></script>
 <!-- Importing the Script for Search Bar Functionality -->
-<script defer src="/js/search.js"></script>
+<script defer src="<%= assetPath('js/search.js') %>"></script>
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-<script defer src="/js/toggle_likes.js"></script>
+<script defer src="<%= assetPath('js/toggle_likes.js') %>"></script>
 <!-- Importing the Script for Toggling Friendships through AJAX -->
-<script defer src="/js/friendship.js"></script>
+<script defer src="<%= assetPath('js/friendship.js') %>"></script>
 
 <!-- Web Socket :: Socket.io CDN Import -->
 <script
@@ -24,10 +24,10 @@
 	defer
 ></script>
 <!-- Importing the Script for Sending the Request to Create the Connection -->
-<script defer src="/js/chat_engine.js"></script>
+<script defer src="<%= assetPath('js/chat_engine.js') %>"></script>
 <!-- Script for Creating / Establishing the Connection -->
 <% if(locals.user){ %>
-<script defer src="/js/chat_connection.js"></script>
+<script defer src="<%= assetPath('js/chat_connection.js') %>"></script>
 <% } %>
 
 <!-- Hidden Files -->
@@ -97,11 +97,11 @@
 			<% }else{ %>
 			<img
 				class="user-avatar create-post-avatar"
-				src="/images/empty-avatar.png"
+				src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= user.name %>"
 				style="margin: auto"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% } %>
@@ -182,7 +182,7 @@
 				<% } else { %>
 				<img
 					class="user-avatar"
-					src="/images/empty-avatar.png"
+					src="<%= assetPath('images/empty-avatar.png') %>"
 					alt="<%= person.name %>"
 					onclick="window.location.href='/users/profile/<%= person.id %>'"
 					loading="lazy"
@@ -219,7 +219,7 @@
 				<% } else { %>
 				<img
 					class="user-avatar"
-					src="/images/empty-avatar.png"
+					src="<%= assetPath('images/empty-avatar.png') %>"
 					alt="<%= person.name %>"
 					onclick="window.location.href='/users/profile/<%= person.id %>'"
 					loading="lazy"
@@ -238,8 +238,8 @@
 <div id="welcome-container">
 	<img
 		id="intro-1"
-		src=""
-		data-src="../images/intro-1.jpg"
+		src="<%= assetPath('images/intro-1.jpg') %>"
+		data-src="<%= assetPath('images/intro-1.jpg') %>"
 		alt="social media info"
 		loading="lazy"
 	/>

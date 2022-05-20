@@ -13,7 +13,9 @@ const env = require("./config/environment");
 const logger = require("morgan");
 //Create Express App for Request-Response Cycle & to create the Express Server
 const app = express();
-//Create Port
+//Require the View Helpers
+const viewHelpers = require("./config/view-helpers")(app);
+//Create Express Server Port
 const port = env.express_server_port;
 //Require Path Module for the Directory
 const path = require("path");

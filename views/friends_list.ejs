@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="/css/friends_list.css" />
-<script defer src="/js/profile.js"></script>
-<script defer src="/js/lazy_loading.js"></script>
+<link rel="stylesheet" href="<%= assetPath('css/friends_list.css') %>" />
+<script defer src="<%= assetPath('js/profile.js') %>"></script>
+<script defer src="<%= assetPath('js/lazy_loading.js') %>"></script>
 
 <div class="friends-container">
 	<h2><%= title %></h2>
@@ -15,7 +15,7 @@
 		>
 			<% if (friend.to_user.avatar) { %>
 			<img
-				src=""
+				src="<%= friend.to_user.avatar %>"
 				data-src="<%= friend.to_user.avatar %>"
 				alt="<%= friend.to_user.name %>"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
@@ -23,8 +23,8 @@
 			/>
 			<% } else { %>
 			<img
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="<%= assetPath('images/empty-avatar.png') %>"
+				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= friend.to_user.name %>"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 				loading="lazy"
@@ -39,7 +39,7 @@
 		>
 			<% if (friend.from_user.avatar) { %>
 			<img
-				src=""
+				src="<%= friend.from_user.avatar %>"
 				data-src="<%= friend.from_user.avatar %>"
 				alt="<%= friend.from_user.name %>"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
@@ -47,8 +47,8 @@
 			/>
 			<% } else { %>
 			<img
-				src=""
-				data-src="/images/empty-avatar.png"
+				src="<%= assetPath('images/empty-avatar.png') %>"
+				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= friend.from_user.name %>"
 				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
 				loading="lazy"
