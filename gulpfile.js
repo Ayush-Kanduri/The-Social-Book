@@ -7,6 +7,12 @@ const sass = require("gulp-sass")(require("node-sass"));
 const cssnano = require("gulp-cssnano");
 //Require the Gulp-Rev Module for Renaming the CSS Files
 const rev = require("gulp-rev");
+//Require the Uglify Module for Minifying the JS
+const uglify = require("gulp-uglify-es").default;
+//Require the ImageMin Module for Minifying the Images
+const imagemin = require("gulp-imagemin");
+//Require the Del Module for Deleting the Old CSS Files
+const del = require("del");
 
 gulp.task("css", (done) => {
 	console.log("Minifying CSS...");
@@ -45,5 +51,23 @@ gulp.task("css", (done) => {
 		//Stores the Manifest File in the /public/assets folder
 		.pipe(gulp.dest("./public/assets"));
 
+	done();
+});
+
+gulp.task("js", (done) => {
+	console.log("Minifying JavaScript...");
+	gulp
+		.src("./assets/**/*.js")
+		.pipe(uglify())
+		.pipe(rev())
+		.pipe(gulp.dest("./public/assets"))
+		.pipe(
+			rev.manifest({
+				cwd: "public",
+				merge: true,
+			})
+		)
+		.pipe(gulp.dest("./public/assets"));
+	console.log("Minified JavaScript...");
 	done();
 });
