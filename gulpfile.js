@@ -71,3 +71,21 @@ gulp.task("js", (done) => {
 	console.log("Minified JavaScript...");
 	done();
 });
+
+gulp.task("images", (done) => {
+	console.log("Compressing Images...");
+	gulp
+		.src("./assets/**/*.+(png|jpg|gif|svg|jpeg)")
+		.pipe(imagemin())
+		.pipe(rev())
+		.pipe(gulp.dest("./public/assets"))
+		.pipe(
+			rev.manifest({
+				cwd: "public",
+				merge: true,
+			})
+		)
+		.pipe(gulp.dest("./public/assets"));
+	console.log("Compressed Images...");
+	done();
+});
