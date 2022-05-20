@@ -383,3 +383,8 @@
 ::1 - - [20/May/2022:15:51:19 +0000] "GET /contact/about HTTP/1.1" 200 3897 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
 ::1 - - [20/May/2022:15:51:21 +0000] "GET /contact HTTP/1.1" 200 3467 "http://localhost:8000/contact/about" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
 ::1 - - [20/May/2022:15:51:23 +0000] "GET / HTTP/1.1" 304 - "http://localhost:8000/contact" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
+::1 - - [20/May/2022:16:02:51 +0000] "GET /users/login HTTP/1.1" 200 3334 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
+::1 - - [20/May/2022:16:02:56 +0000] "POST /users/create-session HTTP/1.1" 302 46 "http://localhost:8000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
+::1 - - [20/May/2022:16:02:56 +0000] "GET / HTTP/1.1" 200 9455 "http://localhost:8000/users/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
+::1 - - [20/May/2022:16:40:36 +0000] "GET /users/logout HTTP/1.1" 302 46 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
+::1 - - [20/May/2022:16:40:36 +0000] "GET / HTTP/1.1" 200 6411 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"
