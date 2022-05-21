@@ -1,3 +1,6 @@
+//Require Socket.io Admin UI Dashboard
+const { instrument } = require("@socket.io/admin-ui");
+
 //Communication over the Chat Sockets via Socket.io using Chat Server will take place here//
 
 //Receiving the Request to Create the Connection
@@ -9,7 +12,8 @@ module.exports.chatSockets = function (socketServer) {
 		cors: {
 			//To Allow the Origin to be our Server
 			// origin: "*",
-			origin: "http://localhost:8000",
+			// origin: "http://localhost:8000",
+			origin: ["http://localhost:8000", "https://admin.socket.io/"],
 		},
 	});
 
@@ -96,4 +100,7 @@ module.exports.chatSockets = function (socketServer) {
 			socket.broadcast.emit("new_message_notify", data);
 		});
 	});
+
+	//Instrument the Socket.io Admin UI Dashboard
+	instrument(io, { auth: false });
 };
