@@ -11,7 +11,8 @@ class ChatEngine {
 		//Go & Connect to the Chat Server
 		//io.connect fires an Event - 'connection'
 		//Emits an Event - 'connect'
-		this.socket = io.connect("http://localhost:5000");
+		this.socket = io.connect("http://thesocialbook.co.in");
+		// this.socket = io.connect("http://localhost:5000");
 
 		//If User Email Exists & Logged In
 		if (this.userEmail) {

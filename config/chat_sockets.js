@@ -13,7 +13,12 @@ module.exports.chatSockets = function (socketServer) {
 			//To Allow the Origin to be our Server
 			// origin: "*",
 			// origin: "http://localhost:8000",
-			origin: ["http://localhost:8000", "https://admin.socket.io/"],
+			origin: [
+				"http://localhost:8000",
+				"https://admin.socket.io/",
+				"http://54.160.184.63",
+				"http://thesocialbook.co.in",
+			],
 		},
 	});
 

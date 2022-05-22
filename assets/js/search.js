@@ -28,7 +28,7 @@
 			}
 
 			try {
-				const url = "http://localhost:8000/api/v1/users";
+				const url = "http://thesocialbook.co.in/api/v1/users";
 				const response = await fetch(url);
 				const data = await response.json();
 
