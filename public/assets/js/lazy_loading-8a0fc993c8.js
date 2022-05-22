@@ -1,1 +1,0 @@
-try{(()=>{const r=document.querySelectorAll("img[data-src]"),e=new IntersectionObserver(((r,e)=>{r.forEach((r=>{if(!r.isIntersecting)return;const t=r.target;t.src=t.dataset.src,e.unobserve(t)}))}),{root:null,rootMargin:"100px",threshold:0});r.forEach((r=>{e.observe(r)}))})()}catch(r){}

@@ -1,1 +1,0 @@
-try{function connection(){const e=document.getElementById("hidden-user-id").value,n=document.getElementById("hidden-chat-id").value,t=document.getElementById("hidden-user-name").value;new ChatEngine(n,e,t)}connection()}catch(e){console.log(e)}
