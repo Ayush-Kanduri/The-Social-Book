@@ -17,6 +17,8 @@ module.exports.chatSockets = function (socketServer) {
 				"http://localhost:8000",
 				"https://admin.socket.io/",
 				"http://54.160.184.63",
+				"http://54.160.184.63:8000",
+				"http://54.160.184.63:5000",
 				"http://thesocialbook.co.in",
 			],
 		},
