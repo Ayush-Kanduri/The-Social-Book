@@ -9,6 +9,8 @@
 const express = require("express");
 //Require the Environment File for getting the Environment Variables
 const env = require("./config/environment");
+//Require the CORS Module for allowing Cross-Origin Requests
+const cors = require("cors");
 //Require the Morgan Module for Logging
 const logger = require("morgan");
 //Create Express App for Request-Response Cycle & to create the Express Server
@@ -70,8 +72,9 @@ chatServer.listen(chatPort);
 //----------------------------------------------------------------//
 //Run Application Middlewares//
 //----------------------------------------------------------------//
+//Middleware - CORS
+app.use(cors());
 //We have to put SASS just before the server is starting, because the files should be pre-compiled before the server starts. Whenever templates/browser ask for it, these pre-compiled files will be served.
-
 //Middleware - SASS Middleware
 //SASS Middleware should only Run in Development Mode
 if (env.name == "development") {
