@@ -11,8 +11,9 @@ class ChatEngine {
 		//Go & Connect to the Chat Server
 		//io.connect fires an Event - 'connection'
 		//Emits an Event - 'connect'
-		this.socket = io.connect("http://54.160.184.63:5000");
-		// this.socket = io.connect("http://localhost:5000");
+
+		// this.socket = io.connect("http://54.160.184.63:5000");
+		this.socket = io.connect("http://localhost:5000");
 
 		//If User Email Exists & Logged In
 		if (this.userEmail) {
@@ -41,11 +42,24 @@ class ChatEngine {
 
 			self.onlineStatusUpdate(self);
 			self.configureChatBox(self);
-			self.userJoined(self);
-			self.userLeft(self);
 		});
 
+		self.userJoined(self);
+		self.userLeft(self);
 		self.receiveMessage(self);
+		self.socket.on("user_offline", function (data) {
+			//---------//
+			// console.log("Online Users: ", data);
+			//---------//
+			//Convert Object to a [key, value] Array
+			let arr = Object.entries(data);
+			//Remove the Self User from the Online Users List
+			arr = arr.filter((item) => item[0] != self.socket.id);
+			//Convert the [key, value] Array back to an Object
+			let obj = Object.fromEntries(arr);
+			//Highlight the Offline Users in the ChatBox
+			self.onlineStatusToggle(obj);
+		});
 		self.socket.on("new_message_notify", function (data) {
 			const el = document.getElementsByClassName("chat-friend");
 			for (let i of el) {
@@ -89,27 +103,40 @@ class ChatEngine {
 			//---------//
 			// console.log("Message Received: ", data.message);
 			//---------//
+
+			if (data.sender === self.userEmail) {
+				data.alignment = "receiver";
+			} else {
+				data.alignment = "sender";
+			}
+
+			console.log(data);
+			self.chatMessage(data);
+			self.socket.emit("new_message", data);
+
+			//DON'T USE BELOW AJAX AS IT IS NOT WORKING
+			//IT STORES THE VALUE TWICE FOR EACH USER OUT OF @ USERS
 			//AJAX Call
-			$.ajax({
-				type: "POST",
-				url: "/messages/create",
-				data: {
-					message: data.message,
-					user_email: data.user_email,
-					user_name: data.user_name,
-					timestamp: data.timestamp,
-					chat_room: data.chat_room,
-					friend_email: data.friend_email,
-				},
-				success: function (data) {
-					data = data.data;
-					self.chatMessage(data);
-					self.socket.emit("new_message", data);
-				},
-				error: function (error) {
-					console.log("Error: ", error);
-				},
-			});
+			// $.ajax({
+			// 	type: "POST",
+			// 	url: "/messages/create",
+			// 	data: {
+			// 		message: data.message,
+			// 		user_email: data.user_email,
+			// 		user_name: data.user_name,
+			// 		timestamp: data.timestamp,
+			// 		chat_room: data.chat_room,
+			// 		friend_email: data.friend_email,
+			// 	},
+			// 	success: function (data) {
+			// 		data = data.data;
+			// 		self.chatMessage(data);
+			// 		self.socket.emit("new_message", data);
+			// 	},
+			// 	error: function (error) {
+			// 		console.log("Error: ", error);
+			// 	},
+			// });
 		});
 	}
 
@@ -192,20 +219,6 @@ class ChatEngine {
 			// Convert the [key, value] Array back to an Object
 			let obj = Object.fromEntries(arr);
 			// Highlight the Online Users in the ChatBox
-			self.onlineStatusToggle(obj);
-		});
-
-		self.socket.on("user_offline", function (data) {
-			//---------//
-			// console.log("Online Users: ", data);
-			//---------//
-			//Convert Object to a [key, value] Array
-			let arr = Object.entries(data);
-			//Remove the Self User from the Online Users List
-			arr = arr.filter((item) => item[0] != self.socket.id);
-			//Convert the [key, value] Array back to an Object
-			let obj = Object.fromEntries(arr);
-			//Highlight the Offline Users in the ChatBox
 			self.onlineStatusToggle(obj);
 		});
 	}

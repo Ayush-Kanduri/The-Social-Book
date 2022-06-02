@@ -1,5 +1,9 @@
+const User = require("../models/user");
+const Chat = require("../models/chat");
+const Room = require("../models/room");
+
 //Require Socket.io Admin UI Dashboard
-const { instrument } = require("@socket.io/admin-ui");
+let { instrument } = require("@socket.io/admin-ui");
 
 //Communication over the Chat Sockets via Socket.io using Chat Server will take place here//
 
@@ -16,9 +20,9 @@ module.exports.chatSockets = function (socketServer) {
 			origin: [
 				"http://localhost:8000",
 				"https://admin.socket.io/",
-				"http://54.160.184.63",
-				"http://54.160.184.63:8000",
-				"http://54.160.184.63:5000",
+				// "http://54.160.184.63",
+				// "http://54.160.184.63:8000",
+				// "http://54.160.184.63:5000",
 				"http://thesocialbook.co.in",
 			],
 		},
@@ -99,8 +103,9 @@ module.exports.chatSockets = function (socketServer) {
 		});
 
 		// CHANGE :: Detect 'send_message' Event & broadcast the message to everyone in the room
-		socket.on("send_message", function (data) {
-			io.in(data.chat_room).emit("receive_message", data);
+		socket.on("send_message", async function (data) {
+			const info = await chat(data);
+			io.in(data.chat_room).emit("receive_message", info);
 		});
 
 		socket.on("new_message", function (data) {
@@ -111,3 +116,61 @@ module.exports.chatSockets = function (socketServer) {
 	//Instrument the Socket.io Admin UI Dashboard
 	instrument(io, { auth: false });
 };
+
+async function chat(data) {
+	try {
+		let info = {};
+		let { friend_email, chat_room, timestamp, message, user_email } = data;
+		let alignment = "";
+
+		const user = await User.findOne({ email: user_email }).populate();
+		const friend = await User.findOne({ email: friend_email }).populate();
+
+		let chat = await Chat.create({
+			content: message,
+			sender: user._id,
+			receiver: friend._id,
+			time: timestamp,
+			room: chat_room,
+		});
+
+		let room = await Room.findOne({
+			sender: user._id,
+			receiver: friend._id,
+		});
+
+		if (!room) {
+			room = await Room.findOne({
+				sender: friend._id,
+				receiver: user._id,
+			});
+		}
+
+		chat.save();
+		room.chats.push(chat);
+		room.save();
+		user.chats.push(chat);
+		friend.chats.push(chat);
+		user.save();
+		friend.save();
+
+		let sender = await User.findById(chat.sender).populate();
+		sender = sender.email;
+		info = {
+			message: message,
+			user_name: user.name,
+			user_email: user.email,
+			friend_name: friend.name,
+			friend_email: friend.email,
+			alignment: alignment,
+			sender: sender,
+			timestamp: timestamp,
+			chat_room: chat_room,
+		};
+
+		console.log(info);
+		return info;
+	} catch (err) {
+		console.log("Error: ", err);
+	}
+}

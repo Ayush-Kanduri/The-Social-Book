@@ -91,6 +91,8 @@ const production = {
 	},
 };
 
+// module.exports = development;
+
 module.exports =
 	eval(process.env.TSB_ENVIRONMENT) == undefined
 		? development

@@ -7,7 +7,7 @@ const router = express.Router();
 const chatController = require("../controllers/chat_controller");
 
 //Access the Chat Controller's chatMessage() Function
-router.post("/create", chatController.chatMessage);
+// router.post("/create", chatController.chatMessage);
 //Access the Chat Controller's chatRoom() Function
 router.post("/join", chatController.chatRoom);
 

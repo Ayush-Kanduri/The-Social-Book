@@ -6,7 +6,7 @@ const path = require("path");
 module.exports = (app) => {
 	app.locals.assetPath = (filePath) => {
 		if (env.name === "development") {
-			return filePath;
+			return "/" + filePath;
 		}
 
 		//Parsing the JSON Manifest File & Synchronized reading of it.
