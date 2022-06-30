@@ -18,7 +18,7 @@ exports.newPost = (post) => {
 			from: env.email_sender,
 			//RECEIVER'S EMAIL ADDRESS
 			to: post.user.email,
-			subject: "Post Published!",
+			subject: "Post Published | The Social Book 🎊",
 			html: htmlString,
 		},
 		(err, info) => {

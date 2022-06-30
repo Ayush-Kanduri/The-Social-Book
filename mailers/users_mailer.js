@@ -18,7 +18,7 @@ exports.newUser = (user) => {
 			from: env.email_sender,
 			//RECEIVER'S EMAIL ADDRESS
 			to: user.email,
-			subject: "Welcome to The Social Book!",
+			subject: "Welcome to The Social Book 🎊",
 			html: htmlString,
 		},
 		(err, info) => {
@@ -44,7 +44,8 @@ exports.updateUser = (user) => {
 			from: process.env.fromEmail,
 			//RECEIVER'S EMAIL ADDRESS
 			to: user.email,
-			subject: "Profile Updated!",
+			subject:
+				"User Profile Updated | The Social Book 🎊",
 			html: htmlString,
 		},
 		(err, info) => {

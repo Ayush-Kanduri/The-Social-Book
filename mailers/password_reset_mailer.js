@@ -18,7 +18,7 @@ exports.passwordReset = (resetPasswordToken) => {
 			from: env.email_sender,
 			//RECEIVER'S EMAIL ADDRESS
 			to: resetPasswordToken.user.email,
-			subject: "Reset Password!",
+			subject: "Reset Password | The Social Book 🎊",
 			html: htmlString,
 		},
 		(err, info) => {

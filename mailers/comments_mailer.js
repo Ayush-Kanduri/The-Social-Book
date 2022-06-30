@@ -18,7 +18,8 @@ exports.newComment = (post) => {
 			from: env.email_sender,
 			//RECEIVER'S EMAIL ADDRESS
 			to: post.user.email,
-			subject: "New Comment on your Post!",
+			subject:
+				"New Comment on your Post | The Social Book 🎊",
 			html: htmlString,
 			// html: `<h1>Someone has Commented on your Post!</h1>`,
 		},
