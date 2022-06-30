@@ -26,8 +26,8 @@ const development = {
 	smtp: {
 		service: "gmail",
 		host: "smtp.gmail.com",
-		port: 587,
-		secure: false, //For 2FA
+		port: 465,
+		secure: true, //For 2FA
 		auth: {
 			//To establish our Identity
 			//SENDER'S EMAIL ADDRESS
@@ -63,8 +63,8 @@ const production = {
 	smtp: {
 		service: "gmail",
 		host: "smtp.gmail.com",
-		port: 587,
-		secure: false, //For 2FA
+		port: 465,
+		secure: true, //For 2FA
 		auth: {
 			//To establish our Identity
 			//SENDER'S EMAIL ADDRESS
