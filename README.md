@@ -1,7 +1,18 @@
 # Social-Book_Social_Media_Website
 
-The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS). Users are able to create, share the posts and connect with each other across the platform. Many more functionalities are present as well including update the profile, chat with other users in real-time, like & comment on posts, add friends, receive notifications and emails, login through email and social login. In the chat, user gets notified when he/she has received a new message & also when the friend is online.
+The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS), RedisDB, GulpJS & Passport Auths. 
+
+Users are able to create, share the posts and connect with each other across the platform.
 This website is completely Responsive across all the Devices.
+
+-  Users are able to login through social & manual login.
+-  Users receive emails for resetting password links, for creating post-comments, profile updation, account creation.
+-  Users can chat with other users. Users get notified when they recieve a new message & when the other friend is online.  
+-  Users can like & create the posts and comments.
+-  Users can post images and videos.
+-  Users can add other users as friends.
+-  JWT functionality is also present in the code but is not used. 
+
 
 ## Tools Used
 
