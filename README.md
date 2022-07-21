@@ -1,7 +1,6 @@
 # Social-Book_Social_Media_Website
 
 The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS), RedisDB, GulpJS & Passport Auths. 
-
 Users are able to create, share the posts and connect with each other across the platform.
 This website is completely Responsive across all the Devices.
 
