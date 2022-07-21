@@ -13,6 +13,15 @@ This website is completely Responsive across all the Devices.
 -  JWT functionality is also present in the code but is not used. 
 
 
+## NOTE
+
+-  master branch contains the code for the Heroku Deployment.
+-  Development branch contains the code for the localhost development version.
+-  AWS_Deployment branch contains the code for the AWS Deployment.
+
+#
+
+
 ## Tools Used
 
 <p align="left">
