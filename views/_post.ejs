@@ -98,7 +98,7 @@
 				data-src="<%= user.avatar%>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% }else{ %>
@@ -108,7 +108,7 @@
 				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% } %>

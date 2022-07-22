@@ -18,7 +18,7 @@
 				src="<%= friend.to_user.avatar %>"
 				data-src="<%= friend.to_user.avatar %>"
 				alt="<%= friend.to_user.name %>"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% } else { %>
@@ -26,7 +26,7 @@
 				src="<%= assetPath('images/empty-avatar.png') %>"
 				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= friend.to_user.name %>"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% } %>
@@ -42,7 +42,7 @@
 				src="<%= friend.from_user.avatar %>"
 				data-src="<%= friend.from_user.avatar %>"
 				alt="<%= friend.from_user.name %>"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% } else { %>
@@ -50,7 +50,7 @@
 				src="<%= assetPath('images/empty-avatar.png') %>"
 				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= friend.from_user.name %>"
-				onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
 				loading="lazy"
 			/>
 			<% } %>

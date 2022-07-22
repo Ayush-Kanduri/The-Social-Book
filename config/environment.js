@@ -23,6 +23,10 @@ const development = {
 	asset_path: process.env.TSB_DEVELOPMENT_ASSET_PATH,
 	session_cookie_key: process.env.TSB_DEVELOPMENT_SESSION_COOKIE_KEY,
 	db: process.env.TSB_DEVELOPMENT_DB,
+	db_name: process.env.TSB_DEVELOPMENT_DB_NAME,
+	deployment: process.env.DEPLOYMENT,
+	website_link: process.env.TSB_DEVELOPMENT_WEBSITE_LINK,
+	chat_link: process.env.TSB_DEVELOPMENT_CHAT_LINK,
 	smtp: {
 		service: "gmail",
 		host: "smtp.gmail.com",
@@ -60,6 +64,10 @@ const production = {
 	asset_path: process.env.TSB_ASSET_PATH,
 	session_cookie_key: process.env.TSB_SESSION_COOKIE_KEY,
 	db: process.env.TSB_DB,
+	db_name: process.env.TSB_DB_NAME,
+	deployment: process.env.DEPLOYMENT,
+	website_link: process.env.TSB_WEBSITE_LINK,
+	chat_link: process.env.TSB_CHAT_LINK,
 	smtp: {
 		service: "gmail",
 		host: "smtp.gmail.com",
@@ -83,6 +91,9 @@ const production = {
 	express_server_port: process.env.TSB_EXPRESS_SERVER_PORT,
 	chat_server_port: process.env.TSB_CHAT_SERVER_PORT,
 	email_sender: process.env.TSB_FROM_EMAIL,
+	redis_host: process.env.TSB_REDIS_HOST,
+	redis_port: process.env.TSB_REDIS_PORT,
+	redis_auth: process.env.TSB_REDIS_AUTH,
 	morgan: {
 		mode: "combined",
 		options: {
@@ -91,12 +102,12 @@ const production = {
 	},
 };
 
-// module.exports = development;
+// module.exports = production;
 
 module.exports =
-	eval(process.env.TSB_ENVIRONMENT) == undefined
+	eval(process.env.ENVIRONMENT) == undefined
 		? development
-		: eval(process.env.TSB_ENVIRONMENT);
+		: eval(process.env.ENVIRONMENT);
 
 // module.exports =
 // 	eval(process.env.NODE_ENV) == undefined

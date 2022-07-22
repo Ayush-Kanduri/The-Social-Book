@@ -256,8 +256,8 @@
 						file.type.match("video.webm") ||
 						file.type.match("video.mkv")
 					) {
-						//file size should be less than equal to 15MB
-						if (file.size <= 1024 * 1024 * 15) {
+						//file size should be less than equal to 5MB
+						if (file.size <= 1024 * 1024 * 5) {
 							const reader = new FileReader();
 							reader.readAsDataURL(file);
 							reader.onload = (e) => {

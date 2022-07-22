@@ -74,7 +74,7 @@ class PostComments {
 			} else {
 				commentUserAvatar = `<img
 									class="user-avatar"
-									src="/images/empty-avatar.png"
+									src="<%= assetPath('images/empty-avatar.png') %>"
 									alt="${comment.user.name}"
 									onclick="window.location.href='/users/profile/${comment.user._id}'"
 									loading="lazy"

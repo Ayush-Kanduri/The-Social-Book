@@ -9,6 +9,8 @@
 const express = require("express");
 //Require the Environment File for getting the Environment Variables
 const env = require("./config/environment");
+//Require the DotEnv Library
+const dotenv = require("dotenv").config();
 //Require the CORS Module for allowing Cross-Origin Requests
 const cors = require("cors");
 //Require the Morgan Module for Logging
@@ -18,7 +20,7 @@ const app = express();
 //Require the View Helpers
 const viewHelpers = require("./config/view-helpers")(app);
 //Create Express Server Port
-const port = env.express_server_port;
+const port = process.env.PORT || env.express_server_port;
 //Require Path Module for the Directory
 const path = require("path");
 //Requires the index.js - Route File, from the Routes Folder.
@@ -96,6 +98,8 @@ if (env.name == "development") {
 }
 //Middleware - URL Encoder
 app.use(express.urlencoded({ extended: true }));
+//Middleware - JSON Encoder
+app.use(express.json());
 //Middleware - Cookie Parser for accessing the cookies
 app.use(cookieParser());
 //Middleware - Express App uses Static Files in the Assets Folder
@@ -130,7 +134,7 @@ app.use(
 		secret: env.session_cookie_key,
 		//Don't save the uninitialized session
 		saveUninitialized: false,
-		//Dont re-save the session if it is not modified
+		//Don't re-save the session if it is not modified
 		resave: false,
 		//Cookie Options
 		cookie: {
@@ -141,7 +145,7 @@ app.use(
 		store: MongoStore.create(
 			{
 				//DB Connection URL
-				mongoUrl: `mongodb://localhost/${env.db}`,
+				mongoUrl: `${env.db}`,
 				//Interacts with the mongoose to connect to the MongoDB
 				mongooseConnection: db,
 				//To auto remove the store
@@ -164,8 +168,10 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 //Middleware - Uses the Flash Message just after the Session Cookie is set
 app.use(flash());
-//Middleware - Uses the Custom Middleware
+//Middleware - Uses the Custom Middleware to set the Flash Message in the Response
 app.use(customMiddleware.setFlash);
+//Middleware - Creates Uploads Folder & Sub Folders, if not exists
+app.use(customMiddleware.createUploads);
 //Middleware - App calls index.js - Route File, whenever '/' route is called in the request.
 app.use("/", route);
 //----------------------------------------------------------------//
@@ -176,9 +182,8 @@ app.use("/", route);
 app.listen(port, (err) => {
 	if (err) {
 		console.log(err);
+		return;
 	}
-	//---------//
-	// console.log(`Server is Up & Running Successfully on Port ${port}`);
-	//---------//
+	console.log(`Server is Up & Running Successfully on Port ${port}`);
 });
 //----------------------------------------------------------------//

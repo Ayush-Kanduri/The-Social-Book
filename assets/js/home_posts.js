@@ -67,22 +67,24 @@
 		let likes = [];
 
 		try {
+			let link = "images/empty-avatar.png";
+			let error = `this.onerror=null; this.src="<%= assetPath('${link}') %>"`;
 			if (user.avatar) {
 				userAvatar = `<img
 							class="user-avatar create-post-avatar"
 							src="${user.avatar}"
 							alt="${user.name}"
 							onclick="window.location.href='/users/profile/${user._id}'"
-							onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+							onerror="${error}"
 							loading="lazy"
 						/>`;
 			} else {
 				userAvatar = `<img
 							class="user-avatar create-post-avatar"
-							src="/images/empty-avatar.png"
+							src="<%= assetPath('${link}') %>"
 							alt="${user.name}"
 							onclick="window.location.href='/users/profile/${user._id}'"
-							onerror="this.onerror=null; this.src='/images/empty-avatar.png'"
+							onerror="${error}"
 							loading="lazy"
 						/>`;
 			}
@@ -114,7 +116,7 @@
 			} else {
 				postUserAvatar = `<img
 								class="user-avatar"
-								src="/images/empty-avatar.png"
+								src="<%= assetPath('${link}') %>"
 								alt="${post.user.name}"
 								onclick="window.location.href='/users/profile/${post.user._id}'"
 								loading="lazy"

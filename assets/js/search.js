@@ -28,7 +28,8 @@
 			}
 
 			try {
-				const url = "http://thesocialbook.co.in/api/v1/users";
+				// const url = "http://thesocialbook.co.in/api/v1/users";
+				const url = "http://localhost:8000/api/v1/users";
 				const response = await fetch(url);
 				const data = await response.json();
 
@@ -95,7 +96,7 @@
 			if (user.avatar) {
 				img.src = user.avatar;
 			} else {
-				img.src = "/images/empty-avatar.png";
+				img.src = "<%= assetPath('images/empty-avatar.png') %>";
 			}
 
 			img.setAttribute("alt", user.name);

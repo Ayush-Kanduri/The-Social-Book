@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Chat = require("../models/chat");
 const Room = require("../models/room");
+const env = require("./environment");
 
 //Require Socket.io Admin UI Dashboard
 let { instrument } = require("@socket.io/admin-ui");
@@ -16,14 +17,12 @@ module.exports.chatSockets = function (socketServer) {
 		cors: {
 			//To Allow the Origin to be our Server
 			// origin: "*",
-			// origin: "http://localhost:8000",
 			origin: [
-				"http://localhost:8000",
+				`${env.website_link}`,
 				"https://admin.socket.io/",
 				// "http://54.160.184.63",
 				// "http://54.160.184.63:8000",
 				// "http://54.160.184.63:5000",
-				"http://thesocialbook.co.in",
 			],
 		},
 	});
@@ -168,7 +167,7 @@ async function chat(data) {
 			chat_room: chat_room,
 		};
 
-		console.log(info);
+		// console.log(info);
 		return info;
 	} catch (err) {
 		console.log("Error: ", err);
