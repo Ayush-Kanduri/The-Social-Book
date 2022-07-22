@@ -29,7 +29,8 @@
 
 			try {
 				// const url = "http://thesocialbook.co.in/api/v1/users";
-				const url = "http://localhost:8000/api/v1/users";
+				// const url = "http://localhost:8000/api/v1/users";
+				const url = "https://the-social-book.herokuapp.com/api/v1/users";
 				const response = await fetch(url);
 				const data = await response.json();
 

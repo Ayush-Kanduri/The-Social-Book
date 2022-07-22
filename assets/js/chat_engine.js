@@ -13,7 +13,8 @@ class ChatEngine {
 		//Emits an Event - 'connect'
 
 		// this.socket = io.connect("http://54.160.184.63:5000");
-		this.socket = io.connect("http://localhost:5000");
+		// this.socket = io.connect("http://localhost:5000");
+		this.socket = io.connect("https://the-social-book.herokuapp.com");
 
 		//If User Email Exists & Logged In
 		if (this.userEmail) {
