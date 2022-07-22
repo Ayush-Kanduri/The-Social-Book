@@ -47,7 +47,7 @@ passport.use(
 							email: profile.emails[0].value,
 							password: crypto.randomBytes(20).toString("hex"),
 							avatar: !!profile.photos[0].value
-								? profile.photos[0].value
+								? `${profile.photos[0].value}?`
 								: "",
 						},
 						(err, user) => {
