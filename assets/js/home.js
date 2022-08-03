@@ -194,8 +194,8 @@
 						file.type.match("image.gif") ||
 						file.type.match("image.jpg")
 					) {
-						//file size should be less than equal to 5MB
-						if (file.size <= 1024 * 1024 * 5) {
+						//file size should be less than equal to 3MB
+						if (file.size <= 1024 * 1024 * 3) {
 							const reader = new FileReader();
 							reader.readAsDataURL(file);
 							reader.onload = (e) => {
@@ -214,7 +214,7 @@
 						} else {
 							new Noty({
 								theme: "metroui",
-								text: "Image File Size Limit is 5MB",
+								text: "Image File Size Limit is 3MB",
 								type: "error",
 								layout: "topRight",
 								timeout: 3000,
@@ -256,8 +256,8 @@
 						file.type.match("video.webm") ||
 						file.type.match("video.mkv")
 					) {
-						//file size should be less than equal to 5MB
-						if (file.size <= 1024 * 1024 * 5) {
+						//file size should be less than equal to 3MB
+						if (file.size <= 1024 * 1024 * 3) {
 							const reader = new FileReader();
 							reader.readAsDataURL(file);
 							reader.onload = (e) => {
@@ -276,7 +276,7 @@
 						} else {
 							new Noty({
 								theme: "metroui",
-								text: "Video File Size Limit is 15MB",
+								text: "Video File Size Limit is 3MB",
 								type: "error",
 								layout: "topRight",
 								timeout: 3000,

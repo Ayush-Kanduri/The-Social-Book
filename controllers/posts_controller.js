@@ -30,7 +30,7 @@ module.exports.create = async (req, res) => {
 						break;
 					case "LIMIT_FILE_SIZE":
 						err =
-							"File is too large. Max size is, 5MB for Images & 15MB for Videos";
+							"File is too large. Max size is, 3MB for Images & 3MB for Videos";
 						break;
 					case "INVALID_FILE_TYPE":
 						err =
