@@ -10,7 +10,11 @@ const router = express.Router();
 const postsAPIRouterFile = require("./posts");
 //Require Users-API Router File
 const usersAPIRouterFile = require("./users");
+//Require Chats-API Router File
+const chatsAPIRouterFile = require("./chats");
 
+//Access the Chats-API Router File on '/api/v1/chats' route.
+router.use("/chats", chatsAPIRouterFile);
 //Access the Posts-API Router File on '/api/v1/posts' route.
 router.use("/posts", postsAPIRouterFile);
 //Access the Users-API Router File on '/api/v1/users' route.
