@@ -59,13 +59,15 @@ const customMiddleware = require("./config/middleware");
 //Setup the Chat Server to be used with Socket.io//
 //----------------------------------------------------------------//
 //Create Chat Server :: Require the HTTP Module for the Socket.io Server
-const chatServer = require("http").Server(app);
-//Create Chat Sockets for the Socket.io Server
-const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
-//Create Chat Server Port
-const chatPort = env.chat_server_port;
-//Run the Chat Server
-chatServer.listen(chatPort);
+
+// const chatServer = require("http").Server(app);
+// //Create Chat Sockets for the Socket.io Server
+// const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
+// //Create Chat Server Port
+// const chatPort = env.chat_server_port;
+// //Run the Chat Server
+// chatServer.listen(chatPort);
+
 //---------//
 // console.log("Chat Server is Running Successfully on Port: " + chatPort);
 //---------//
