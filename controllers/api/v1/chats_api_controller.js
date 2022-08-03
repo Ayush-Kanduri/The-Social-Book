@@ -5,8 +5,9 @@ const Room = require("../../../models/room");
 module.exports.chatting = async function (req, res) {
 	try {
 		let info = {};
-		let { chat_room, timestamp, message } = req.body;
-		let { friend_email, user_email } = req.body;
+		let { information } = req.body;
+		let { chat_room, timestamp, message } = information;
+		let { friend_email, user_email } = information;
 		let alignment = "";
 
 		console.log("DATA: ");
