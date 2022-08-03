@@ -101,15 +101,12 @@ class ChatEngine {
 	receiveMessage(self) {
 		//Receives/Detects the Event - 'receive_message'
 		self.socket.on("receive_message", function (data) {
-			console.log("Message Received: ", data);
-
 			if (data.sender === self.userEmail) {
-				data.alignment = "receiver";
-			} else {
 				data.alignment = "sender";
+			} else {
+				data.alignment = "receiver";
 			}
 
-			console.log(data);
 			self.chatMessage(data);
 			self.socket.emit("new_message", data);
 
