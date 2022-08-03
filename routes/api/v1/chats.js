@@ -11,11 +11,5 @@ const chatsAPIController = require("../../../controllers/api/v1/chats_api_contro
 //Access the Chats-API Controller's chatting() Function
 router.post("/", chatsAPIController.chatting);
 
-// router.delete(
-// 	"/:id",
-// 	passport.authenticate("jwt", { session: false }),
-// 	postsAPIController.destroy
-// );
-
 //Export the Router
 module.exports = router;

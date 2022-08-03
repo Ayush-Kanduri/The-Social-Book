@@ -185,8 +185,8 @@ class ChatEngine {
 							timestamp: chat.time,
 							alignment:
 								chat.sender.email === self.userEmail
-									? "receiver"
-									: "sender",
+									? "sender"
+									: "receiver",
 						};
 						self.chatMessage(newData);
 					}

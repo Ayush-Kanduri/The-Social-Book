@@ -10,17 +10,8 @@ module.exports.chatting = async function (req, res) {
 		let { friend_email, user_email } = information;
 		let alignment = "";
 
-		console.log("DATA: ");
-		console.log(chat_room);
-		console.log(timestamp);
-		console.log(message);
-		console.log(friend_email);
-		console.log(user_email);
-
 		const user = await User.findOne({ email: user_email }).populate();
 		const friend = await User.findOne({ email: friend_email }).populate();
-
-		console.log(user);
 
 		let chat = await Chat.create({
 			content: message,
