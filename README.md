@@ -1,4 +1,5 @@
-# THE SOCIAL BOOK 🚀
+# The Social Book 🚀
+#
 
 
 <p align="center">
@@ -113,9 +114,11 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 -  Integrated Development Environment: VSCode
 
 
-> ### Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
+## Links
+
+> ## Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
 >
-> ### Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
+> ## Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
 
 
 ## Screens
