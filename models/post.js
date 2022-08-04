@@ -59,8 +59,8 @@ const multimediaTypeFilter = (req, file, cb) => {
 		file.mimetype === "image/jpg" ||
 		file.mimetype === "image/gif"
 	) {
-		if (file.size > 1024 * 1024 * 5) {
-			cb(new Error("File is too large. Max size is 5MB"), false);
+		if (file.size > 1024 * 1024 * 3) {
+			cb(new Error("File is too large. Max size is 3MB"), false);
 		} else {
 			cb(null, true);
 		}
@@ -70,8 +70,8 @@ const multimediaTypeFilter = (req, file, cb) => {
 		file.mimetype === "video/mkv" ||
 		file.mimetype === "video/webm"
 	) {
-		if (file.size > 1024 * 1024 * 15) {
-			cb(new Error("File is too large. Max size is 15MB"), false);
+		if (file.size > 1024 * 1024 * 3) {
+			cb(new Error("File is too large. Max size is 3MB"), false);
 		} else {
 			cb(null, true);
 		}

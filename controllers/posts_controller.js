@@ -22,6 +22,7 @@ module.exports.create = async (req, res) => {
 	try {
 		//Call Post static method to upload the Post Images & Videos
 		Post.uploadedMultimediaPost(req, res, async (err) => {
+			console.log("ERROR --> ", err);
 			if (err) {
 				let err = "Error Occurred while uploading the Post Multimedia";
 				switch (err.code) {

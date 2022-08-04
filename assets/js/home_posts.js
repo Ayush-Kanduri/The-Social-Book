@@ -75,8 +75,6 @@
 							src="${user.avatar}"
 							alt="${user.name}"
 							onclick="window.location.href='/users/profile/${user._id}'"
-							onerror="${error}"
-							loading="lazy"
 						/>`;
 			} else {
 				userAvatar = `<img
@@ -84,8 +82,6 @@
 							src="<%= assetPath('${link}') %>"
 							alt="${user.name}"
 							onclick="window.location.href='/users/profile/${user._id}'"
-							onerror="${error}"
-							loading="lazy"
 						/>`;
 			}
 
@@ -93,7 +89,6 @@
 				postImage = `<img
 							src="${post.contentImage}"
 							alt="alt-post-image"
-							loading="lazy"
 						/>`;
 			} else {
 				postImage = "";
@@ -111,7 +106,6 @@
 								src="${post.user.avatar}"
 								alt="${post.user.name}"
 								onclick="window.location.href='/users/profile/${post.user._id}'"
-								loading="lazy"
 							/>`;
 			} else {
 				postUserAvatar = `<img
@@ -119,7 +113,6 @@
 								src="<%= assetPath('${link}') %>"
 								alt="${post.user.name}"
 								onclick="window.location.href='/users/profile/${post.user._id}'"
-								loading="lazy"
 							/>`;
 			}
 
@@ -132,7 +125,7 @@
 
 			if (likes.length > 0) {
 				likeButton = `<a href="/likes/toggle/?id=${post._id}&type=Post" 
-				class="like toggle-like-button" 
+				class="like toggle-like-button"   
 				data-likes="0" 
 				style="color: rgb(199, 0, 0);">
 					<i class="fa-solid fa-thumbs-up"></i>

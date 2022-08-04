@@ -98,21 +98,17 @@
 				data-src="<%= user.avatar%>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
-				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
-				loading="lazy"
-			/>
-			<% }else{ %>
+			/>   
+			<% }else{ %>  
 			<img
 				class="user-avatar create-post-avatar"
 				src="<%= assetPath('images/empty-avatar.png') %>"
 				data-src="<%= assetPath('images/empty-avatar.png') %>"
 				alt="<%= user.name %>"
 				onclick="window.location.href='/users/profile/<%= user.id %>'"
-				onerror="this.onerror=null; this.src=`<%= assetPath('images/empty-avatar.png') %>`"
-				loading="lazy"
-			/>
-			<% } %>
-			<textarea
+			/>  
+			<% } %> 
+			<textarea 
 				name="content"
 				cols="30"
 				rows="3"
