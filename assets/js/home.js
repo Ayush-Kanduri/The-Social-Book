@@ -268,6 +268,8 @@
 								vid.src = e.target.result;
 								vid.addEventListener("click", (e) => {
 									video.value = "";
+									vid.muted = true;
+									vid.src = "";
 									e.target.parentElement.remove();
 								});
 								vidPreview.appendChild(vid);
@@ -309,7 +311,7 @@
 		const createVideoThumbnail = () => {
 			const video = document.createElement("video");
 			video.classList.add("preview");
-			video.setAttribute("muted", "true");
+			video.setAttribute("muted", true);
 			video.setAttribute("id", "post-video-preview");
 			video.setAttribute("src", "");
 			return video;
