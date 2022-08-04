@@ -1,11 +1,13 @@
 # The Social Book 🚀
-#
 
+<br/>
+<br/>
 
 <p align="center">
 <img height="400" width="800" src="https://user-images.githubusercontent.com/76626529/182868886-3f26cbc9-f619-4250-8951-0d834805251c.png">
 </p>
-
+<br/>
+<br/>
 
 ## Introduction
 
@@ -23,14 +25,16 @@ This website is completely Responsive across all the Devices.
 -  Users can update their profiles.
 -  Users can add other users as friends.
 -  JWT functionality is also present in the code but is not used.
-
+   <br/>
+   <br/>
 
 ## Note
 
 -  'master' branch contains the code for the Heroku Deployment.
 -  'Development' branch contains the code for the localhost development version.
 -  'AWS_Deployment' branch contains the code for the AWS Deployment.
-
+   <br/>
+   <br/>
 
 ## Getting Started With The Project
 
@@ -39,24 +43,25 @@ This website is completely Responsive across all the Devices.
 -  Install & Configure - NodeJS, MongoDB, Robo3T, POSTMAN, WSL & Redis Server
 -  Create '.env' file & Set the Environment Variables in it, as per the 'ENV_FORMAT.json' file.
 -  Run 'npm install' in GitBash Terminal
--  Go to 'package.json' & inside the 'SCRIPTS', find "start":"...."
-   -  Change it to - "start": "nodemon index.js",
+-  Go to 'package.json' & inside the 'SCRIPTS', find "start":"...." <br/>
+   Change it to - "start": "nodemon index.js",
 -  If you want to run the project in development mode locally then go to '.env' file & set,
-   -  ENVIRONMENT=development
-   -  DEPLOYMENT=local
+   ENVIRONMENT=development <br/>
+   DEPLOYMENT=local
 -  If you want to run the project in production mode locally then go to '.env' file & set,
-   -  ENVIRONMENT=production
-   -  DEPLOYMENT=local
+   ENVIRONMENT=production <br/>
+   DEPLOYMENT=local
 -  Run 'redis-server' in WSL Terminal
 -  Run 'npm start' in GitBash Terminal
 -  Enjoy :)
 
 For any issues related to the project, raise an ISSUE in the respective Repository.
-
+<br/>
+<br/>
 
 ## Tools Used
 
-<p align="left">
+<p align="justify">
 <img height="140" width="140" src="https://www.w3.org/html/logo/downloads/HTML5_Logo_256.png">
 <img height="140" width="140" src="https://logodix.com/logo/470309.png">
 <img height="140" width="140" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png">
@@ -112,14 +117,17 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 -  Front-End: HTML, CSS, EJS
 -  Runtime Environment: NodeJS
 -  Integrated Development Environment: VSCode
-
+   <br/>
+   <br/>
 
 ## Links
 
 > ## Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
 >
 > ## Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
-
+>
+> <br/>
+> <br/>
 
 ## Screens
 
@@ -136,7 +144,8 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 <img height="200" width="400" src="https://user-images.githubusercontent.com/76626529/171700685-692a6572-3b8b-4c34-9f20-415732fabfc4.png">
 <img height="200" width="400" src="https://user-images.githubusercontent.com/76626529/171700687-12b3894f-d1ee-4df6-aa81-c949981df9b3.png">
 </p>
-
+<br/>
+<br/>
 
 ## Follow Me:
 
@@ -149,4 +158,3 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 > [YouTube](https://www.youtube.com/channel/UC6c1ajC_2jF7wQp7Y13t2bg)
 
 I hope you like the project. Thanks for reading :)
-
