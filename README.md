@@ -4,9 +4,8 @@
 <p align="center">
 <img height="400" width="800" src="https://user-images.githubusercontent.com/76626529/182868886-3f26cbc9-f619-4250-8951-0d834805251c.png">
 </p>
-<br/>
 
-## Introduction
+## ⭐ Introduction
 
 The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS), RedisDB, GulpJS & Passport Auths.
 Users are able to create, share the posts and connect with each other across the platform.
@@ -25,7 +24,7 @@ This website is completely Responsive across all the Devices.
    <br/>
    <br/>
 
-## Note
+## ❗ Note
 
 -  'master' branch contains the code for the Heroku Deployment.
 -  'Development' branch contains the code for the localhost development version.
@@ -33,7 +32,7 @@ This website is completely Responsive across all the Devices.
    <br/>
    <br/>
 
-## Getting Started With The Project
+## 🔥 Getting Started With The Project
 
 -  Fork the Project in your Repository.
 -  Clone the Forked Repository in your Local System.
@@ -56,7 +55,7 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 <br/>
 <br/>
 
-## Tools Used
+## 🔨 Tools Used
 
 <p align="justify">
 <img height="140" width="140" src="https://www.w3.org/html/logo/downloads/HTML5_Logo_256.png">
@@ -117,7 +116,7 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
    <br/>
    <br/>
 
-## Links
+## 🔗 Links
 
 > ## Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
 >
@@ -125,7 +124,7 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 
 <br/>
 
-## Screens
+## 💻 Screens
 
 <p align="justify">
 <img height="200" width="400" src="https://user-images.githubusercontent.com/76626529/171700636-a8e6c78a-8217-4da5-9bd9-0088c7f2c6a5.png">
@@ -142,7 +141,7 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 </p>
 <br/>
 
-## Follow Me:
+## 🐦 Follow Me:
 
 > [Dev Community](https://dev.to/ayushkanduri)
 
