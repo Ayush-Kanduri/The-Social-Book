@@ -46,9 +46,11 @@ passport.use(
 							name: profile.displayName,
 							email: profile.emails[0].value,
 							password: crypto.randomBytes(20).toString("hex"),
-							avatar: !!profile.photos[0].value
-								? `${profile.photos[0].value}?`
-								: "",
+							// avatar: !!profile.photos[0].value
+							// 	? `${profile.photos[0].value}?`
+							// 	: "",
+							avatar:
+								"https://raw.githubusercontent.com/Ayush-Kanduri/Social-Book_Social_Media_Website/master/assets/images/empty-avatar.png",
 						},
 						(err, user) => {
 							if (err) {

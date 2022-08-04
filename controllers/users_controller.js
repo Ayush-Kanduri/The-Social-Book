@@ -203,6 +203,9 @@ module.exports.createUser = (req, res) => {
 					return res.redirect("back");
 				}
 
+				user.avatar =
+					"https://raw.githubusercontent.com/Ayush-Kanduri/Social-Book_Social_Media_Website/master/assets/images/empty-avatar.png";
+
 				//Populating the user with the required information.
 				let newUser = {
 					name: user.name,
