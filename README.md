@@ -1,7 +1,6 @@
-# The Social Book 🚀
+# 𝐓𝐡𝐞 𝐒𝐨𝐜𝐢𝐚𝐥 𝐁𝐨𝐨𝐤 🚀
 
 <br/>
-
 <p align="center">
 <img height="400" width="800" src="https://user-images.githubusercontent.com/76626529/182868886-3f26cbc9-f619-4250-8951-0d834805251c.png">
 </p>
@@ -121,9 +120,9 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 ## Links
 
 > ## Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
+>
 > ## Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
 
-<br/>
 <br/>
 
 ## Screens
@@ -141,7 +140,6 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 <img height="200" width="400" src="https://user-images.githubusercontent.com/76626529/171700685-692a6572-3b8b-4c34-9f20-415732fabfc4.png">
 <img height="200" width="400" src="https://user-images.githubusercontent.com/76626529/171700687-12b3894f-d1ee-4df6-aa81-c949981df9b3.png">
 </p>
-<br/>
 <br/>
 
 ## Follow Me:
