@@ -1,4 +1,12 @@
-# The Social Book 🚀
+# THE SOCIAL BOOK 🚀
+
+
+<p align="center">
+<img height="400" width="800" src="https://user-images.githubusercontent.com/76626529/182868886-3f26cbc9-f619-4250-8951-0d834805251c.png">
+</p>
+
+
+## Introduction
 
 The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS), RedisDB, GulpJS & Passport Auths.
 Users are able to create, share the posts and connect with each other across the platform.
@@ -15,13 +23,13 @@ This website is completely Responsive across all the Devices.
 -  Users can add other users as friends.
 -  JWT functionality is also present in the code but is not used.
 
-## NOTE
 
--  master branch contains the code for the Heroku Deployment.
--  Development branch contains the code for the localhost development version.
--  AWS_Deployment branch contains the code for the AWS Deployment.
+## Note
 
-#
+-  'master' branch contains the code for the Heroku Deployment.
+-  'Development' branch contains the code for the localhost development version.
+-  'AWS_Deployment' branch contains the code for the AWS Deployment.
+
 
 ## Getting Started With The Project
 
@@ -31,19 +39,19 @@ This website is completely Responsive across all the Devices.
 -  Create '.env' file & Set the Environment Variables in it, as per the 'ENV_FORMAT.json' file.
 -  Run 'npm install' in GitBash Terminal
 -  Go to 'package.json' & inside the 'SCRIPTS', find "start":"...."
-   Change it to - "start": "nodemon index.js",
+   -  Change it to - "start": "nodemon index.js",
 -  If you want to run the project in development mode locally then go to '.env' file & set,
-   ENVIRONMENT=development
-   DEPLOYMENT=local
+   -  ENVIRONMENT=development
+   -  DEPLOYMENT=local
 -  If you want to run the project in production mode locally then go to '.env' file & set,
-   ENVIRONMENT=production
-   DEPLOYMENT=local
+   -  ENVIRONMENT=production
+   -  DEPLOYMENT=local
 -  Run 'redis-server' in WSL Terminal
 -  Run 'npm start' in GitBash Terminal
 -  Enjoy :)
 
 For any issues related to the project, raise an ISSUE in the respective Repository.
-#
+
 
 ## Tools Used
 
@@ -56,8 +64,6 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 <img height="140" width="250" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRASBParCnQhsRkKZ8opkkRjtk9XJ-MHdy0jA&usqp=CAU">
 <img height="140" width="140" src="https://code.visualstudio.com/assets/apple-touch-icon.png">
 </p>
-
-#
 
 -  Library:
    -  @socket.io/admin-ui
@@ -106,13 +112,11 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 -  Runtime Environment: NodeJS
 -  Integrated Development Environment: VSCode
 
-#
 
-> #### Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
+> ### Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
 >
-> #### Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
+> ### Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
 
-#
 
 ## Screens
 
@@ -130,7 +134,8 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 <img height="200" width="400" src="https://user-images.githubusercontent.com/76626529/171700687-12b3894f-d1ee-4df6-aa81-c949981df9b3.png">
 </p>
 
-## Follow me on:
+
+## Follow Me:
 
 > [Dev Community](https://dev.to/ayushkanduri)
 
@@ -141,3 +146,4 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 > [YouTube](https://www.youtube.com/channel/UC6c1ajC_2jF7wQp7Y13t2bg)
 
 I hope you like the project. Thanks for reading :)
+
