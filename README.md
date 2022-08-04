@@ -1,17 +1,19 @@
-# Social-Book_Social_Media_Website
+# The Social Book 🚀
 
-The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS), RedisDB, GulpJS & Passport Auths. 
+The Social Book is a Social Media Website designed using Full Stack Web Development through Back-End Technology of MEN Stack (MongoDB, ExpressJS, NodeJS), RedisDB, GulpJS & Passport Auths.
 Users are able to create, share the posts and connect with each other across the platform.
 This website is completely Responsive across all the Devices.
 
--  Users are able to login through social & manual login.
--  Users receive emails for resetting password links, for creating post-comments, profile updation, account creation.
--  Users can chat with other users. Users get notified when they recieve a new message & when the other friend is online.  
--  Users can like & create the posts and comments.
--  Users can post images and videos.
+-  Users are able to login through social & manual login. They can also reset their passwords using 'Forgot Password'.
+-  Users can check the 'About Us' & 'Contact Us' Sections.
+-  Users receive emails for resetting password links, for creating post-comments, profile updation, account creation, receiving comments.
+-  Users can chat with other users. Users get notified when they receive a new message & also when the other friend is online.
+-  Users can like both posts - comments & can create the posts and comments.
+-  Users can post images and videos as well.
+-  Users can search for other users as well.
+-  Users can update their profiles.
 -  Users can add other users as friends.
--  JWT functionality is also present in the code but is not used. 
-
+-  JWT functionality is also present in the code but is not used.
 
 ## NOTE
 
@@ -20,7 +22,6 @@ This website is completely Responsive across all the Devices.
 -  AWS_Deployment branch contains the code for the AWS Deployment.
 
 #
-
 
 ## Tools Used
 
@@ -75,7 +76,7 @@ This website is completely Responsive across all the Devices.
    -  socket.io-client
    -  validator
 -  Framework: ExpressJS
--  Database: MongoDB
+-  Database: MongoDB, RedisDB
 -  Version Control System: Git
 -  VCS Hosting: GitHub
 -  Programming / Scripting: JavaScript
@@ -85,7 +86,7 @@ This website is completely Responsive across all the Devices.
 
 #
 
-> #### Checkout the Website [Web Application](http://thesocialbook.co.in)
+> #### Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
 >
 > #### Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
 
