@@ -23,6 +23,28 @@ This website is completely Responsive across all the Devices.
 
 #
 
+## Getting Started With The Project
+
+-  Fork the Project in your Repository.
+-  Clone the Forked Repository in your Local System.
+-  Install & Configure - NodeJS, MongoDB, Robo3T, POSTMAN, WSL & Redis Server
+-  Create '.env' file & Set the Environment Variables in it, as per the 'ENV_FORMAT.json' file.
+-  Run 'npm install' in GitBash Terminal
+-  Go to 'package.json' & inside the 'SCRIPTS', find "start":"...."
+   Change it to - "start": "nodemon index.js",
+-  If you want to run the project in development mode locally then go to '.env' file & set,
+   ENVIRONMENT=development
+   DEPLOYMENT=local
+-  If you want to run the project in production mode locally then go to '.env' file & set,
+   ENVIRONMENT=production
+   DEPLOYMENT=local
+-  Run 'redis-server' in WSL Terminal
+-  Run 'npm start' in GitBash Terminal
+-  Enjoy :)
+
+For any issues related to the project, raise an ISSUE in the respective Repository.
+#
+
 ## Tools Used
 
 <p align="left">

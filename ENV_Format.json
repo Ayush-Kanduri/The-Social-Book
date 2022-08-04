@@ -33,5 +33,8 @@
 	"TSB_EXPRESS_SERVER_PORT": "8000",
 	"TSB_CHAT_SERVER_PORT": "5000",
 	"TSB_FROM_EMAIL": "The Social Book 📧 <write the above user email here>",
-	"TSB_GOOGLE_MAPS_API_KEY": "configured google embed maps api key. it's free."
+	"TSB_GOOGLE_MAPS_API_KEY": "configured google embed maps api key. it's free.",
+
+	"ENVIRONMENT":"development",
+	"DEPLOYMENT":"local"
 }
