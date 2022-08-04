@@ -11,7 +11,7 @@ module.exports.createUploads = async (req, res, next) => {
 		if (!fs.existsSync(directory)) fs.mkdirSync(directory);
 		directory = path.join(__dirname, "..", "/uploads/users/avatars");
 		if (!fs.existsSync(directory)) fs.mkdirSync(directory);
-		directory = path.join(__dirname, "..", "/uploads/users/playlists");
+		directory = path.join(__dirname, "..", "/uploads/users/posts");
 		if (!fs.existsSync(directory)) fs.mkdirSync(directory);
 	} catch (error) {
 		console.log(error);
