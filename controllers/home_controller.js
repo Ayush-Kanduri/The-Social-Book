@@ -4,12 +4,31 @@ const Post = require("../models/post");
 const User = require("../models/user");
 //Require the Friendship Model Data Structure
 const Friendship = require("../models/friendship");
+//Require Axios
+const axios = require("axios");
+//Require the Environment Variables
+const env = require("../config/environment");
 
 //We need to give this function a name, since it is an object.
 //Export the Home Controller's Home() Function to the "/" Route.
 module.exports.home = async (request, response) => {
 	//Populate the User (from user field) of each Post, Comments from comments array and the User making the comment from the Comment Schema.
 	try {
+		//Homepage :: Not Logged In
+		if (!request.isAuthenticated()) {
+			//Chat Server Initialization
+			(async function initialize() {
+				try {
+					const url = env.chat_link;
+					const res = await axios.get(url);
+					if (res.ok) console.log("API Running Successfully");
+					if (!res.ok) console.log("API Not Running");
+				} catch (error) {
+					console.log(error);
+				}
+			})();
+		}
+
 		//CHANGE :: Populate the likes of each post and comment.
 		const query = [
 			{
