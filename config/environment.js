@@ -61,7 +61,7 @@ const development = {
 //Production Environment
 const production = {
 	name: "production",
-	asset_path: process.env.TSB_ASSET_PATH,
+	asset_path: process.env.ASSET_PATH,
 	session_cookie_key: process.env.TSB_SESSION_COOKIE_KEY,
 	db: process.env.TSB_DB,
 	db_name: process.env.TSB_DB_NAME,
@@ -82,7 +82,7 @@ const production = {
 	},
 	google_client_id: process.env.TSB_GOOGLE_CLIENT_ID,
 	google_client_secret: process.env.TSB_GOOGLE_CLIENT_SECRET,
-	google_callback_url: process.env.TSB_GOOGLE_CALLBACK_URL,
+	google_callback_url: `${process.env.TSB_WEBSITE_LINK}${process.env.TSB_GOOGLE_CALLBACK_URL}`,
 	facebook_client_id: process.env.TSB_FACEBOOK_CLIENT_ID,
 	facebook_client_secret: process.env.TSB_FACEBOOK_CLIENT_SECRET,
 	facebook_callback_url: process.env.TSB_FACEBOOK_CALLBACK_URL,

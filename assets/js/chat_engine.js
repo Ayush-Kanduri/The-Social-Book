@@ -14,7 +14,9 @@ class ChatEngine {
 
 		// this.socket = io.connect("http://54.160.184.63:5000");
 		// this.socket = io.connect("http://localhost:5000");
-		this.socket = io.connect("https://tsbchatserver.herokuapp.com/");
+		this.socket = io.connect(
+			"https://the-social-book-mini-chat-server.onrender.com"
+		);
 
 		//If User Email Exists & Logged In
 		if (this.userEmail) {

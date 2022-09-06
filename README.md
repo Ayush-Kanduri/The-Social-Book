@@ -119,7 +119,7 @@ For any issues related to the project, raise an ISSUE in the respective Reposito
 
 ## 🔗 Links
 
-> ## Checkout the Website [Web Application](https://the-social-book.herokuapp.com/)
+> ## Checkout the Website [Web Application](https://the-social-book.onrender.com)
 >
 > ## Checkout the Application Demo Video [YouTube](https://youtu.be/Rje8wN1JQK4)
 

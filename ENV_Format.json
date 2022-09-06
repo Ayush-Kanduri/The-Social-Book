@@ -2,7 +2,8 @@
 	"TSB_DEVELOPMENT_ENVIRONMENT": "development",
 	"TSB_DEVELOPMENT_ASSET_PATH": "./assets",
 	"TSB_DEVELOPMENT_SESSION_COOKIE_KEY": "secret key as per your wish",
-	"TSB_DEVELOPMENT_DB": "database name as per your wish",
+	"TSB_DEVELOPMENT_DB": "database URI as per your wish",
+	"TSB_DEVELOPMENT_DB_NAME": "database name as per your wish",
 	"TSB_DEVELOPMENT_USER_EMAIL": "user email which sends the email, as per your wish",
 	"TSB_DEVELOPMENT_USER_PASS": "app password of the above account. 2FA should be ON. app password can be set in the security settings of the account",
 	"TSB_DEVELOPMENT_GOOGLE_CLIENT_ID": "configured google client id",
@@ -16,11 +17,14 @@
 	"TSB_DEVELOPMENT_CHAT_SERVER_PORT": "5000",
 	"TSB_DEVELOPMENT_FROM_EMAIL": "The Social Book 📧 <write the above user email here>",
 	"TSB_DEVELOPMENT_GOOGLE_MAPS_API_KEY": "configured google embed maps api key. it's free.",
+	"TSB_DEVELOPMENT_WEBSITE_LINK": "development website link",
+	"TSB_DEVELOPMENT_CHAT_LINK": "development chat server link",
 
 	"TSB_ENVIRONMENT": "production",
-	"TSB_ASSET_PATH": "./public/assets",
+	"ASSET_PATH": "./public/assets",
 	"TSB_SESSION_COOKIE_KEY": "secret key as per your wish",
-	"TSB_DB": "database name as per your wish",
+	"TSB_DB": "database URI as per your wish",
+	"TSB_DB_NAME": "database name as per your wish",
 	"TSB_USER_EMAIL": "user email which sends the email, as per your wish",
 	"TSB_USER_PASS": "app password of the above account. 2FA should be ON. app password can be set in the security settings of the account",
 	"TSB_GOOGLE_CLIENT_ID": "configured google client id",
@@ -34,7 +38,12 @@
 	"TSB_CHAT_SERVER_PORT": "5000",
 	"TSB_FROM_EMAIL": "The Social Book 📧 <write the above user email here>",
 	"TSB_GOOGLE_MAPS_API_KEY": "configured google embed maps api key. it's free.",
+	"TSB_WEBSITE_LINK": "Production website link",
+	"TSB_CHAT_LINK": "Production chat server link",
+	"TSB_REDIS_HOST": "redis host",
+	"TSB_REDIS_PORT": "redis port",
+	"TSB_REDIS_AUTH": "redis password",
 
-	"ENVIRONMENT":"development",
-	"DEPLOYMENT":"local"
+	"ENVIRONMENT": "development",
+	"DEPLOYMENT": "local"
 }
